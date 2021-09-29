@@ -63,9 +63,9 @@ N.B. For Windows systems follow the relevant instructions.
 ## How to run
 ---
 
-To execute the program (within the activated virtual environment), first navigate
-to the main directory of the project (i.e. where the napshift.py is located), and
-then run the following command:
+To execute the program (within the activated virtual environment), you can either
+navigate  to the main directory of the project (i.e. where the napshift.py is located),
+or locate it through the command line and then run the following command:
 
     $ ./napshift.py -f path/to/PDB/file
 
