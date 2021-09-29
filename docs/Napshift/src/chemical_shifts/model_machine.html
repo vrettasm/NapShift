@@ -1,0 +1,3344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>Napshift.src.chemical_shifts.model_machine API documentation</title>
+<meta name="description" content="This module includes the main classes that handle the training of the ANN models
+as well as the predictions of the new chemical shifts." />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>Napshift.src.chemical_shifts.model_machine</code></h1>
+</header>
+<section id="section-intro">
+<p>This module includes the main classes that handle the training of the ANN models
+as well as the predictions of the new chemical shifts.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+This module includes the main classes that handle the training of the ANN models
+as well as the predictions of the new chemical shifts.
+&#34;&#34;&#34;
+
+# Python import(s).
+import logging
+import sys
+from datetime import date
+from gc import collect as collect_mem_garbage
+from pathlib import Path
+from time import time
+import h5py
+import joblib
+import matplotlib.pyplot as plt
+import numpy as np
+from pandas import DataFrame, read_csv
+from sklearn.preprocessing import MaxAbsScaler
+
+# Tensorflow version 2.
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.optimizers import SGD
+from tensorflow.keras.models import load_model, Sequential
+
+# Neural networks imports.
+from src.chemical_shifts.input_vector import InputVector
+from src.chemical_shifts.auxiliaries import (RES_3_TO_1, TARGET_ATOMS,
+                                             RANDOM_COIL_TBL)
+# CamCoil random coil prediction engine.
+from src.random_coil.camcoil import CamCoil
+
+# Disables annoying TF warnings.
+tf.get_logger().setLevel(&#34;ERROR&#34;)
+
+
+# Base (abstract) class.
+class ChemShiftBase(object):
+
+    # Default directory.
+    dir_default = Path.cwd()
+    &#34;&#34;&#34;
+    The default directory is set to the &#34;current working directory&#34;.
+    &#34;&#34;&#34;
+
+    # Object variables.
+    __slots__ = (&#34;dir_input&#34;, &#34;logger&#34;, &#34;dir_output&#34;, &#34;overwrite_flag&#34;)
+
+    # Constructor.
+    def __init__(self, dir_input=None, dir_output=None, overwrite=True,
+                 file_logging=False):
+        &#34;&#34;&#34;
+        Constructs an object that holds the basic functionality of the
+        rest classes. It mostly handles input/output directories along
+        with some commonly used variables/flags.
+
+        :param dir_input: Input directory.
+
+        :param dir_output: Output directory.
+
+        :param overwrite: Overwrite file protection (flag). If is True
+        then the output process WILL overwrite any pre-existing files.
+
+        :param file_logging: If the flag is True it will start logging
+        the activities of the object in files.
+        &#34;&#34;&#34;
+
+        # Check if we have given explicitly
+        # a new location for the input files.
+        if dir_input is None:
+            # This is the default input location.
+            self.dir_input = ChemShiftBase.dir_default
+        else:
+            # This will be the new location.
+            self.dir_input = Path(dir_input)
+        # _end_if_
+
+        # Make sure the input directory ALWAYS exists.
+        if not self.dir_input.is_dir():
+            raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                             f&#34;Input directory doesn&#39;t exist: {self.dir_input}.&#34;)
+        # _end_if_
+
+        # Check if we have given explicitly a
+        # new location for the output results.
+        if dir_output is None:
+            # This is the default output location.
+            self.dir_output = ChemShiftBase.dir_default
+        else:
+            # This will be the new location.
+            self.dir_output = Path(dir_output)
+
+            # If the output directory doesn&#39;t exist
+            # create it, along with all its parents.
+            if not self.dir_output.is_dir():
+                self.dir_output.mkdir(parents=True)
+            # _end_if_
+        # _end_if_
+
+        # Boolean flag. If &#34;True&#34; the class will allow
+        # the new results to overwrite old ones (if exist).
+        if isinstance(overwrite, bool):
+            # Copy the overwrite flag value.
+            self.overwrite_flag = overwrite
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}: &#34;
+                            f&#34;Overwrite protection flag should be bool: {type(overwrite)}.&#34;)
+        # _end_if_
+
+        # Create a new logger for each object.
+        self.logger = logging.getLogger(self.__class__.__name__)
+
+        # Remove all previous handlers.
+        if self.logger.handlers:
+            self.logger.handlers.clear()
+        # _end_if_
+
+        # Set the level to INFO.
+        self.logger.setLevel(logging.INFO)
+
+        # Enable logging only in the constructor.
+        if isinstance(file_logging, bool) and file_logging:
+
+            # Get the current date (in string).
+            today = str(date.today()).replace(&#39;-&#39;, &#39;_&#39;)
+
+            # Creating an output (log) file handler.
+            file_handler = logging.FileHandler(Path(self.dir_output /
+                                                    f&#34;Fid_{today}_{id(self)}.log&#34;), mode=&#39;w&#39;)
+            # Create a &#34;formatter&#34;.
+            formatter = logging.Formatter(&#34;%(asctime)s - %(name)s - %(levelname)s : %(message)s&#34;)
+
+            # Add it to the handler.
+            file_handler.setFormatter(formatter)
+
+            # Add the file handler to the logger.
+            self.logger.addHandler(file_handler)
+        # _end_if_
+
+        # Creating a console handler.
+        console_handler = logging.StreamHandler(sys.stdout)
+
+        # Add the console handler.
+        self.logger.addHandler(console_handler)
+
+        # First message:
+        self.logger.info(&#34; -[Started logging]- &#34;)
+
+    # _end_def_
+
+    # Destructor.
+    def __del__(self):
+        &#34;&#34;&#34;
+        Releases all the handlers before deleting
+        the object from the memory.
+
+        N.B. : I am not sure if this is actually
+        helpful here.
+
+        :return: None
+        &#34;&#34;&#34;
+
+        # Sanity check.
+        if self.logger.handlers:
+
+            # Final message:
+            self.logger.info(&#34; -[Stopped logging]- &#34;)
+
+            # Release all handlers.
+            for handler in self.logger.handlers:
+                # First close the stream.
+                handler.close()
+
+                # Finally remove it from the list.
+                self.logger.removeHandler(handler)
+            # _end_for_
+
+        # _end_if_
+
+    # _end_def_
+
+    @property
+    def overwrite(self):
+        &#34;&#34;&#34;
+        Accessor (getter) of the overwrite flag.
+
+        :return: overwrite_flag.
+        &#34;&#34;&#34;
+        return self.overwrite_flag
+    # _end_def_
+
+    @overwrite.setter
+    def overwrite(self, new_value):
+        &#34;&#34;&#34;
+        Accessor (setter) of the overwrite flag.
+
+        :param new_value: (bool).
+        &#34;&#34;&#34;
+
+        # Check for correct type.
+        if isinstance(new_value, bool):
+            # Update the flag value.
+            self.overwrite_flag = new_value
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}: &#34;
+                            f&#34;Overwrite protection flag should be bool: {type(new_value)}.&#34;)
+        # _end_if_
+
+    # _end_def_
+
+    @property
+    def input_path(self):
+        &#34;&#34;&#34;
+        Accessor (getter) of the input path.
+
+        :return: dir_input.
+        &#34;&#34;&#34;
+        return self.dir_input
+    # _end_def_
+
+    @input_path.setter
+    def input_path(self, new_value):
+        &#34;&#34;&#34;
+        Accessor (setter) of the input path.
+
+        :param new_value: (Path / String).
+        &#34;&#34;&#34;
+
+        # Check for correct type.
+        if isinstance(new_value, (str, Path)):
+            # Temporary path.
+            tmp_path = Path(new_value)
+
+            # Make sure the new input
+            # always directory exists.
+            if not tmp_path.is_dir():
+                raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                                 f&#34;New input directory doesn&#39;t exist: {type(new_value)}.&#34;)
+            # _end_if_
+
+            # Update the path value.
+            self.dir_input = tmp_path
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}: &#34;
+                            f&#34;Input directory should be Path/String: {type(new_value)}.&#34;)
+        # _end_if_
+
+    # _end_def_
+
+    @property
+    def output_path(self):
+        &#34;&#34;&#34;
+        Accessor (getter) of the output path.
+
+        :return: dir_output.
+        &#34;&#34;&#34;
+        return self.dir_output
+    # _end_def_
+
+    @output_path.setter
+    def output_path(self, new_value):
+        &#34;&#34;&#34;
+        Accessor (setter) of the output path.
+
+        :param new_value: (Path / String).
+        &#34;&#34;&#34;
+
+        # Check for correct type.
+        if isinstance(new_value, (str, Path)):
+            # Update the path value.
+            self.dir_output = Path(new_value)
+
+            # Make sure the output directory exists.
+            if not self.dir_output.is_dir():
+                self.dir_output.mkdir(parents=True)
+            # _end_if_
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}: &#34;
+                            f&#34;Output directory should be Path/String: {type(new_value)}.&#34;)
+        # _end_if_
+    # _end_def_
+
+    # Auxiliary.
+    def __str__(self):
+        &#34;&#34;&#34;
+        Override to print a readable string presentation of the object.
+        This will include its id(), along with its field values.
+
+        NOTE: The overwrite protection is the &#34;opposite&#34; of the overwrite
+        flag, so in the print version we show the &#34;not overwrite_flag&#34;!
+
+        :return: a string representation of a ChemShiftBase object.
+        &#34;&#34;&#34;
+
+        # New line in character.
+        new_line = &#39;\n&#39;
+
+        # Return the f-string.
+        return f&#34; ChemShiftBase Id({id(self)}): {new_line}&#34; \
+               f&#34; Input  dir={self.dir_input} {new_line}&#34; \
+               f&#34; Output dir={self.dir_output} {new_line}&#34; \
+               f&#34; Overwrite protection={(not self.overwrite_flag)}&#34;
+    # _end_def_
+
+# _end_class_
+
+
+# Training Class
+class ChemShiftTraining(ChemShiftBase):
+
+    # Constructor.
+    def __init__(self, dir_data=None, dir_output=None, overwrite=True):
+        &#34;&#34;&#34;
+        Constructs an object that will perform the training of the artificial
+        neural networks (ANNs), on predicting the chemical shift values from
+        specific atoms.
+
+        :param dir_data: Directory where the trained ANN models (one for each
+        target atom) exist.
+
+        :param dir_output: Directory where the output of the training will be
+        saved (trained ANN models).
+
+        :param overwrite: Overwrite file protection. If True, then the output
+        process WILL overwrite any pre-existing output files.
+        &#34;&#34;&#34;
+        # First call the base class constructor.
+        super().__init__(dir_data, dir_output, overwrite, file_logging=False)
+    # _end_def_
+
+    # Auxiliary.
+    def load_data(self, atom=None):
+        &#34;&#34;&#34;
+        This method will load the training datasets for a
+        given input atom (target).
+
+        :param atom: Atom to be used as target during the
+        training process by the ann.
+
+        :return: The (X/y) datasets. Note that the method
+        will look for NaN target values and will clean up
+        these values.
+        &#34;&#34;&#34;
+
+        # Check the atom.
+        if atom not in TARGET_ATOMS:
+            raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                             f&#34;Loading data: Unknown target &#39;{atom}&#39;.&#34;)
+        # _end_if_
+
+        # Open the train data file for read only.
+        with h5py.File(Path(self.input_path/f&#34;x_train_{atom}.h5&#34;), &#39;r&#39;) as data_file:
+            # Convert directly to numpy.
+            data = np.array(data_file[&#39;x_mat&#39;])
+        # _end_with_
+
+        # Total amount of data.
+        num_data = data.shape[0]
+
+        # Sanity check.
+        if num_data == 0:
+            raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                             f&#34;Loading data: Empty data set for target &#39;{atom}&#39;.&#34;)
+        # _end_if_
+
+        # Remove entries with NaN target values.
+        clean_data = data[~np.isnan(data[:, -1])].copy()
+
+        # X-Y (train):
+        x_train = clean_data[:, 0:-1]
+        y_train = clean_data[:, -1]
+
+        # Percentage of NaN in the training set.
+        nan_percent = 100.0 * (1.0 - np.round(clean_data.shape[0] / num_data, 3))
+
+        # Print Info.
+        self.logger.info(f&#34; Train data shape: {data.shape},&#34;
+                         f&#34; includes {nan_percent:.2f}% NaN.&#34;)
+
+        # Return the (X/y) sets of data.
+        return x_train, y_train
+    # _end_def_
+
+    def train_models(self, validation_split=0.10, save_plots=True, verbose=False):
+        &#34;&#34;&#34;
+        The main purpose of this method is to use a pre-defined Artificial Neural
+        Network and train it on the chemical shift data. Since we have six targets
+        the method will train six networks separately and store its results.
+
+        :param validation_split: (float) This value is used to keep a portion of the
+        training data aside while training to validate the training process. This is
+        not the test set hold out.
+
+        :param save_plots: (bool) If &#34;True&#34; it will save the training errors, as
+        function of time (epochs), for all the training targets (atoms).
+
+        :param verbose: (bool) If &#34;True&#34; it will display more information during
+        the training. The default is &#34;False&#34; to avoid cluttering the screen with
+        information.
+
+        :return: None.
+        &#34;&#34;&#34;
+
+        # Make sure the neural network models are cleared.
+        nn_model = {atom: None for atom in TARGET_ATOMS}
+
+        # Make sure the neural network outputs are cleared.
+        nn_output = {atom: None for atom in TARGET_ATOMS}
+
+        # Default plots path.
+        plots_path = None
+
+        # Check if we want to save the training
+        # figures and then create the directory.
+        if save_plots:
+            # Figure path.
+            plots_path = Path(self.output_path/&#34;plots&#34;)
+
+            # Check if the models (output) directory exists.
+            if not plots_path.is_dir():
+                # Make the path.
+                plots_path.mkdir(parents=True)
+
+                # Display info (verbose mode).
+                if verbose:
+                    self.logger.info(f&#34; Created plots directory at: {plots_path}&#34;)
+                # _end_if_
+            # _end_if_
+        # _end_if_
+
+        # Models path.
+        models_path = Path(self.output_path/&#34;models&#34;)
+
+        # Check if the models (output) directory exists.
+        if not models_path.is_dir():
+            # Make the path.
+            models_path.mkdir(parents=True)
+
+            # Display info (verbose mode).
+            if verbose:
+                self.logger.info(f&#34; Created models directory at: {models_path}&#34;)
+            # _end_if_
+        # _end_if_
+
+        # Output path.
+        results_path = Path(self.output_path/&#34;results&#34;)
+
+        # Check if the results (output) directory exists.
+        if not results_path.is_dir():
+            # Make the path.
+            results_path.mkdir(parents=True)
+
+            # Display info (verbose mode).
+            if verbose:
+                self.logger.info(f&#34; Created results directory at: {results_path}&#34;)
+            # _end_if_
+        # _end_if_
+
+        # Switch on/off the verbosity.
+        nn_verbose_flag = 1 if verbose else 0
+
+        # Localize the convert to tensor method.
+        convert_to_tensor = tf.convert_to_tensor
+
+        # Make batch size tf.constant.
+        nn_batch_size = tf.constant(512, dtype=tf.int64, name=&#34;batch_size&#34;)
+
+        # Make epochs tf.constant.
+        nn_epochs = tf.constant(1000, dtype=tf.int64, name=&#34;epochs&#34;)
+
+        # Train for each target a separate ANN.
+        for atom in TARGET_ATOMS:
+            # Print info.
+            self.logger.info(f&#34; Training ANN for target &#39;{atom}&#39;.&#34;)
+
+            # Prepare the data for the network.
+            x_train, y_train = self.load_data(atom)
+
+            # Reshape the target vector.
+            y_train = y_train.reshape(-1, 1)
+
+            # Fit the input scaler with the data.
+            input_scaler = MaxAbsScaler().fit(x_train)
+
+            try:
+                # Try to save the x-Scaler because we
+                # will need it in the prediction step.
+                joblib.dump(input_scaler,
+                            Path(models_path/f&#34;data_scaler_{atom}.gz&#34;))
+            except RuntimeError as e0:
+                self.logger.error(f&#34; Error while saving input Scaler. {e0}&#34;)
+            # _end_try_
+
+            # Transform the input data.
+            x_train = input_scaler.transform(x_train)
+
+            # Weights initializer:
+            #
+            # 1) For the &#34;hidden&#34; units can also use:
+            #    - RandomNormal(mean=0.0, stddev=0.1)
+            #
+            # 2) For the &#34;output&#34; units can also use:
+            #    - RandomUniform(minval=-0.1, maxval=0.1)
+            #
+
+            # Setup the ANN (model).
+            nn_model[atom] = Sequential([
+                Dense(units=26,
+                      name=&#34;Hidden_1&#34;,
+                      activation=&#34;elu&#34;,
+                      activity_regularizer=None,
+                      kernel_initializer=&#34;glorot_normal&#34;,
+                      input_shape=(x_train.shape[1],)),
+                Dense(units=1,
+                      name=&#34;Output_1&#34;,
+                      activation=&#39;linear&#39;,
+                      activity_regularizer=None,
+                      kernel_initializer=&#34;glorot_uniform&#34;)
+            ], name=f&#34;model_{atom}&#34;)
+
+            # Print info.
+            if verbose:
+                # Model summary.
+                nn_model[atom].summary()
+            # _end_if_
+
+            # Monitor the &#39;val_loss&#39; function and if it does not improve for
+            # &#39;patience&#39; epochs, then stop the training and restore the best
+            # weights that have been found so far.
+            early_stop = keras.callbacks.EarlyStopping(monitor=&#34;val_loss&#34;, mode=&#34;min&#34;,
+                                                       patience=20, restore_best_weights=True)
+            # Set the optimizer object.
+            optimization_alg = SGD(learning_rate=0.01, momentum=0.8, nesterov=True)
+
+            # Compile the model.
+            nn_model[atom].compile(optimizer=optimization_alg, loss=&#34;mse&#34;)
+
+            # First time instant.
+            time_0 = time()
+
+            # Fit the model.
+            nn_output[atom] = nn_model[atom].fit(x=convert_to_tensor(x_train),
+                                                 y=convert_to_tensor(y_train),
+                                                 batch_size=nn_batch_size, epochs=nn_epochs,
+                                                 validation_split=validation_split, shuffle=True,
+                                                 verbose=nn_verbose_flag, callbacks=[early_stop])
+            # Final time instant.
+            time_f = time()
+
+            # Save the model to the pre-defined location.
+            nn_model[atom].save(Path(models_path / f&#34;ann_model_{atom}.h5&#34;),
+                                include_optimizer=False, save_format=&#34;h5&#34;)
+
+            # Number of actual runs (epochs).
+            n_epoch = len(nn_output[atom].history[&#39;loss&#39;])
+
+            # Timing message.
+            self.logger.info(f&#34; Finished {n_epoch} epochs&#34;
+                             f&#34; in {time_f - time_0:.2f} seconds.&#34;)
+
+            # Get the final (training and validation) error values.
+            train_RMSE = np.sqrt(nn_output[atom].history[&#34;loss&#34;][-1])
+            valid_RMSE = np.sqrt(nn_output[atom].history[&#34;val_loss&#34;][-1])
+
+            # Error message.
+            self.logger.info(f&#34; RMSE = {train_RMSE:.3f},&#34;
+                             f&#34; val-RMSE = {valid_RMSE:.3f}\n\n&#34;)
+
+            # Convert the output history to a DataFrame.
+            df_output = DataFrame(nn_output[atom].history)
+
+            # Save to csv:
+            with open(Path(results_path/f&#34;nn_output_{atom}.csv&#34;), mode=&#39;w&#39;) as f:
+                df_output.to_csv(f)
+            # _end_with_
+
+            # Save the training figure.
+            if save_plots:
+                # Make a new figure.
+                fig = plt.figure()
+
+                # Plot training loss.
+                plt.plot(np.sqrt(df_output[&#39;loss&#39;]), label=&#34;Training&#34;)
+
+                # Plot validation loss.
+                plt.plot(np.sqrt(df_output[&#39;val_loss&#39;]), label=&#34;Validation&#34;)
+
+                # Add the x label.
+                plt.xlabel(&#34;Epoch&#34;)
+
+                # Add the y label.
+                plt.ylabel(&#34;RMSE&#34;)
+
+                # Finalize the plot.
+                plt.title(f&#34;Target: {atom}&#34;)
+                plt.legend()
+                plt.grid(True)
+
+                # Maximize the space.
+                fig.tight_layout()
+
+                # Save the figure.
+                fig.savefig(Path(plots_path/f&#34;nn_training_vs_validation_{atom}.png&#34;),
+                            orientation=&#34;landscape&#34;, dpi=300)
+            # _end_if_
+
+            # Clean up the memory.
+            collect_mem_garbage()
+        # _end_for_
+
+        # Print final info.
+        self.logger.info(&#34; Finished training models!&#34;)
+    # _end_def_
+
+    # Auxiliary.
+    def __call__(self, *args, **kwargs):
+        &#34;&#34;&#34;
+        This is a &#34;wrapper&#34; method of the &#34;train_models&#34;
+        method to simplify the call.
+        &#34;&#34;&#34;
+        return self.train_models(*args, **kwargs)
+    # _end_def_
+
+    # Auxiliary.
+    def __str__(self):
+        &#34;&#34;&#34;
+        Override method to print a readable string presentation of the
+        object. This will include its id, along with its field values.
+
+            NOTE: The overwrite protection is the opposite of the
+            overwrite flag, so in the printed version we show the
+            &#34;not overwrite_flag&#34;!
+
+        :return: a string representation of a ChemShiftTraining object.
+        &#34;&#34;&#34;
+
+        # New line in character.
+        new_line = &#39;\n&#39;
+
+        # Return the f-string.
+        return f&#34; ChemShiftTraining Id({id(self)}): {new_line}&#34; \
+               f&#34; Data   dir={self.input_path} {new_line}&#34; \
+               f&#34; Output dir={self.output_path} {new_line}&#34; \
+               f&#34; Overwrite protection={(not self.overwrite)}&#34;
+    # _end_def_
+
+# _end_class_
+
+
+# Predictor Class.
+class ChemShiftPredictor(ChemShiftBase):
+
+    # InputVector.
+    vec_in = InputVector(blosum_id=62, include_hydrogen_bonds=False,
+                         check_aromatic_rings=True, data_type=np.float16)
+    &#34;&#34;&#34;
+    This will be used to load the PDB file(s) before we make the prediction
+    with the ANN model. Here we set (for brevity) all the input parameters.
+    &#34;&#34;&#34;
+
+    # Convert the random coil (average) values to DataFrame.
+    df_avg = DataFrame(RANDOM_COIL_TBL, index=TARGET_ATOMS)
+    &#34;&#34;&#34;
+    This dataframe will be used in case we do not provide a random coil file.
+    &#34;&#34;&#34;
+
+    # Camcoil predictor of random coil chemical shifts.
+    random_coil = CamCoil(pH=7.0)
+    &#34;&#34;&#34;
+    This object will be used to predict the random coil
+    chemical shifts. The default value for the &#34;pH&#34; is
+    set to &#39;7.0&#39;.
+    &#34;&#34;&#34;
+
+    # Object variables.
+    __slots__ = (&#34;nn_model&#34;, &#34;input_scaler&#34;)
+
+    # Constructor.
+    def __init__(self, dir_model=None, dir_output=None, overwrite=True):
+        &#34;&#34;&#34;
+        Constructs an object that will perform the chemical shifts prediction.
+        This is done by first constructing the necessary input values from the
+        PDB file and subsequently calling the trained nn-models to perform the
+        predictions on all atoms.
+
+        :param dir_model: (Path) Directory where the trained ANN models exist,
+        (one for each target atom).
+
+        :param dir_output: (Path) Directory where the output of the predictions
+        will be saved.
+
+        :param overwrite: (bool) Overwrite file protection. If &#34;True&#34;, then the
+        output file WILL overwrite any pre-existing output.
+        &#34;&#34;&#34;
+
+        # First call the base class constructor.
+        super().__init__(dir_model, dir_output, overwrite, file_logging=False)
+
+        # Neural network models. Set initial value to &#34;None&#34;.
+        self.nn_model = {atom: None for atom in TARGET_ATOMS}
+
+        # Input data scaler. Set initial value to &#34;None&#34;.
+        self.input_scaler = {atom: None for atom in TARGET_ATOMS}
+
+        # Load all the trained models (one for each atom).
+        for atom in TARGET_ATOMS:
+
+            # Make the file path.
+            file_path = Path(self.input_path/f&#34;ann_model_{atom}.h5&#34;)
+
+            # Check if the file exists.
+            if not file_path.is_file():
+                # Show a message instead of raising an exception.
+                self.logger.info(f&#34; Model for target &#39;{atom}&#39;, doesn&#39;t exist.&#34;
+                                 f&#34; Skipping ...&#34;)
+                # Skip to the next atom.
+                continue
+            # _end_if_
+
+            # If everything is OK load the model. We set the &#34;compile&#34;
+            # flag to False, because we use the models for prediction.
+            self.nn_model[atom] = load_model(file_path, compile=False)
+
+            # Create the Scaler filename.
+            scaler_path = Path(self.input_path/f&#34;data_scaler_{atom}.gz&#34;)
+
+            # Check if the scaler exists.
+            if scaler_path.is_file():
+                # Load the Scaler from the file.
+                self.input_scaler[atom] = joblib.load(scaler_path)
+            else:
+                # Display what went wrong.
+                self.logger.warning(f&#34; {self.__class__.__name__}.&#34;
+                                    f&#34; WARNING: File {scaler_path} not found.&#34;)
+            # _end_if_
+
+        # _end_for_
+
+    # _end_def_
+
+    def save_to_file(self, pdb_id, aa_sequence, predictions, target_peptides, ref_peptides,
+                     random_coil=None, model_id=None, chain_id=None, talos_format=True):
+        &#34;&#34;&#34;
+        This method accepts the output of the __call__() method and writes all the
+        information in a text file. Optionally we can save using the TALOS format.
+
+        :param pdb_id: (string) This is the PDB-ID from the input file. It is used
+        to provide information in the final output file.
+
+        :param aa_sequence: (string) This is the sequence of the amino acids in the
+        input file. It is used for information to the final output file.
+
+        :param predictions: These are the predictions (numerical values) of the ANN.
+        It is a dictionary where each entry (key) corresponds to an atom-target.
+
+        :param target_peptides:  These are the poly-peptides that were predicted by
+        the artificial neural network. Because of the &#34;aromatic-rings effect&#34; there
+        could be poly-peptides that were not predicted for all the targets.
+
+        :param ref_peptides: These are ALL the poly-peptides, as constructed by the
+        InputVector class. They are used as reference with regards to the list of
+        &#34;poly_peptides&#34;.
+
+        :param random_coil: This is a DataFrame with the random coil values. If it
+        isn&#39;t given (default=None) we will use average values from a default table.
+
+        :param model_id: This is the id of the model in the PDB file. We use it to
+        distinguish the output results.
+
+        :param chain_id: This is the id of the chain in the protein model.
+        We use it to distinguish the output results.
+
+        :param talos_format: (bool) Flag that defines the file format. If is set to
+        &#34;True&#34; we will use the TALOS format. If it is set to &#34;False&#34; the file will
+        be saved with a default tabular format.
+
+        :return: None.
+        &#34;&#34;&#34;
+
+        try:
+            # Construct the model-id for the file name.
+            model_id = &#34;1&#34; if model_id is None else model_id
+
+            # Construct the chain-id for the file name.
+            chain_id = &#34;A&#34; if chain_id is None else chain_id
+
+            # Construct the output file name.
+            f_name_out = Path(self.output_path/f&#34;prediction_{pdb_id}_&#34;
+                                               f&#34;model_{model_id}_chain_{chain_id}.tab&#34;)
+
+            # Check if we have enabled the overwrite protection.
+            if (not self.overwrite) and f_name_out.is_file():
+                raise FileExistsError(f&#34; Output: {f_name_out} already exists.&#34;)
+            # _end_if_
+
+            # Check there is a random coil dataframe.
+            if random_coil is not None:
+                # This will optimize the searches.
+                random_coil.set_index([&#34;ID&#34;, &#34;RES&#34;], inplace=True)
+            # _end_if_
+
+            # Size of chunks.
+            n = 20
+
+            # Split the amino-acid sequence to chucks of size &#39;n&#39;.
+            chunks = [aa_sequence[i:i + n] for i in range(0, len(aa_sequence), n)]
+
+            # Write the prediction data to a text file.
+            with open(f_name_out, &#34;w&#34;) as f_out:
+
+                # Localize the write function.
+                file_write = f_out.write
+
+                # In case we need to add comments. This is not mandatory but
+                # it will let us know what the original file was coming from.
+                file_write(f&#34;REMARK Chemical Shift predictions for {pdb_id}. \n&#34;)
+
+                # Model/Chain information
+                file_write(f&#34;REMARK Model {model_id} / Chain {chain_id}. \n&#34;)
+
+                # Empty line.
+                file_write(&#34;\n&#34;)
+
+                # Default value is set to N/A (optional).
+                file_write(&#34;DATA FIRST_RESID N/A \n&#34;)
+
+                # Empty line.
+                file_write(&#34;\n&#34;)
+
+                # Write the whole sequence in chunks of size &#34;n&#34;.
+                for sub_k in chunks:
+                    file_write(&#34;DATA SEQUENCE &#34; + sub_k + &#34;\n&#34;)
+                # _end_for_
+
+                # Empty line.
+                file_write(&#34;\n&#34;)
+
+                # Check the file format.
+                if talos_format:
+                    # Write the (TALOS) variable names.
+                    file_write(&#34;VARS RESID RESNAME ATOMNAME SHIFT \n&#34;)
+
+                    # Write the (TALOS) file format.
+                    file_write(&#34;FORMAT %4d %1s %4s %8.3f \n&#34;)
+                else:
+                    # Declare a dictionary to group the data
+                    # values according to their atom values.
+                    record = {atom: np.nan for atom in TARGET_ATOMS}
+
+                    # Tabular text format. This will preserve the same order
+                    # (of atoms) as in the TARGET_ATOMS (tuple) declaration.
+                    file_write(&#34;{:&gt;4} {:&gt;4} {:&gt;8} {:&gt;8} {:&gt;8} {:&gt;8} {:&gt;8} &#34;
+                               &#34;{:&gt;8} \n&#34;.format(&#34;ID&#34;, &#34;RES&#34;, *record.keys()))
+                # _end_if_
+
+                # Empty line.
+                file_write(&#34;\n&#34;)
+
+                # Extract the data and write them to the file.
+                for n, peptide in enumerate(ref_peptides, start=1):
+
+                    # Extract the information.
+                    index, res_name, res_id = peptide
+
+                    # Convert the name from 3 to 1 letters.
+                    res_name_1 = RES_3_TO_1[res_name]
+
+                    # Search link.
+                    search_link = (index, res_name_1)
+
+                    # Extract the predicted chemical shifts.
+                    for atom in TARGET_ATOMS:
+
+                        # Setting to NaN will indicate that we don&#39;t
+                        # have a predicted &#34;ss&#34; value for this atom.
+                        ss_value, rc_value = np.nan, np.nan
+
+                        # Create a search-peptide tuple.
+                        search_peptide = tuple(peptide)
+
+                        # If the peptide is in the target list.
+                        if search_peptide in target_peptides[atom]:
+
+                            # Get its index.
+                            idx = target_peptides[atom].index(search_peptide)
+
+                            # Get the predicted (secondary structure)
+                            # value that comes directly from the ANN.
+                            ss_value = predictions[atom][idx].item()
+
+                            # Get the random coil chemical shift.
+                            if random_coil is not None:
+                                # Get the value from the random coil file.
+                                rc_value = random_coil.loc[search_link, atom]
+                            else:
+                                # Get the average value from a Table.
+                                rc_value = ChemShiftPredictor.df_avg.loc[atom, res_name]
+                            # _end_if_
+
+                        # _end_if_
+
+                        # Add the random coil value to
+                        # the secondary structure value.
+                        value = ss_value + rc_value
+
+                        # Check the file format.
+                        if talos_format:
+                            # Rename the hydrogen from &#34;H&#34; to &#34;HN&#34;.
+                            atom = &#34;HN&#34; if atom == &#34;H&#34; else atom
+
+                            # Put all the information together in one record.
+                            file_write(f&#34;{res_id:&gt;4} {res_name_1:&gt;3} {atom:&gt;6} {value:&gt;8.3f} \n&#34;)
+                        else:
+                            # Store it to the dictionary.
+                            record[atom] = value
+                        # _end_if_
+
+                    # _end_for_
+
+                    # Check the file format.
+                    if not talos_format:
+                        # NOTE: From Python &#34;3.6&#34; onwards, the standard dict type maintains
+                        # insertion order by default!
+                        file_write(&#34;{:&gt;4} {:&gt;4} {:&gt;8.3f} {:&gt;8.3f} {:&gt;8.3f} {:&gt;8.3f} {:&gt;8.3f} &#34;
+                                   &#34;{:&gt;8.3f} \n&#34;.format(res_id, res_name_1, *record.values()))
+                    # _end_if_
+
+                # _end_for_
+
+            # _end_with_
+        except FileExistsError as e0:
+
+            # Log the error message.
+            self.logger.error(e0, end=&#34;\n&#34;)
+        # _end_try_
+
+    # _end_def_
+
+    def predict(self, f_path, n_peptides=3, all_models=False, random_coil_path=None,
+                verbose=False, talos_fmt=True):
+        &#34;&#34;&#34;
+        Primary method of a &#34;ChemShiftPredictor&#34; object. It accepts a PDB file as input,
+        constructs the input to the trained NN and puts the results -(predicted chemical
+        shifts)- in a new text file.
+
+        :param f_path: (string) PDB file with the residue / atom coordinates.
+
+        :param n_peptides: (int) Number of peptides to consider for the input vectors.
+        By default it considers tri-peptides.
+
+        :param all_models: (bool) flag. If &#34;True&#34; the method will process all the models
+        in the PDB file, otherwise only the first model.
+
+        :param random_coil_path: (string) file with the random coil chemical shift values.
+
+        :param verbose: (bool) If &#34;True&#34; it will display more info during the prediction.
+        The default set is &#34;False&#34; to avoid cluttering the screen with information.
+
+        :param talos_fmt: (bool) If &#34;True&#34; (default) it will use the TALOS format to save
+        the results. If it is set to &#34;False&#34; the output format will be tabular.
+
+        :return: It will call the save method to write the results in a TALOS file format.
+        &#34;&#34;&#34;
+
+        # Make sure the input file is a Path.
+        f_path = Path(f_path)
+
+        # Sanity check.
+        if not f_path.is_file():
+            raise FileNotFoundError(f&#34;{self.__class__.__name__} : &#34;
+                                    f&#34;File {f_path} doesn&#39;t exist.&#34;)
+        # _end_if_
+
+        # Call the &#34;vector&#34; method to create the input values.
+        model_vectors = ChemShiftPredictor.vec_in(f_path,
+                                                  all_models=all_models,
+                                                  n_peptides=n_peptides)
+        # Index of the middle element.
+        mid_idx = int(n_peptides) // 2
+
+        # Early exit if the input data is empty.
+        # This shouldn&#39;t happen very frequently.
+        if not model_vectors:
+            # Display a warning message.
+            self.logger.warning(f&#34; File: {f_path} is empty.&#34;)
+
+            # Exit from here.
+            return None
+        # _end_if_
+
+        # Random coil shift values
+        # (from an input file).
+        random_coil_shifts = None
+
+        # Check if a random coil file is given.
+        if random_coil_path:
+            # Make sure the input is a Path.
+            rc_path = Path(random_coil_path)
+
+            # Sanity check.
+            if rc_path.is_file():
+                # Extract the random coil chem-shifts.
+                # The first row (id-&gt;0) is the header.
+                random_coil_shifts = read_csv(rc_path, header=0)
+            else:
+                # Display a message.
+                self.logger.info(f&#34; Random coil file {rc_path} doesn&#39;t exist.&#34;)
+            # _end_if_
+
+        # _end_if_
+
+        # Switch on/off the verbosity.
+        nn_verbose_flag = 1 if verbose else 0
+
+        # Localize the convert to tensor method.
+        convert_to_tensor = tf.convert_to_tensor
+
+        # Make batch size tf.constant.
+        nn_batch_size = tf.constant(512, dtype=tf.int64, name=&#34;batch_size&#34;)
+
+        # Predict chemical shifts of all models.
+        for model_id, model_value in enumerate(model_vectors.values(), start=0):
+
+            # Unpack the contents.
+            input_data = model_value[&#34;data&#34;]
+            amino_acid_seq = model_value[&#34;sequence&#34;]
+
+            # Sanity check.
+            if len(input_data) != len(amino_acid_seq):
+                raise RuntimeError(f&#34;{self.__class__.__name__} : &#34;
+                                   f&#34;Data / Sequence length mismatch.&#34;)
+            # _end_if_
+
+            # Process all chains in the model.
+            for chain_id, chain_seq in amino_acid_seq.items():
+
+                # Sanity check.
+                if not input_data[chain_id]:
+
+                    # Display a warning message.
+                    if verbose:
+                        # Display a warning message.
+                        self.logger.warning(f&#34; Model: {model_id} -&#34;
+                                            f&#34; Chain: {chain_id} didn&#39;t produce any input data.&#34;)
+                    # _end_if_
+
+                    # Go to the next model.
+                    continue
+                # _end_if_
+
+                # Check if a random coil file is given.
+                if random_coil_shifts is not None:
+                    # Assign the file shift values.
+                    df_random_coil = random_coil_shifts
+                else:
+                    # Use Camcoil algorithm to predict the values.
+                    df_random_coil = ChemShiftPredictor.random_coil(chain_seq)
+                # _end_if_
+
+                # Declare data dictionary.
+                data = {atom: [] for atom in TARGET_ATOMS}
+
+                # Declare peptides dictionary.
+                y_peptide = {atom: [] for atom in TARGET_ATOMS}
+
+                # Reference poly-peptide list.
+                ref_peptide = []
+
+                # Localize append method.
+                ref_peptide_append = ref_peptide.append
+
+                # Separate all the input data.
+                for entry in input_data[chain_id]:
+
+                    # Extract only the middle one.
+                    peptide = entry[&#34;poly-peptides&#34;][mid_idx]
+
+                    # Check all target atoms.
+                    for atom in TARGET_ATOMS:
+
+                        # Check for membership.
+                        if atom in entry[&#34;targets&#34;]:
+                            # Add the data (numpy) vector.
+                            data[atom].append(entry[&#34;vector&#34;])
+
+                            # Add the peptide information.
+                            y_peptide[atom].append(peptide)
+                        # _end_if_
+
+                    # _end_for_
+
+                    # Here we add all the peptides, because
+                    # these will be the &#34;reference&#34; peptides.
+                    ref_peptide_append(peptide)
+                # _end_for_
+
+                # Model predictions: Initialize them with &#34;None&#34;.
+                y_predict = {atom: None for atom in TARGET_ATOMS}
+
+                # Run through all atom-models.
+                for atom in TARGET_ATOMS:
+
+                    # Convert the data to a DataFrame.
+                    df_data = DataFrame(data[atom])
+
+                    # Check if we have to scale the data.
+                    if self.input_scaler[atom]:
+                        df_data = DataFrame(self.input_scaler[atom].transform(df_data))
+                    # _end_if_
+
+                    # Get the model predictions (secondary structure values).
+                    y_predict[atom] = self.nn_model[atom].predict(x=convert_to_tensor(df_data),
+                                                                  batch_size=nn_batch_size,
+                                                                  verbose=nn_verbose_flag)
+                # _end_for_
+
+                # Send the predictions to the &#34;save method&#34;.
+                self.save_to_file(f_path.stem, chain_seq, y_predict, y_peptide, ref_peptide,
+                                  df_random_coil, model_id, chain_id, talos_format=talos_fmt)
+            # _end_for_
+
+            # Clean up the memory.
+            collect_mem_garbage()
+        # _end_for_
+
+    # _end_def_
+
+    # Auxiliary.
+    def __call__(self, *args, **kwargs):
+        &#34;&#34;&#34;
+        This is only a &#34;wrapper&#34; method
+        of the &#34;predict&#34; method.
+        &#34;&#34;&#34;
+        return self.predict(*args, **kwargs)
+    # _end_def_
+
+    # Auxiliary.
+    def __str__(self):
+        &#34;&#34;&#34;
+        Override to print a readable string presentation of the object.
+        This will include its id(), along with its field values.
+
+            NOTE: The overwrite protection is the opposite of the
+            overwrite flag, so in the printed version we show the
+            &#34;not overwrite_flag&#34;!
+
+        :return: a string representation of a ChemShiftPredictor object.
+        &#34;&#34;&#34;
+
+        # New line in character.
+        new_line = &#39;\n&#39;
+
+        # Return the f-string.
+        return f&#34; ChemShiftPredictor Id({id(self)}): {new_line}&#34; \
+               f&#34; Models dir={self.input_path} {new_line}&#34; \
+               f&#34; Output dir={self.output_path} {new_line}&#34; \
+               f&#34; Overwrite protection={(not self.overwrite)}&#34;
+    # _end_def_
+
+# _end_class_</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="Napshift.src.chemical_shifts.model_machine.ChemShiftBase"><code class="flex name class">
+<span>class <span class="ident">ChemShiftBase</span></span>
+<span>(</span><span>dir_input=None, dir_output=None, overwrite=True, file_logging=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Constructs an object that holds the basic functionality of the
+rest classes. It mostly handles input/output directories along
+with some commonly used variables/flags.</p>
+<p>:param dir_input: Input directory.</p>
+<p>:param dir_output: Output directory.</p>
+<p>:param overwrite: Overwrite file protection (flag). If is True
+then the output process WILL overwrite any pre-existing files.</p>
+<p>:param file_logging: If the flag is True it will start logging
+the activities of the object in files.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ChemShiftBase(object):
+
+    # Default directory.
+    dir_default = Path.cwd()
+    &#34;&#34;&#34;
+    The default directory is set to the &#34;current working directory&#34;.
+    &#34;&#34;&#34;
+
+    # Object variables.
+    __slots__ = (&#34;dir_input&#34;, &#34;logger&#34;, &#34;dir_output&#34;, &#34;overwrite_flag&#34;)
+
+    # Constructor.
+    def __init__(self, dir_input=None, dir_output=None, overwrite=True,
+                 file_logging=False):
+        &#34;&#34;&#34;
+        Constructs an object that holds the basic functionality of the
+        rest classes. It mostly handles input/output directories along
+        with some commonly used variables/flags.
+
+        :param dir_input: Input directory.
+
+        :param dir_output: Output directory.
+
+        :param overwrite: Overwrite file protection (flag). If is True
+        then the output process WILL overwrite any pre-existing files.
+
+        :param file_logging: If the flag is True it will start logging
+        the activities of the object in files.
+        &#34;&#34;&#34;
+
+        # Check if we have given explicitly
+        # a new location for the input files.
+        if dir_input is None:
+            # This is the default input location.
+            self.dir_input = ChemShiftBase.dir_default
+        else:
+            # This will be the new location.
+            self.dir_input = Path(dir_input)
+        # _end_if_
+
+        # Make sure the input directory ALWAYS exists.
+        if not self.dir_input.is_dir():
+            raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                             f&#34;Input directory doesn&#39;t exist: {self.dir_input}.&#34;)
+        # _end_if_
+
+        # Check if we have given explicitly a
+        # new location for the output results.
+        if dir_output is None:
+            # This is the default output location.
+            self.dir_output = ChemShiftBase.dir_default
+        else:
+            # This will be the new location.
+            self.dir_output = Path(dir_output)
+
+            # If the output directory doesn&#39;t exist
+            # create it, along with all its parents.
+            if not self.dir_output.is_dir():
+                self.dir_output.mkdir(parents=True)
+            # _end_if_
+        # _end_if_
+
+        # Boolean flag. If &#34;True&#34; the class will allow
+        # the new results to overwrite old ones (if exist).
+        if isinstance(overwrite, bool):
+            # Copy the overwrite flag value.
+            self.overwrite_flag = overwrite
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}: &#34;
+                            f&#34;Overwrite protection flag should be bool: {type(overwrite)}.&#34;)
+        # _end_if_
+
+        # Create a new logger for each object.
+        self.logger = logging.getLogger(self.__class__.__name__)
+
+        # Remove all previous handlers.
+        if self.logger.handlers:
+            self.logger.handlers.clear()
+        # _end_if_
+
+        # Set the level to INFO.
+        self.logger.setLevel(logging.INFO)
+
+        # Enable logging only in the constructor.
+        if isinstance(file_logging, bool) and file_logging:
+
+            # Get the current date (in string).
+            today = str(date.today()).replace(&#39;-&#39;, &#39;_&#39;)
+
+            # Creating an output (log) file handler.
+            file_handler = logging.FileHandler(Path(self.dir_output /
+                                                    f&#34;Fid_{today}_{id(self)}.log&#34;), mode=&#39;w&#39;)
+            # Create a &#34;formatter&#34;.
+            formatter = logging.Formatter(&#34;%(asctime)s - %(name)s - %(levelname)s : %(message)s&#34;)
+
+            # Add it to the handler.
+            file_handler.setFormatter(formatter)
+
+            # Add the file handler to the logger.
+            self.logger.addHandler(file_handler)
+        # _end_if_
+
+        # Creating a console handler.
+        console_handler = logging.StreamHandler(sys.stdout)
+
+        # Add the console handler.
+        self.logger.addHandler(console_handler)
+
+        # First message:
+        self.logger.info(&#34; -[Started logging]- &#34;)
+
+    # _end_def_
+
+    # Destructor.
+    def __del__(self):
+        &#34;&#34;&#34;
+        Releases all the handlers before deleting
+        the object from the memory.
+
+        N.B. : I am not sure if this is actually
+        helpful here.
+
+        :return: None
+        &#34;&#34;&#34;
+
+        # Sanity check.
+        if self.logger.handlers:
+
+            # Final message:
+            self.logger.info(&#34; -[Stopped logging]- &#34;)
+
+            # Release all handlers.
+            for handler in self.logger.handlers:
+                # First close the stream.
+                handler.close()
+
+                # Finally remove it from the list.
+                self.logger.removeHandler(handler)
+            # _end_for_
+
+        # _end_if_
+
+    # _end_def_
+
+    @property
+    def overwrite(self):
+        &#34;&#34;&#34;
+        Accessor (getter) of the overwrite flag.
+
+        :return: overwrite_flag.
+        &#34;&#34;&#34;
+        return self.overwrite_flag
+    # _end_def_
+
+    @overwrite.setter
+    def overwrite(self, new_value):
+        &#34;&#34;&#34;
+        Accessor (setter) of the overwrite flag.
+
+        :param new_value: (bool).
+        &#34;&#34;&#34;
+
+        # Check for correct type.
+        if isinstance(new_value, bool):
+            # Update the flag value.
+            self.overwrite_flag = new_value
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}: &#34;
+                            f&#34;Overwrite protection flag should be bool: {type(new_value)}.&#34;)
+        # _end_if_
+
+    # _end_def_
+
+    @property
+    def input_path(self):
+        &#34;&#34;&#34;
+        Accessor (getter) of the input path.
+
+        :return: dir_input.
+        &#34;&#34;&#34;
+        return self.dir_input
+    # _end_def_
+
+    @input_path.setter
+    def input_path(self, new_value):
+        &#34;&#34;&#34;
+        Accessor (setter) of the input path.
+
+        :param new_value: (Path / String).
+        &#34;&#34;&#34;
+
+        # Check for correct type.
+        if isinstance(new_value, (str, Path)):
+            # Temporary path.
+            tmp_path = Path(new_value)
+
+            # Make sure the new input
+            # always directory exists.
+            if not tmp_path.is_dir():
+                raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                                 f&#34;New input directory doesn&#39;t exist: {type(new_value)}.&#34;)
+            # _end_if_
+
+            # Update the path value.
+            self.dir_input = tmp_path
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}: &#34;
+                            f&#34;Input directory should be Path/String: {type(new_value)}.&#34;)
+        # _end_if_
+
+    # _end_def_
+
+    @property
+    def output_path(self):
+        &#34;&#34;&#34;
+        Accessor (getter) of the output path.
+
+        :return: dir_output.
+        &#34;&#34;&#34;
+        return self.dir_output
+    # _end_def_
+
+    @output_path.setter
+    def output_path(self, new_value):
+        &#34;&#34;&#34;
+        Accessor (setter) of the output path.
+
+        :param new_value: (Path / String).
+        &#34;&#34;&#34;
+
+        # Check for correct type.
+        if isinstance(new_value, (str, Path)):
+            # Update the path value.
+            self.dir_output = Path(new_value)
+
+            # Make sure the output directory exists.
+            if not self.dir_output.is_dir():
+                self.dir_output.mkdir(parents=True)
+            # _end_if_
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}: &#34;
+                            f&#34;Output directory should be Path/String: {type(new_value)}.&#34;)
+        # _end_if_
+    # _end_def_
+
+    # Auxiliary.
+    def __str__(self):
+        &#34;&#34;&#34;
+        Override to print a readable string presentation of the object.
+        This will include its id(), along with its field values.
+
+        NOTE: The overwrite protection is the &#34;opposite&#34; of the overwrite
+        flag, so in the print version we show the &#34;not overwrite_flag&#34;!
+
+        :return: a string representation of a ChemShiftBase object.
+        &#34;&#34;&#34;
+
+        # New line in character.
+        new_line = &#39;\n&#39;
+
+        # Return the f-string.
+        return f&#34; ChemShiftBase Id({id(self)}): {new_line}&#34; \
+               f&#34; Input  dir={self.dir_input} {new_line}&#34; \
+               f&#34; Output dir={self.dir_output} {new_line}&#34; \
+               f&#34; Overwrite protection={(not self.overwrite_flag)}&#34;</code></pre>
+</details>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftPredictor" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftPredictor">ChemShiftPredictor</a></li>
+<li><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftTraining" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftTraining">ChemShiftTraining</a></li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.dir_default"><code class="name">var <span class="ident">dir_default</span></code></dt>
+<dd>
+<div class="desc"><p>The default directory is set to the "current working directory".</p></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.dir_input"><code class="name">var <span class="ident">dir_input</span></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.dir_output"><code class="name">var <span class="ident">dir_output</span></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.input_path"><code class="name">var <span class="ident">input_path</span></code></dt>
+<dd>
+<div class="desc"><p>Accessor (getter) of the input path.</p>
+<p>:return: dir_input.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def input_path(self):
+    &#34;&#34;&#34;
+    Accessor (getter) of the input path.
+
+    :return: dir_input.
+    &#34;&#34;&#34;
+    return self.dir_input</code></pre>
+</details>
+</dd>
+<dt id="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.logger"><code class="name">var <span class="ident">logger</span></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.output_path"><code class="name">var <span class="ident">output_path</span></code></dt>
+<dd>
+<div class="desc"><p>Accessor (getter) of the output path.</p>
+<p>:return: dir_output.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def output_path(self):
+    &#34;&#34;&#34;
+    Accessor (getter) of the output path.
+
+    :return: dir_output.
+    &#34;&#34;&#34;
+    return self.dir_output</code></pre>
+</details>
+</dd>
+<dt id="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.overwrite"><code class="name">var <span class="ident">overwrite</span></code></dt>
+<dd>
+<div class="desc"><p>Accessor (getter) of the overwrite flag.</p>
+<p>:return: overwrite_flag.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def overwrite(self):
+    &#34;&#34;&#34;
+    Accessor (getter) of the overwrite flag.
+
+    :return: overwrite_flag.
+    &#34;&#34;&#34;
+    return self.overwrite_flag</code></pre>
+</details>
+</dd>
+<dt id="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.overwrite_flag"><code class="name">var <span class="ident">overwrite_flag</span></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="Napshift.src.chemical_shifts.model_machine.ChemShiftPredictor"><code class="flex name class">
+<span>class <span class="ident">ChemShiftPredictor</span></span>
+<span>(</span><span>dir_model=None, dir_output=None, overwrite=True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Constructs an object that will perform the chemical shifts prediction.
+This is done by first constructing the necessary input values from the
+PDB file and subsequently calling the trained nn-models to perform the
+predictions on all atoms.</p>
+<p>:param dir_model: (Path) Directory where the trained ANN models exist,
+(one for each target atom).</p>
+<p>:param dir_output: (Path) Directory where the output of the predictions
+will be saved.</p>
+<p>:param overwrite: (bool) Overwrite file protection. If "True", then the
+output file WILL overwrite any pre-existing output.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ChemShiftPredictor(ChemShiftBase):
+
+    # InputVector.
+    vec_in = InputVector(blosum_id=62, include_hydrogen_bonds=False,
+                         check_aromatic_rings=True, data_type=np.float16)
+    &#34;&#34;&#34;
+    This will be used to load the PDB file(s) before we make the prediction
+    with the ANN model. Here we set (for brevity) all the input parameters.
+    &#34;&#34;&#34;
+
+    # Convert the random coil (average) values to DataFrame.
+    df_avg = DataFrame(RANDOM_COIL_TBL, index=TARGET_ATOMS)
+    &#34;&#34;&#34;
+    This dataframe will be used in case we do not provide a random coil file.
+    &#34;&#34;&#34;
+
+    # Camcoil predictor of random coil chemical shifts.
+    random_coil = CamCoil(pH=7.0)
+    &#34;&#34;&#34;
+    This object will be used to predict the random coil
+    chemical shifts. The default value for the &#34;pH&#34; is
+    set to &#39;7.0&#39;.
+    &#34;&#34;&#34;
+
+    # Object variables.
+    __slots__ = (&#34;nn_model&#34;, &#34;input_scaler&#34;)
+
+    # Constructor.
+    def __init__(self, dir_model=None, dir_output=None, overwrite=True):
+        &#34;&#34;&#34;
+        Constructs an object that will perform the chemical shifts prediction.
+        This is done by first constructing the necessary input values from the
+        PDB file and subsequently calling the trained nn-models to perform the
+        predictions on all atoms.
+
+        :param dir_model: (Path) Directory where the trained ANN models exist,
+        (one for each target atom).
+
+        :param dir_output: (Path) Directory where the output of the predictions
+        will be saved.
+
+        :param overwrite: (bool) Overwrite file protection. If &#34;True&#34;, then the
+        output file WILL overwrite any pre-existing output.
+        &#34;&#34;&#34;
+
+        # First call the base class constructor.
+        super().__init__(dir_model, dir_output, overwrite, file_logging=False)
+
+        # Neural network models. Set initial value to &#34;None&#34;.
+        self.nn_model = {atom: None for atom in TARGET_ATOMS}
+
+        # Input data scaler. Set initial value to &#34;None&#34;.
+        self.input_scaler = {atom: None for atom in TARGET_ATOMS}
+
+        # Load all the trained models (one for each atom).
+        for atom in TARGET_ATOMS:
+
+            # Make the file path.
+            file_path = Path(self.input_path/f&#34;ann_model_{atom}.h5&#34;)
+
+            # Check if the file exists.
+            if not file_path.is_file():
+                # Show a message instead of raising an exception.
+                self.logger.info(f&#34; Model for target &#39;{atom}&#39;, doesn&#39;t exist.&#34;
+                                 f&#34; Skipping ...&#34;)
+                # Skip to the next atom.
+                continue
+            # _end_if_
+
+            # If everything is OK load the model. We set the &#34;compile&#34;
+            # flag to False, because we use the models for prediction.
+            self.nn_model[atom] = load_model(file_path, compile=False)
+
+            # Create the Scaler filename.
+            scaler_path = Path(self.input_path/f&#34;data_scaler_{atom}.gz&#34;)
+
+            # Check if the scaler exists.
+            if scaler_path.is_file():
+                # Load the Scaler from the file.
+                self.input_scaler[atom] = joblib.load(scaler_path)
+            else:
+                # Display what went wrong.
+                self.logger.warning(f&#34; {self.__class__.__name__}.&#34;
+                                    f&#34; WARNING: File {scaler_path} not found.&#34;)
+            # _end_if_
+
+        # _end_for_
+
+    # _end_def_
+
+    def save_to_file(self, pdb_id, aa_sequence, predictions, target_peptides, ref_peptides,
+                     random_coil=None, model_id=None, chain_id=None, talos_format=True):
+        &#34;&#34;&#34;
+        This method accepts the output of the __call__() method and writes all the
+        information in a text file. Optionally we can save using the TALOS format.
+
+        :param pdb_id: (string) This is the PDB-ID from the input file. It is used
+        to provide information in the final output file.
+
+        :param aa_sequence: (string) This is the sequence of the amino acids in the
+        input file. It is used for information to the final output file.
+
+        :param predictions: These are the predictions (numerical values) of the ANN.
+        It is a dictionary where each entry (key) corresponds to an atom-target.
+
+        :param target_peptides:  These are the poly-peptides that were predicted by
+        the artificial neural network. Because of the &#34;aromatic-rings effect&#34; there
+        could be poly-peptides that were not predicted for all the targets.
+
+        :param ref_peptides: These are ALL the poly-peptides, as constructed by the
+        InputVector class. They are used as reference with regards to the list of
+        &#34;poly_peptides&#34;.
+
+        :param random_coil: This is a DataFrame with the random coil values. If it
+        isn&#39;t given (default=None) we will use average values from a default table.
+
+        :param model_id: This is the id of the model in the PDB file. We use it to
+        distinguish the output results.
+
+        :param chain_id: This is the id of the chain in the protein model.
+        We use it to distinguish the output results.
+
+        :param talos_format: (bool) Flag that defines the file format. If is set to
+        &#34;True&#34; we will use the TALOS format. If it is set to &#34;False&#34; the file will
+        be saved with a default tabular format.
+
+        :return: None.
+        &#34;&#34;&#34;
+
+        try:
+            # Construct the model-id for the file name.
+            model_id = &#34;1&#34; if model_id is None else model_id
+
+            # Construct the chain-id for the file name.
+            chain_id = &#34;A&#34; if chain_id is None else chain_id
+
+            # Construct the output file name.
+            f_name_out = Path(self.output_path/f&#34;prediction_{pdb_id}_&#34;
+                                               f&#34;model_{model_id}_chain_{chain_id}.tab&#34;)
+
+            # Check if we have enabled the overwrite protection.
+            if (not self.overwrite) and f_name_out.is_file():
+                raise FileExistsError(f&#34; Output: {f_name_out} already exists.&#34;)
+            # _end_if_
+
+            # Check there is a random coil dataframe.
+            if random_coil is not None:
+                # This will optimize the searches.
+                random_coil.set_index([&#34;ID&#34;, &#34;RES&#34;], inplace=True)
+            # _end_if_
+
+            # Size of chunks.
+            n = 20
+
+            # Split the amino-acid sequence to chucks of size &#39;n&#39;.
+            chunks = [aa_sequence[i:i + n] for i in range(0, len(aa_sequence), n)]
+
+            # Write the prediction data to a text file.
+            with open(f_name_out, &#34;w&#34;) as f_out:
+
+                # Localize the write function.
+                file_write = f_out.write
+
+                # In case we need to add comments. This is not mandatory but
+                # it will let us know what the original file was coming from.
+                file_write(f&#34;REMARK Chemical Shift predictions for {pdb_id}. \n&#34;)
+
+                # Model/Chain information
+                file_write(f&#34;REMARK Model {model_id} / Chain {chain_id}. \n&#34;)
+
+                # Empty line.
+                file_write(&#34;\n&#34;)
+
+                # Default value is set to N/A (optional).
+                file_write(&#34;DATA FIRST_RESID N/A \n&#34;)
+
+                # Empty line.
+                file_write(&#34;\n&#34;)
+
+                # Write the whole sequence in chunks of size &#34;n&#34;.
+                for sub_k in chunks:
+                    file_write(&#34;DATA SEQUENCE &#34; + sub_k + &#34;\n&#34;)
+                # _end_for_
+
+                # Empty line.
+                file_write(&#34;\n&#34;)
+
+                # Check the file format.
+                if talos_format:
+                    # Write the (TALOS) variable names.
+                    file_write(&#34;VARS RESID RESNAME ATOMNAME SHIFT \n&#34;)
+
+                    # Write the (TALOS) file format.
+                    file_write(&#34;FORMAT %4d %1s %4s %8.3f \n&#34;)
+                else:
+                    # Declare a dictionary to group the data
+                    # values according to their atom values.
+                    record = {atom: np.nan for atom in TARGET_ATOMS}
+
+                    # Tabular text format. This will preserve the same order
+                    # (of atoms) as in the TARGET_ATOMS (tuple) declaration.
+                    file_write(&#34;{:&gt;4} {:&gt;4} {:&gt;8} {:&gt;8} {:&gt;8} {:&gt;8} {:&gt;8} &#34;
+                               &#34;{:&gt;8} \n&#34;.format(&#34;ID&#34;, &#34;RES&#34;, *record.keys()))
+                # _end_if_
+
+                # Empty line.
+                file_write(&#34;\n&#34;)
+
+                # Extract the data and write them to the file.
+                for n, peptide in enumerate(ref_peptides, start=1):
+
+                    # Extract the information.
+                    index, res_name, res_id = peptide
+
+                    # Convert the name from 3 to 1 letters.
+                    res_name_1 = RES_3_TO_1[res_name]
+
+                    # Search link.
+                    search_link = (index, res_name_1)
+
+                    # Extract the predicted chemical shifts.
+                    for atom in TARGET_ATOMS:
+
+                        # Setting to NaN will indicate that we don&#39;t
+                        # have a predicted &#34;ss&#34; value for this atom.
+                        ss_value, rc_value = np.nan, np.nan
+
+                        # Create a search-peptide tuple.
+                        search_peptide = tuple(peptide)
+
+                        # If the peptide is in the target list.
+                        if search_peptide in target_peptides[atom]:
+
+                            # Get its index.
+                            idx = target_peptides[atom].index(search_peptide)
+
+                            # Get the predicted (secondary structure)
+                            # value that comes directly from the ANN.
+                            ss_value = predictions[atom][idx].item()
+
+                            # Get the random coil chemical shift.
+                            if random_coil is not None:
+                                # Get the value from the random coil file.
+                                rc_value = random_coil.loc[search_link, atom]
+                            else:
+                                # Get the average value from a Table.
+                                rc_value = ChemShiftPredictor.df_avg.loc[atom, res_name]
+                            # _end_if_
+
+                        # _end_if_
+
+                        # Add the random coil value to
+                        # the secondary structure value.
+                        value = ss_value + rc_value
+
+                        # Check the file format.
+                        if talos_format:
+                            # Rename the hydrogen from &#34;H&#34; to &#34;HN&#34;.
+                            atom = &#34;HN&#34; if atom == &#34;H&#34; else atom
+
+                            # Put all the information together in one record.
+                            file_write(f&#34;{res_id:&gt;4} {res_name_1:&gt;3} {atom:&gt;6} {value:&gt;8.3f} \n&#34;)
+                        else:
+                            # Store it to the dictionary.
+                            record[atom] = value
+                        # _end_if_
+
+                    # _end_for_
+
+                    # Check the file format.
+                    if not talos_format:
+                        # NOTE: From Python &#34;3.6&#34; onwards, the standard dict type maintains
+                        # insertion order by default!
+                        file_write(&#34;{:&gt;4} {:&gt;4} {:&gt;8.3f} {:&gt;8.3f} {:&gt;8.3f} {:&gt;8.3f} {:&gt;8.3f} &#34;
+                                   &#34;{:&gt;8.3f} \n&#34;.format(res_id, res_name_1, *record.values()))
+                    # _end_if_
+
+                # _end_for_
+
+            # _end_with_
+        except FileExistsError as e0:
+
+            # Log the error message.
+            self.logger.error(e0, end=&#34;\n&#34;)
+        # _end_try_
+
+    # _end_def_
+
+    def predict(self, f_path, n_peptides=3, all_models=False, random_coil_path=None,
+                verbose=False, talos_fmt=True):
+        &#34;&#34;&#34;
+        Primary method of a &#34;ChemShiftPredictor&#34; object. It accepts a PDB file as input,
+        constructs the input to the trained NN and puts the results -(predicted chemical
+        shifts)- in a new text file.
+
+        :param f_path: (string) PDB file with the residue / atom coordinates.
+
+        :param n_peptides: (int) Number of peptides to consider for the input vectors.
+        By default it considers tri-peptides.
+
+        :param all_models: (bool) flag. If &#34;True&#34; the method will process all the models
+        in the PDB file, otherwise only the first model.
+
+        :param random_coil_path: (string) file with the random coil chemical shift values.
+
+        :param verbose: (bool) If &#34;True&#34; it will display more info during the prediction.
+        The default set is &#34;False&#34; to avoid cluttering the screen with information.
+
+        :param talos_fmt: (bool) If &#34;True&#34; (default) it will use the TALOS format to save
+        the results. If it is set to &#34;False&#34; the output format will be tabular.
+
+        :return: It will call the save method to write the results in a TALOS file format.
+        &#34;&#34;&#34;
+
+        # Make sure the input file is a Path.
+        f_path = Path(f_path)
+
+        # Sanity check.
+        if not f_path.is_file():
+            raise FileNotFoundError(f&#34;{self.__class__.__name__} : &#34;
+                                    f&#34;File {f_path} doesn&#39;t exist.&#34;)
+        # _end_if_
+
+        # Call the &#34;vector&#34; method to create the input values.
+        model_vectors = ChemShiftPredictor.vec_in(f_path,
+                                                  all_models=all_models,
+                                                  n_peptides=n_peptides)
+        # Index of the middle element.
+        mid_idx = int(n_peptides) // 2
+
+        # Early exit if the input data is empty.
+        # This shouldn&#39;t happen very frequently.
+        if not model_vectors:
+            # Display a warning message.
+            self.logger.warning(f&#34; File: {f_path} is empty.&#34;)
+
+            # Exit from here.
+            return None
+        # _end_if_
+
+        # Random coil shift values
+        # (from an input file).
+        random_coil_shifts = None
+
+        # Check if a random coil file is given.
+        if random_coil_path:
+            # Make sure the input is a Path.
+            rc_path = Path(random_coil_path)
+
+            # Sanity check.
+            if rc_path.is_file():
+                # Extract the random coil chem-shifts.
+                # The first row (id-&gt;0) is the header.
+                random_coil_shifts = read_csv(rc_path, header=0)
+            else:
+                # Display a message.
+                self.logger.info(f&#34; Random coil file {rc_path} doesn&#39;t exist.&#34;)
+            # _end_if_
+
+        # _end_if_
+
+        # Switch on/off the verbosity.
+        nn_verbose_flag = 1 if verbose else 0
+
+        # Localize the convert to tensor method.
+        convert_to_tensor = tf.convert_to_tensor
+
+        # Make batch size tf.constant.
+        nn_batch_size = tf.constant(512, dtype=tf.int64, name=&#34;batch_size&#34;)
+
+        # Predict chemical shifts of all models.
+        for model_id, model_value in enumerate(model_vectors.values(), start=0):
+
+            # Unpack the contents.
+            input_data = model_value[&#34;data&#34;]
+            amino_acid_seq = model_value[&#34;sequence&#34;]
+
+            # Sanity check.
+            if len(input_data) != len(amino_acid_seq):
+                raise RuntimeError(f&#34;{self.__class__.__name__} : &#34;
+                                   f&#34;Data / Sequence length mismatch.&#34;)
+            # _end_if_
+
+            # Process all chains in the model.
+            for chain_id, chain_seq in amino_acid_seq.items():
+
+                # Sanity check.
+                if not input_data[chain_id]:
+
+                    # Display a warning message.
+                    if verbose:
+                        # Display a warning message.
+                        self.logger.warning(f&#34; Model: {model_id} -&#34;
+                                            f&#34; Chain: {chain_id} didn&#39;t produce any input data.&#34;)
+                    # _end_if_
+
+                    # Go to the next model.
+                    continue
+                # _end_if_
+
+                # Check if a random coil file is given.
+                if random_coil_shifts is not None:
+                    # Assign the file shift values.
+                    df_random_coil = random_coil_shifts
+                else:
+                    # Use Camcoil algorithm to predict the values.
+                    df_random_coil = ChemShiftPredictor.random_coil(chain_seq)
+                # _end_if_
+
+                # Declare data dictionary.
+                data = {atom: [] for atom in TARGET_ATOMS}
+
+                # Declare peptides dictionary.
+                y_peptide = {atom: [] for atom in TARGET_ATOMS}
+
+                # Reference poly-peptide list.
+                ref_peptide = []
+
+                # Localize append method.
+                ref_peptide_append = ref_peptide.append
+
+                # Separate all the input data.
+                for entry in input_data[chain_id]:
+
+                    # Extract only the middle one.
+                    peptide = entry[&#34;poly-peptides&#34;][mid_idx]
+
+                    # Check all target atoms.
+                    for atom in TARGET_ATOMS:
+
+                        # Check for membership.
+                        if atom in entry[&#34;targets&#34;]:
+                            # Add the data (numpy) vector.
+                            data[atom].append(entry[&#34;vector&#34;])
+
+                            # Add the peptide information.
+                            y_peptide[atom].append(peptide)
+                        # _end_if_
+
+                    # _end_for_
+
+                    # Here we add all the peptides, because
+                    # these will be the &#34;reference&#34; peptides.
+                    ref_peptide_append(peptide)
+                # _end_for_
+
+                # Model predictions: Initialize them with &#34;None&#34;.
+                y_predict = {atom: None for atom in TARGET_ATOMS}
+
+                # Run through all atom-models.
+                for atom in TARGET_ATOMS:
+
+                    # Convert the data to a DataFrame.
+                    df_data = DataFrame(data[atom])
+
+                    # Check if we have to scale the data.
+                    if self.input_scaler[atom]:
+                        df_data = DataFrame(self.input_scaler[atom].transform(df_data))
+                    # _end_if_
+
+                    # Get the model predictions (secondary structure values).
+                    y_predict[atom] = self.nn_model[atom].predict(x=convert_to_tensor(df_data),
+                                                                  batch_size=nn_batch_size,
+                                                                  verbose=nn_verbose_flag)
+                # _end_for_
+
+                # Send the predictions to the &#34;save method&#34;.
+                self.save_to_file(f_path.stem, chain_seq, y_predict, y_peptide, ref_peptide,
+                                  df_random_coil, model_id, chain_id, talos_format=talos_fmt)
+            # _end_for_
+
+            # Clean up the memory.
+            collect_mem_garbage()
+        # _end_for_
+
+    # _end_def_
+
+    # Auxiliary.
+    def __call__(self, *args, **kwargs):
+        &#34;&#34;&#34;
+        This is only a &#34;wrapper&#34; method
+        of the &#34;predict&#34; method.
+        &#34;&#34;&#34;
+        return self.predict(*args, **kwargs)
+    # _end_def_
+
+    # Auxiliary.
+    def __str__(self):
+        &#34;&#34;&#34;
+        Override to print a readable string presentation of the object.
+        This will include its id(), along with its field values.
+
+            NOTE: The overwrite protection is the opposite of the
+            overwrite flag, so in the printed version we show the
+            &#34;not overwrite_flag&#34;!
+
+        :return: a string representation of a ChemShiftPredictor object.
+        &#34;&#34;&#34;
+
+        # New line in character.
+        new_line = &#39;\n&#39;
+
+        # Return the f-string.
+        return f&#34; ChemShiftPredictor Id({id(self)}): {new_line}&#34; \
+               f&#34; Models dir={self.input_path} {new_line}&#34; \
+               f&#34; Output dir={self.output_path} {new_line}&#34; \
+               f&#34; Overwrite protection={(not self.overwrite)}&#34;</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase">ChemShiftBase</a></li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="Napshift.src.chemical_shifts.model_machine.ChemShiftPredictor.df_avg"><code class="name">var <span class="ident">df_avg</span></code></dt>
+<dd>
+<div class="desc"><p>This dataframe will be used in case we do not provide a random coil file.</p></div>
+</dd>
+<dt id="Napshift.src.chemical_shifts.model_machine.ChemShiftPredictor.random_coil"><code class="name">var <span class="ident">random_coil</span></code></dt>
+<dd>
+<div class="desc"><p>This object will be used to predict the random coil
+chemical shifts. The default value for the "pH" is
+set to '7.0'.</p></div>
+</dd>
+<dt id="Napshift.src.chemical_shifts.model_machine.ChemShiftPredictor.vec_in"><code class="name">var <span class="ident">vec_in</span></code></dt>
+<dd>
+<div class="desc"><p>This will be used to load the PDB file(s) before we make the prediction
+with the ANN model. Here we set (for brevity) all the input parameters.</p></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="Napshift.src.chemical_shifts.model_machine.ChemShiftPredictor.input_scaler"><code class="name">var <span class="ident">input_scaler</span></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="Napshift.src.chemical_shifts.model_machine.ChemShiftPredictor.nn_model"><code class="name">var <span class="ident">nn_model</span></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="Napshift.src.chemical_shifts.model_machine.ChemShiftPredictor.predict"><code class="name flex">
+<span>def <span class="ident">predict</span></span>(<span>self, f_path, n_peptides=3, all_models=False, random_coil_path=None, verbose=False, talos_fmt=True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Primary method of a "ChemShiftPredictor" object. It accepts a PDB file as input,
+constructs the input to the trained NN and puts the results -(predicted chemical
+shifts)- in a new text file.</p>
+<p>:param f_path: (string) PDB file with the residue / atom coordinates.</p>
+<p>:param n_peptides: (int) Number of peptides to consider for the input vectors.
+By default it considers tri-peptides.</p>
+<p>:param all_models: (bool) flag. If "True" the method will process all the models
+in the PDB file, otherwise only the first model.</p>
+<p>:param random_coil_path: (string) file with the random coil chemical shift values.</p>
+<p>:param verbose: (bool) If "True" it will display more info during the prediction.
+The default set is "False" to avoid cluttering the screen with information.</p>
+<p>:param talos_fmt: (bool) If "True" (default) it will use the TALOS format to save
+the results. If it is set to "False" the output format will be tabular.</p>
+<p>:return: It will call the save method to write the results in a TALOS file format.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def predict(self, f_path, n_peptides=3, all_models=False, random_coil_path=None,
+            verbose=False, talos_fmt=True):
+    &#34;&#34;&#34;
+    Primary method of a &#34;ChemShiftPredictor&#34; object. It accepts a PDB file as input,
+    constructs the input to the trained NN and puts the results -(predicted chemical
+    shifts)- in a new text file.
+
+    :param f_path: (string) PDB file with the residue / atom coordinates.
+
+    :param n_peptides: (int) Number of peptides to consider for the input vectors.
+    By default it considers tri-peptides.
+
+    :param all_models: (bool) flag. If &#34;True&#34; the method will process all the models
+    in the PDB file, otherwise only the first model.
+
+    :param random_coil_path: (string) file with the random coil chemical shift values.
+
+    :param verbose: (bool) If &#34;True&#34; it will display more info during the prediction.
+    The default set is &#34;False&#34; to avoid cluttering the screen with information.
+
+    :param talos_fmt: (bool) If &#34;True&#34; (default) it will use the TALOS format to save
+    the results. If it is set to &#34;False&#34; the output format will be tabular.
+
+    :return: It will call the save method to write the results in a TALOS file format.
+    &#34;&#34;&#34;
+
+    # Make sure the input file is a Path.
+    f_path = Path(f_path)
+
+    # Sanity check.
+    if not f_path.is_file():
+        raise FileNotFoundError(f&#34;{self.__class__.__name__} : &#34;
+                                f&#34;File {f_path} doesn&#39;t exist.&#34;)
+    # _end_if_
+
+    # Call the &#34;vector&#34; method to create the input values.
+    model_vectors = ChemShiftPredictor.vec_in(f_path,
+                                              all_models=all_models,
+                                              n_peptides=n_peptides)
+    # Index of the middle element.
+    mid_idx = int(n_peptides) // 2
+
+    # Early exit if the input data is empty.
+    # This shouldn&#39;t happen very frequently.
+    if not model_vectors:
+        # Display a warning message.
+        self.logger.warning(f&#34; File: {f_path} is empty.&#34;)
+
+        # Exit from here.
+        return None
+    # _end_if_
+
+    # Random coil shift values
+    # (from an input file).
+    random_coil_shifts = None
+
+    # Check if a random coil file is given.
+    if random_coil_path:
+        # Make sure the input is a Path.
+        rc_path = Path(random_coil_path)
+
+        # Sanity check.
+        if rc_path.is_file():
+            # Extract the random coil chem-shifts.
+            # The first row (id-&gt;0) is the header.
+            random_coil_shifts = read_csv(rc_path, header=0)
+        else:
+            # Display a message.
+            self.logger.info(f&#34; Random coil file {rc_path} doesn&#39;t exist.&#34;)
+        # _end_if_
+
+    # _end_if_
+
+    # Switch on/off the verbosity.
+    nn_verbose_flag = 1 if verbose else 0
+
+    # Localize the convert to tensor method.
+    convert_to_tensor = tf.convert_to_tensor
+
+    # Make batch size tf.constant.
+    nn_batch_size = tf.constant(512, dtype=tf.int64, name=&#34;batch_size&#34;)
+
+    # Predict chemical shifts of all models.
+    for model_id, model_value in enumerate(model_vectors.values(), start=0):
+
+        # Unpack the contents.
+        input_data = model_value[&#34;data&#34;]
+        amino_acid_seq = model_value[&#34;sequence&#34;]
+
+        # Sanity check.
+        if len(input_data) != len(amino_acid_seq):
+            raise RuntimeError(f&#34;{self.__class__.__name__} : &#34;
+                               f&#34;Data / Sequence length mismatch.&#34;)
+        # _end_if_
+
+        # Process all chains in the model.
+        for chain_id, chain_seq in amino_acid_seq.items():
+
+            # Sanity check.
+            if not input_data[chain_id]:
+
+                # Display a warning message.
+                if verbose:
+                    # Display a warning message.
+                    self.logger.warning(f&#34; Model: {model_id} -&#34;
+                                        f&#34; Chain: {chain_id} didn&#39;t produce any input data.&#34;)
+                # _end_if_
+
+                # Go to the next model.
+                continue
+            # _end_if_
+
+            # Check if a random coil file is given.
+            if random_coil_shifts is not None:
+                # Assign the file shift values.
+                df_random_coil = random_coil_shifts
+            else:
+                # Use Camcoil algorithm to predict the values.
+                df_random_coil = ChemShiftPredictor.random_coil(chain_seq)
+            # _end_if_
+
+            # Declare data dictionary.
+            data = {atom: [] for atom in TARGET_ATOMS}
+
+            # Declare peptides dictionary.
+            y_peptide = {atom: [] for atom in TARGET_ATOMS}
+
+            # Reference poly-peptide list.
+            ref_peptide = []
+
+            # Localize append method.
+            ref_peptide_append = ref_peptide.append
+
+            # Separate all the input data.
+            for entry in input_data[chain_id]:
+
+                # Extract only the middle one.
+                peptide = entry[&#34;poly-peptides&#34;][mid_idx]
+
+                # Check all target atoms.
+                for atom in TARGET_ATOMS:
+
+                    # Check for membership.
+                    if atom in entry[&#34;targets&#34;]:
+                        # Add the data (numpy) vector.
+                        data[atom].append(entry[&#34;vector&#34;])
+
+                        # Add the peptide information.
+                        y_peptide[atom].append(peptide)
+                    # _end_if_
+
+                # _end_for_
+
+                # Here we add all the peptides, because
+                # these will be the &#34;reference&#34; peptides.
+                ref_peptide_append(peptide)
+            # _end_for_
+
+            # Model predictions: Initialize them with &#34;None&#34;.
+            y_predict = {atom: None for atom in TARGET_ATOMS}
+
+            # Run through all atom-models.
+            for atom in TARGET_ATOMS:
+
+                # Convert the data to a DataFrame.
+                df_data = DataFrame(data[atom])
+
+                # Check if we have to scale the data.
+                if self.input_scaler[atom]:
+                    df_data = DataFrame(self.input_scaler[atom].transform(df_data))
+                # _end_if_
+
+                # Get the model predictions (secondary structure values).
+                y_predict[atom] = self.nn_model[atom].predict(x=convert_to_tensor(df_data),
+                                                              batch_size=nn_batch_size,
+                                                              verbose=nn_verbose_flag)
+            # _end_for_
+
+            # Send the predictions to the &#34;save method&#34;.
+            self.save_to_file(f_path.stem, chain_seq, y_predict, y_peptide, ref_peptide,
+                              df_random_coil, model_id, chain_id, talos_format=talos_fmt)
+        # _end_for_
+
+        # Clean up the memory.
+        collect_mem_garbage()</code></pre>
+</details>
+</dd>
+<dt id="Napshift.src.chemical_shifts.model_machine.ChemShiftPredictor.save_to_file"><code class="name flex">
+<span>def <span class="ident">save_to_file</span></span>(<span>self, pdb_id, aa_sequence, predictions, target_peptides, ref_peptides, random_coil=None, model_id=None, chain_id=None, talos_format=True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This method accepts the output of the <strong>call</strong>() method and writes all the
+information in a text file. Optionally we can save using the TALOS format.</p>
+<p>:param pdb_id: (string) This is the PDB-ID from the input file. It is used
+to provide information in the final output file.</p>
+<p>:param aa_sequence: (string) This is the sequence of the amino acids in the
+input file. It is used for information to the final output file.</p>
+<p>:param predictions: These are the predictions (numerical values) of the ANN.
+It is a dictionary where each entry (key) corresponds to an atom-target.</p>
+<p>:param target_peptides:
+These are the poly-peptides that were predicted by
+the artificial neural network. Because of the "aromatic-rings effect" there
+could be poly-peptides that were not predicted for all the targets.</p>
+<p>:param ref_peptides: These are ALL the poly-peptides, as constructed by the
+InputVector class. They are used as reference with regards to the list of
+"poly_peptides".</p>
+<p>:param random_coil: This is a DataFrame with the random coil values. If it
+isn't given (default=None) we will use average values from a default table.</p>
+<p>:param model_id: This is the id of the model in the PDB file. We use it to
+distinguish the output results.</p>
+<p>:param chain_id: This is the id of the chain in the protein model.
+We use it to distinguish the output results.</p>
+<p>:param talos_format: (bool) Flag that defines the file format. If is set to
+"True" we will use the TALOS format. If it is set to "False" the file will
+be saved with a default tabular format.</p>
+<p>:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def save_to_file(self, pdb_id, aa_sequence, predictions, target_peptides, ref_peptides,
+                 random_coil=None, model_id=None, chain_id=None, talos_format=True):
+    &#34;&#34;&#34;
+    This method accepts the output of the __call__() method and writes all the
+    information in a text file. Optionally we can save using the TALOS format.
+
+    :param pdb_id: (string) This is the PDB-ID from the input file. It is used
+    to provide information in the final output file.
+
+    :param aa_sequence: (string) This is the sequence of the amino acids in the
+    input file. It is used for information to the final output file.
+
+    :param predictions: These are the predictions (numerical values) of the ANN.
+    It is a dictionary where each entry (key) corresponds to an atom-target.
+
+    :param target_peptides:  These are the poly-peptides that were predicted by
+    the artificial neural network. Because of the &#34;aromatic-rings effect&#34; there
+    could be poly-peptides that were not predicted for all the targets.
+
+    :param ref_peptides: These are ALL the poly-peptides, as constructed by the
+    InputVector class. They are used as reference with regards to the list of
+    &#34;poly_peptides&#34;.
+
+    :param random_coil: This is a DataFrame with the random coil values. If it
+    isn&#39;t given (default=None) we will use average values from a default table.
+
+    :param model_id: This is the id of the model in the PDB file. We use it to
+    distinguish the output results.
+
+    :param chain_id: This is the id of the chain in the protein model.
+    We use it to distinguish the output results.
+
+    :param talos_format: (bool) Flag that defines the file format. If is set to
+    &#34;True&#34; we will use the TALOS format. If it is set to &#34;False&#34; the file will
+    be saved with a default tabular format.
+
+    :return: None.
+    &#34;&#34;&#34;
+
+    try:
+        # Construct the model-id for the file name.
+        model_id = &#34;1&#34; if model_id is None else model_id
+
+        # Construct the chain-id for the file name.
+        chain_id = &#34;A&#34; if chain_id is None else chain_id
+
+        # Construct the output file name.
+        f_name_out = Path(self.output_path/f&#34;prediction_{pdb_id}_&#34;
+                                           f&#34;model_{model_id}_chain_{chain_id}.tab&#34;)
+
+        # Check if we have enabled the overwrite protection.
+        if (not self.overwrite) and f_name_out.is_file():
+            raise FileExistsError(f&#34; Output: {f_name_out} already exists.&#34;)
+        # _end_if_
+
+        # Check there is a random coil dataframe.
+        if random_coil is not None:
+            # This will optimize the searches.
+            random_coil.set_index([&#34;ID&#34;, &#34;RES&#34;], inplace=True)
+        # _end_if_
+
+        # Size of chunks.
+        n = 20
+
+        # Split the amino-acid sequence to chucks of size &#39;n&#39;.
+        chunks = [aa_sequence[i:i + n] for i in range(0, len(aa_sequence), n)]
+
+        # Write the prediction data to a text file.
+        with open(f_name_out, &#34;w&#34;) as f_out:
+
+            # Localize the write function.
+            file_write = f_out.write
+
+            # In case we need to add comments. This is not mandatory but
+            # it will let us know what the original file was coming from.
+            file_write(f&#34;REMARK Chemical Shift predictions for {pdb_id}. \n&#34;)
+
+            # Model/Chain information
+            file_write(f&#34;REMARK Model {model_id} / Chain {chain_id}. \n&#34;)
+
+            # Empty line.
+            file_write(&#34;\n&#34;)
+
+            # Default value is set to N/A (optional).
+            file_write(&#34;DATA FIRST_RESID N/A \n&#34;)
+
+            # Empty line.
+            file_write(&#34;\n&#34;)
+
+            # Write the whole sequence in chunks of size &#34;n&#34;.
+            for sub_k in chunks:
+                file_write(&#34;DATA SEQUENCE &#34; + sub_k + &#34;\n&#34;)
+            # _end_for_
+
+            # Empty line.
+            file_write(&#34;\n&#34;)
+
+            # Check the file format.
+            if talos_format:
+                # Write the (TALOS) variable names.
+                file_write(&#34;VARS RESID RESNAME ATOMNAME SHIFT \n&#34;)
+
+                # Write the (TALOS) file format.
+                file_write(&#34;FORMAT %4d %1s %4s %8.3f \n&#34;)
+            else:
+                # Declare a dictionary to group the data
+                # values according to their atom values.
+                record = {atom: np.nan for atom in TARGET_ATOMS}
+
+                # Tabular text format. This will preserve the same order
+                # (of atoms) as in the TARGET_ATOMS (tuple) declaration.
+                file_write(&#34;{:&gt;4} {:&gt;4} {:&gt;8} {:&gt;8} {:&gt;8} {:&gt;8} {:&gt;8} &#34;
+                           &#34;{:&gt;8} \n&#34;.format(&#34;ID&#34;, &#34;RES&#34;, *record.keys()))
+            # _end_if_
+
+            # Empty line.
+            file_write(&#34;\n&#34;)
+
+            # Extract the data and write them to the file.
+            for n, peptide in enumerate(ref_peptides, start=1):
+
+                # Extract the information.
+                index, res_name, res_id = peptide
+
+                # Convert the name from 3 to 1 letters.
+                res_name_1 = RES_3_TO_1[res_name]
+
+                # Search link.
+                search_link = (index, res_name_1)
+
+                # Extract the predicted chemical shifts.
+                for atom in TARGET_ATOMS:
+
+                    # Setting to NaN will indicate that we don&#39;t
+                    # have a predicted &#34;ss&#34; value for this atom.
+                    ss_value, rc_value = np.nan, np.nan
+
+                    # Create a search-peptide tuple.
+                    search_peptide = tuple(peptide)
+
+                    # If the peptide is in the target list.
+                    if search_peptide in target_peptides[atom]:
+
+                        # Get its index.
+                        idx = target_peptides[atom].index(search_peptide)
+
+                        # Get the predicted (secondary structure)
+                        # value that comes directly from the ANN.
+                        ss_value = predictions[atom][idx].item()
+
+                        # Get the random coil chemical shift.
+                        if random_coil is not None:
+                            # Get the value from the random coil file.
+                            rc_value = random_coil.loc[search_link, atom]
+                        else:
+                            # Get the average value from a Table.
+                            rc_value = ChemShiftPredictor.df_avg.loc[atom, res_name]
+                        # _end_if_
+
+                    # _end_if_
+
+                    # Add the random coil value to
+                    # the secondary structure value.
+                    value = ss_value + rc_value
+
+                    # Check the file format.
+                    if talos_format:
+                        # Rename the hydrogen from &#34;H&#34; to &#34;HN&#34;.
+                        atom = &#34;HN&#34; if atom == &#34;H&#34; else atom
+
+                        # Put all the information together in one record.
+                        file_write(f&#34;{res_id:&gt;4} {res_name_1:&gt;3} {atom:&gt;6} {value:&gt;8.3f} \n&#34;)
+                    else:
+                        # Store it to the dictionary.
+                        record[atom] = value
+                    # _end_if_
+
+                # _end_for_
+
+                # Check the file format.
+                if not talos_format:
+                    # NOTE: From Python &#34;3.6&#34; onwards, the standard dict type maintains
+                    # insertion order by default!
+                    file_write(&#34;{:&gt;4} {:&gt;4} {:&gt;8.3f} {:&gt;8.3f} {:&gt;8.3f} {:&gt;8.3f} {:&gt;8.3f} &#34;
+                               &#34;{:&gt;8.3f} \n&#34;.format(res_id, res_name_1, *record.values()))
+                # _end_if_
+
+            # _end_for_
+
+        # _end_with_
+    except FileExistsError as e0:
+
+        # Log the error message.
+        self.logger.error(e0, end=&#34;\n&#34;)</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase">ChemShiftBase</a></b></code>:
+<ul class="hlist">
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.dir_default" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase.dir_default">dir_default</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.dir_input" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase.dir_input">dir_input</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.dir_output" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase.dir_output">dir_output</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.input_path" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase.input_path">input_path</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.logger" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase.logger">logger</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.output_path" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase.output_path">output_path</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.overwrite" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase.overwrite">overwrite</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.overwrite_flag" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase.overwrite_flag">overwrite_flag</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="Napshift.src.chemical_shifts.model_machine.ChemShiftTraining"><code class="flex name class">
+<span>class <span class="ident">ChemShiftTraining</span></span>
+<span>(</span><span>dir_data=None, dir_output=None, overwrite=True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Constructs an object that will perform the training of the artificial
+neural networks (ANNs), on predicting the chemical shift values from
+specific atoms.</p>
+<p>:param dir_data: Directory where the trained ANN models (one for each
+target atom) exist.</p>
+<p>:param dir_output: Directory where the output of the training will be
+saved (trained ANN models).</p>
+<p>:param overwrite: Overwrite file protection. If True, then the output
+process WILL overwrite any pre-existing output files.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ChemShiftTraining(ChemShiftBase):
+
+    # Constructor.
+    def __init__(self, dir_data=None, dir_output=None, overwrite=True):
+        &#34;&#34;&#34;
+        Constructs an object that will perform the training of the artificial
+        neural networks (ANNs), on predicting the chemical shift values from
+        specific atoms.
+
+        :param dir_data: Directory where the trained ANN models (one for each
+        target atom) exist.
+
+        :param dir_output: Directory where the output of the training will be
+        saved (trained ANN models).
+
+        :param overwrite: Overwrite file protection. If True, then the output
+        process WILL overwrite any pre-existing output files.
+        &#34;&#34;&#34;
+        # First call the base class constructor.
+        super().__init__(dir_data, dir_output, overwrite, file_logging=False)
+    # _end_def_
+
+    # Auxiliary.
+    def load_data(self, atom=None):
+        &#34;&#34;&#34;
+        This method will load the training datasets for a
+        given input atom (target).
+
+        :param atom: Atom to be used as target during the
+        training process by the ann.
+
+        :return: The (X/y) datasets. Note that the method
+        will look for NaN target values and will clean up
+        these values.
+        &#34;&#34;&#34;
+
+        # Check the atom.
+        if atom not in TARGET_ATOMS:
+            raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                             f&#34;Loading data: Unknown target &#39;{atom}&#39;.&#34;)
+        # _end_if_
+
+        # Open the train data file for read only.
+        with h5py.File(Path(self.input_path/f&#34;x_train_{atom}.h5&#34;), &#39;r&#39;) as data_file:
+            # Convert directly to numpy.
+            data = np.array(data_file[&#39;x_mat&#39;])
+        # _end_with_
+
+        # Total amount of data.
+        num_data = data.shape[0]
+
+        # Sanity check.
+        if num_data == 0:
+            raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                             f&#34;Loading data: Empty data set for target &#39;{atom}&#39;.&#34;)
+        # _end_if_
+
+        # Remove entries with NaN target values.
+        clean_data = data[~np.isnan(data[:, -1])].copy()
+
+        # X-Y (train):
+        x_train = clean_data[:, 0:-1]
+        y_train = clean_data[:, -1]
+
+        # Percentage of NaN in the training set.
+        nan_percent = 100.0 * (1.0 - np.round(clean_data.shape[0] / num_data, 3))
+
+        # Print Info.
+        self.logger.info(f&#34; Train data shape: {data.shape},&#34;
+                         f&#34; includes {nan_percent:.2f}% NaN.&#34;)
+
+        # Return the (X/y) sets of data.
+        return x_train, y_train
+    # _end_def_
+
+    def train_models(self, validation_split=0.10, save_plots=True, verbose=False):
+        &#34;&#34;&#34;
+        The main purpose of this method is to use a pre-defined Artificial Neural
+        Network and train it on the chemical shift data. Since we have six targets
+        the method will train six networks separately and store its results.
+
+        :param validation_split: (float) This value is used to keep a portion of the
+        training data aside while training to validate the training process. This is
+        not the test set hold out.
+
+        :param save_plots: (bool) If &#34;True&#34; it will save the training errors, as
+        function of time (epochs), for all the training targets (atoms).
+
+        :param verbose: (bool) If &#34;True&#34; it will display more information during
+        the training. The default is &#34;False&#34; to avoid cluttering the screen with
+        information.
+
+        :return: None.
+        &#34;&#34;&#34;
+
+        # Make sure the neural network models are cleared.
+        nn_model = {atom: None for atom in TARGET_ATOMS}
+
+        # Make sure the neural network outputs are cleared.
+        nn_output = {atom: None for atom in TARGET_ATOMS}
+
+        # Default plots path.
+        plots_path = None
+
+        # Check if we want to save the training
+        # figures and then create the directory.
+        if save_plots:
+            # Figure path.
+            plots_path = Path(self.output_path/&#34;plots&#34;)
+
+            # Check if the models (output) directory exists.
+            if not plots_path.is_dir():
+                # Make the path.
+                plots_path.mkdir(parents=True)
+
+                # Display info (verbose mode).
+                if verbose:
+                    self.logger.info(f&#34; Created plots directory at: {plots_path}&#34;)
+                # _end_if_
+            # _end_if_
+        # _end_if_
+
+        # Models path.
+        models_path = Path(self.output_path/&#34;models&#34;)
+
+        # Check if the models (output) directory exists.
+        if not models_path.is_dir():
+            # Make the path.
+            models_path.mkdir(parents=True)
+
+            # Display info (verbose mode).
+            if verbose:
+                self.logger.info(f&#34; Created models directory at: {models_path}&#34;)
+            # _end_if_
+        # _end_if_
+
+        # Output path.
+        results_path = Path(self.output_path/&#34;results&#34;)
+
+        # Check if the results (output) directory exists.
+        if not results_path.is_dir():
+            # Make the path.
+            results_path.mkdir(parents=True)
+
+            # Display info (verbose mode).
+            if verbose:
+                self.logger.info(f&#34; Created results directory at: {results_path}&#34;)
+            # _end_if_
+        # _end_if_
+
+        # Switch on/off the verbosity.
+        nn_verbose_flag = 1 if verbose else 0
+
+        # Localize the convert to tensor method.
+        convert_to_tensor = tf.convert_to_tensor
+
+        # Make batch size tf.constant.
+        nn_batch_size = tf.constant(512, dtype=tf.int64, name=&#34;batch_size&#34;)
+
+        # Make epochs tf.constant.
+        nn_epochs = tf.constant(1000, dtype=tf.int64, name=&#34;epochs&#34;)
+
+        # Train for each target a separate ANN.
+        for atom in TARGET_ATOMS:
+            # Print info.
+            self.logger.info(f&#34; Training ANN for target &#39;{atom}&#39;.&#34;)
+
+            # Prepare the data for the network.
+            x_train, y_train = self.load_data(atom)
+
+            # Reshape the target vector.
+            y_train = y_train.reshape(-1, 1)
+
+            # Fit the input scaler with the data.
+            input_scaler = MaxAbsScaler().fit(x_train)
+
+            try:
+                # Try to save the x-Scaler because we
+                # will need it in the prediction step.
+                joblib.dump(input_scaler,
+                            Path(models_path/f&#34;data_scaler_{atom}.gz&#34;))
+            except RuntimeError as e0:
+                self.logger.error(f&#34; Error while saving input Scaler. {e0}&#34;)
+            # _end_try_
+
+            # Transform the input data.
+            x_train = input_scaler.transform(x_train)
+
+            # Weights initializer:
+            #
+            # 1) For the &#34;hidden&#34; units can also use:
+            #    - RandomNormal(mean=0.0, stddev=0.1)
+            #
+            # 2) For the &#34;output&#34; units can also use:
+            #    - RandomUniform(minval=-0.1, maxval=0.1)
+            #
+
+            # Setup the ANN (model).
+            nn_model[atom] = Sequential([
+                Dense(units=26,
+                      name=&#34;Hidden_1&#34;,
+                      activation=&#34;elu&#34;,
+                      activity_regularizer=None,
+                      kernel_initializer=&#34;glorot_normal&#34;,
+                      input_shape=(x_train.shape[1],)),
+                Dense(units=1,
+                      name=&#34;Output_1&#34;,
+                      activation=&#39;linear&#39;,
+                      activity_regularizer=None,
+                      kernel_initializer=&#34;glorot_uniform&#34;)
+            ], name=f&#34;model_{atom}&#34;)
+
+            # Print info.
+            if verbose:
+                # Model summary.
+                nn_model[atom].summary()
+            # _end_if_
+
+            # Monitor the &#39;val_loss&#39; function and if it does not improve for
+            # &#39;patience&#39; epochs, then stop the training and restore the best
+            # weights that have been found so far.
+            early_stop = keras.callbacks.EarlyStopping(monitor=&#34;val_loss&#34;, mode=&#34;min&#34;,
+                                                       patience=20, restore_best_weights=True)
+            # Set the optimizer object.
+            optimization_alg = SGD(learning_rate=0.01, momentum=0.8, nesterov=True)
+
+            # Compile the model.
+            nn_model[atom].compile(optimizer=optimization_alg, loss=&#34;mse&#34;)
+
+            # First time instant.
+            time_0 = time()
+
+            # Fit the model.
+            nn_output[atom] = nn_model[atom].fit(x=convert_to_tensor(x_train),
+                                                 y=convert_to_tensor(y_train),
+                                                 batch_size=nn_batch_size, epochs=nn_epochs,
+                                                 validation_split=validation_split, shuffle=True,
+                                                 verbose=nn_verbose_flag, callbacks=[early_stop])
+            # Final time instant.
+            time_f = time()
+
+            # Save the model to the pre-defined location.
+            nn_model[atom].save(Path(models_path / f&#34;ann_model_{atom}.h5&#34;),
+                                include_optimizer=False, save_format=&#34;h5&#34;)
+
+            # Number of actual runs (epochs).
+            n_epoch = len(nn_output[atom].history[&#39;loss&#39;])
+
+            # Timing message.
+            self.logger.info(f&#34; Finished {n_epoch} epochs&#34;
+                             f&#34; in {time_f - time_0:.2f} seconds.&#34;)
+
+            # Get the final (training and validation) error values.
+            train_RMSE = np.sqrt(nn_output[atom].history[&#34;loss&#34;][-1])
+            valid_RMSE = np.sqrt(nn_output[atom].history[&#34;val_loss&#34;][-1])
+
+            # Error message.
+            self.logger.info(f&#34; RMSE = {train_RMSE:.3f},&#34;
+                             f&#34; val-RMSE = {valid_RMSE:.3f}\n\n&#34;)
+
+            # Convert the output history to a DataFrame.
+            df_output = DataFrame(nn_output[atom].history)
+
+            # Save to csv:
+            with open(Path(results_path/f&#34;nn_output_{atom}.csv&#34;), mode=&#39;w&#39;) as f:
+                df_output.to_csv(f)
+            # _end_with_
+
+            # Save the training figure.
+            if save_plots:
+                # Make a new figure.
+                fig = plt.figure()
+
+                # Plot training loss.
+                plt.plot(np.sqrt(df_output[&#39;loss&#39;]), label=&#34;Training&#34;)
+
+                # Plot validation loss.
+                plt.plot(np.sqrt(df_output[&#39;val_loss&#39;]), label=&#34;Validation&#34;)
+
+                # Add the x label.
+                plt.xlabel(&#34;Epoch&#34;)
+
+                # Add the y label.
+                plt.ylabel(&#34;RMSE&#34;)
+
+                # Finalize the plot.
+                plt.title(f&#34;Target: {atom}&#34;)
+                plt.legend()
+                plt.grid(True)
+
+                # Maximize the space.
+                fig.tight_layout()
+
+                # Save the figure.
+                fig.savefig(Path(plots_path/f&#34;nn_training_vs_validation_{atom}.png&#34;),
+                            orientation=&#34;landscape&#34;, dpi=300)
+            # _end_if_
+
+            # Clean up the memory.
+            collect_mem_garbage()
+        # _end_for_
+
+        # Print final info.
+        self.logger.info(&#34; Finished training models!&#34;)
+    # _end_def_
+
+    # Auxiliary.
+    def __call__(self, *args, **kwargs):
+        &#34;&#34;&#34;
+        This is a &#34;wrapper&#34; method of the &#34;train_models&#34;
+        method to simplify the call.
+        &#34;&#34;&#34;
+        return self.train_models(*args, **kwargs)
+    # _end_def_
+
+    # Auxiliary.
+    def __str__(self):
+        &#34;&#34;&#34;
+        Override method to print a readable string presentation of the
+        object. This will include its id, along with its field values.
+
+            NOTE: The overwrite protection is the opposite of the
+            overwrite flag, so in the printed version we show the
+            &#34;not overwrite_flag&#34;!
+
+        :return: a string representation of a ChemShiftTraining object.
+        &#34;&#34;&#34;
+
+        # New line in character.
+        new_line = &#39;\n&#39;
+
+        # Return the f-string.
+        return f&#34; ChemShiftTraining Id({id(self)}): {new_line}&#34; \
+               f&#34; Data   dir={self.input_path} {new_line}&#34; \
+               f&#34; Output dir={self.output_path} {new_line}&#34; \
+               f&#34; Overwrite protection={(not self.overwrite)}&#34;</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase">ChemShiftBase</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="Napshift.src.chemical_shifts.model_machine.ChemShiftTraining.load_data"><code class="name flex">
+<span>def <span class="ident">load_data</span></span>(<span>self, atom=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This method will load the training datasets for a
+given input atom (target).</p>
+<p>:param atom: Atom to be used as target during the
+training process by the ann.</p>
+<p>:return: The (X/y) datasets. Note that the method
+will look for NaN target values and will clean up
+these values.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load_data(self, atom=None):
+    &#34;&#34;&#34;
+    This method will load the training datasets for a
+    given input atom (target).
+
+    :param atom: Atom to be used as target during the
+    training process by the ann.
+
+    :return: The (X/y) datasets. Note that the method
+    will look for NaN target values and will clean up
+    these values.
+    &#34;&#34;&#34;
+
+    # Check the atom.
+    if atom not in TARGET_ATOMS:
+        raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                         f&#34;Loading data: Unknown target &#39;{atom}&#39;.&#34;)
+    # _end_if_
+
+    # Open the train data file for read only.
+    with h5py.File(Path(self.input_path/f&#34;x_train_{atom}.h5&#34;), &#39;r&#39;) as data_file:
+        # Convert directly to numpy.
+        data = np.array(data_file[&#39;x_mat&#39;])
+    # _end_with_
+
+    # Total amount of data.
+    num_data = data.shape[0]
+
+    # Sanity check.
+    if num_data == 0:
+        raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                         f&#34;Loading data: Empty data set for target &#39;{atom}&#39;.&#34;)
+    # _end_if_
+
+    # Remove entries with NaN target values.
+    clean_data = data[~np.isnan(data[:, -1])].copy()
+
+    # X-Y (train):
+    x_train = clean_data[:, 0:-1]
+    y_train = clean_data[:, -1]
+
+    # Percentage of NaN in the training set.
+    nan_percent = 100.0 * (1.0 - np.round(clean_data.shape[0] / num_data, 3))
+
+    # Print Info.
+    self.logger.info(f&#34; Train data shape: {data.shape},&#34;
+                     f&#34; includes {nan_percent:.2f}% NaN.&#34;)
+
+    # Return the (X/y) sets of data.
+    return x_train, y_train</code></pre>
+</details>
+</dd>
+<dt id="Napshift.src.chemical_shifts.model_machine.ChemShiftTraining.train_models"><code class="name flex">
+<span>def <span class="ident">train_models</span></span>(<span>self, validation_split=0.1, save_plots=True, verbose=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The main purpose of this method is to use a pre-defined Artificial Neural
+Network and train it on the chemical shift data. Since we have six targets
+the method will train six networks separately and store its results.</p>
+<p>:param validation_split: (float) This value is used to keep a portion of the
+training data aside while training to validate the training process. This is
+not the test set hold out.</p>
+<p>:param save_plots: (bool) If "True" it will save the training errors, as
+function of time (epochs), for all the training targets (atoms).</p>
+<p>:param verbose: (bool) If "True" it will display more information during
+the training. The default is "False" to avoid cluttering the screen with
+information.</p>
+<p>:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def train_models(self, validation_split=0.10, save_plots=True, verbose=False):
+    &#34;&#34;&#34;
+    The main purpose of this method is to use a pre-defined Artificial Neural
+    Network and train it on the chemical shift data. Since we have six targets
+    the method will train six networks separately and store its results.
+
+    :param validation_split: (float) This value is used to keep a portion of the
+    training data aside while training to validate the training process. This is
+    not the test set hold out.
+
+    :param save_plots: (bool) If &#34;True&#34; it will save the training errors, as
+    function of time (epochs), for all the training targets (atoms).
+
+    :param verbose: (bool) If &#34;True&#34; it will display more information during
+    the training. The default is &#34;False&#34; to avoid cluttering the screen with
+    information.
+
+    :return: None.
+    &#34;&#34;&#34;
+
+    # Make sure the neural network models are cleared.
+    nn_model = {atom: None for atom in TARGET_ATOMS}
+
+    # Make sure the neural network outputs are cleared.
+    nn_output = {atom: None for atom in TARGET_ATOMS}
+
+    # Default plots path.
+    plots_path = None
+
+    # Check if we want to save the training
+    # figures and then create the directory.
+    if save_plots:
+        # Figure path.
+        plots_path = Path(self.output_path/&#34;plots&#34;)
+
+        # Check if the models (output) directory exists.
+        if not plots_path.is_dir():
+            # Make the path.
+            plots_path.mkdir(parents=True)
+
+            # Display info (verbose mode).
+            if verbose:
+                self.logger.info(f&#34; Created plots directory at: {plots_path}&#34;)
+            # _end_if_
+        # _end_if_
+    # _end_if_
+
+    # Models path.
+    models_path = Path(self.output_path/&#34;models&#34;)
+
+    # Check if the models (output) directory exists.
+    if not models_path.is_dir():
+        # Make the path.
+        models_path.mkdir(parents=True)
+
+        # Display info (verbose mode).
+        if verbose:
+            self.logger.info(f&#34; Created models directory at: {models_path}&#34;)
+        # _end_if_
+    # _end_if_
+
+    # Output path.
+    results_path = Path(self.output_path/&#34;results&#34;)
+
+    # Check if the results (output) directory exists.
+    if not results_path.is_dir():
+        # Make the path.
+        results_path.mkdir(parents=True)
+
+        # Display info (verbose mode).
+        if verbose:
+            self.logger.info(f&#34; Created results directory at: {results_path}&#34;)
+        # _end_if_
+    # _end_if_
+
+    # Switch on/off the verbosity.
+    nn_verbose_flag = 1 if verbose else 0
+
+    # Localize the convert to tensor method.
+    convert_to_tensor = tf.convert_to_tensor
+
+    # Make batch size tf.constant.
+    nn_batch_size = tf.constant(512, dtype=tf.int64, name=&#34;batch_size&#34;)
+
+    # Make epochs tf.constant.
+    nn_epochs = tf.constant(1000, dtype=tf.int64, name=&#34;epochs&#34;)
+
+    # Train for each target a separate ANN.
+    for atom in TARGET_ATOMS:
+        # Print info.
+        self.logger.info(f&#34; Training ANN for target &#39;{atom}&#39;.&#34;)
+
+        # Prepare the data for the network.
+        x_train, y_train = self.load_data(atom)
+
+        # Reshape the target vector.
+        y_train = y_train.reshape(-1, 1)
+
+        # Fit the input scaler with the data.
+        input_scaler = MaxAbsScaler().fit(x_train)
+
+        try:
+            # Try to save the x-Scaler because we
+            # will need it in the prediction step.
+            joblib.dump(input_scaler,
+                        Path(models_path/f&#34;data_scaler_{atom}.gz&#34;))
+        except RuntimeError as e0:
+            self.logger.error(f&#34; Error while saving input Scaler. {e0}&#34;)
+        # _end_try_
+
+        # Transform the input data.
+        x_train = input_scaler.transform(x_train)
+
+        # Weights initializer:
+        #
+        # 1) For the &#34;hidden&#34; units can also use:
+        #    - RandomNormal(mean=0.0, stddev=0.1)
+        #
+        # 2) For the &#34;output&#34; units can also use:
+        #    - RandomUniform(minval=-0.1, maxval=0.1)
+        #
+
+        # Setup the ANN (model).
+        nn_model[atom] = Sequential([
+            Dense(units=26,
+                  name=&#34;Hidden_1&#34;,
+                  activation=&#34;elu&#34;,
+                  activity_regularizer=None,
+                  kernel_initializer=&#34;glorot_normal&#34;,
+                  input_shape=(x_train.shape[1],)),
+            Dense(units=1,
+                  name=&#34;Output_1&#34;,
+                  activation=&#39;linear&#39;,
+                  activity_regularizer=None,
+                  kernel_initializer=&#34;glorot_uniform&#34;)
+        ], name=f&#34;model_{atom}&#34;)
+
+        # Print info.
+        if verbose:
+            # Model summary.
+            nn_model[atom].summary()
+        # _end_if_
+
+        # Monitor the &#39;val_loss&#39; function and if it does not improve for
+        # &#39;patience&#39; epochs, then stop the training and restore the best
+        # weights that have been found so far.
+        early_stop = keras.callbacks.EarlyStopping(monitor=&#34;val_loss&#34;, mode=&#34;min&#34;,
+                                                   patience=20, restore_best_weights=True)
+        # Set the optimizer object.
+        optimization_alg = SGD(learning_rate=0.01, momentum=0.8, nesterov=True)
+
+        # Compile the model.
+        nn_model[atom].compile(optimizer=optimization_alg, loss=&#34;mse&#34;)
+
+        # First time instant.
+        time_0 = time()
+
+        # Fit the model.
+        nn_output[atom] = nn_model[atom].fit(x=convert_to_tensor(x_train),
+                                             y=convert_to_tensor(y_train),
+                                             batch_size=nn_batch_size, epochs=nn_epochs,
+                                             validation_split=validation_split, shuffle=True,
+                                             verbose=nn_verbose_flag, callbacks=[early_stop])
+        # Final time instant.
+        time_f = time()
+
+        # Save the model to the pre-defined location.
+        nn_model[atom].save(Path(models_path / f&#34;ann_model_{atom}.h5&#34;),
+                            include_optimizer=False, save_format=&#34;h5&#34;)
+
+        # Number of actual runs (epochs).
+        n_epoch = len(nn_output[atom].history[&#39;loss&#39;])
+
+        # Timing message.
+        self.logger.info(f&#34; Finished {n_epoch} epochs&#34;
+                         f&#34; in {time_f - time_0:.2f} seconds.&#34;)
+
+        # Get the final (training and validation) error values.
+        train_RMSE = np.sqrt(nn_output[atom].history[&#34;loss&#34;][-1])
+        valid_RMSE = np.sqrt(nn_output[atom].history[&#34;val_loss&#34;][-1])
+
+        # Error message.
+        self.logger.info(f&#34; RMSE = {train_RMSE:.3f},&#34;
+                         f&#34; val-RMSE = {valid_RMSE:.3f}\n\n&#34;)
+
+        # Convert the output history to a DataFrame.
+        df_output = DataFrame(nn_output[atom].history)
+
+        # Save to csv:
+        with open(Path(results_path/f&#34;nn_output_{atom}.csv&#34;), mode=&#39;w&#39;) as f:
+            df_output.to_csv(f)
+        # _end_with_
+
+        # Save the training figure.
+        if save_plots:
+            # Make a new figure.
+            fig = plt.figure()
+
+            # Plot training loss.
+            plt.plot(np.sqrt(df_output[&#39;loss&#39;]), label=&#34;Training&#34;)
+
+            # Plot validation loss.
+            plt.plot(np.sqrt(df_output[&#39;val_loss&#39;]), label=&#34;Validation&#34;)
+
+            # Add the x label.
+            plt.xlabel(&#34;Epoch&#34;)
+
+            # Add the y label.
+            plt.ylabel(&#34;RMSE&#34;)
+
+            # Finalize the plot.
+            plt.title(f&#34;Target: {atom}&#34;)
+            plt.legend()
+            plt.grid(True)
+
+            # Maximize the space.
+            fig.tight_layout()
+
+            # Save the figure.
+            fig.savefig(Path(plots_path/f&#34;nn_training_vs_validation_{atom}.png&#34;),
+                        orientation=&#34;landscape&#34;, dpi=300)
+        # _end_if_
+
+        # Clean up the memory.
+        collect_mem_garbage()
+    # _end_for_
+
+    # Print final info.
+    self.logger.info(&#34; Finished training models!&#34;)</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase">ChemShiftBase</a></b></code>:
+<ul class="hlist">
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.dir_default" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase.dir_default">dir_default</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.dir_input" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase.dir_input">dir_input</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.dir_output" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase.dir_output">dir_output</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.input_path" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase.input_path">input_path</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.logger" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase.logger">logger</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.output_path" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase.output_path">output_path</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.overwrite" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase.overwrite">overwrite</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.overwrite_flag" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase.overwrite_flag">overwrite_flag</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="Napshift.src.chemical_shifts" href="index.html">Napshift.src.chemical_shifts</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase">ChemShiftBase</a></code></h4>
+<ul class="two-column">
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.dir_default" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase.dir_default">dir_default</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.dir_input" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase.dir_input">dir_input</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.dir_output" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase.dir_output">dir_output</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.input_path" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase.input_path">input_path</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.logger" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase.logger">logger</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.output_path" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase.output_path">output_path</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.overwrite" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase.overwrite">overwrite</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftBase.overwrite_flag" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftBase.overwrite_flag">overwrite_flag</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftPredictor" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftPredictor">ChemShiftPredictor</a></code></h4>
+<ul class="two-column">
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftPredictor.df_avg" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftPredictor.df_avg">df_avg</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftPredictor.input_scaler" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftPredictor.input_scaler">input_scaler</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftPredictor.nn_model" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftPredictor.nn_model">nn_model</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftPredictor.predict" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftPredictor.predict">predict</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftPredictor.random_coil" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftPredictor.random_coil">random_coil</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftPredictor.save_to_file" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftPredictor.save_to_file">save_to_file</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftPredictor.vec_in" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftPredictor.vec_in">vec_in</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftTraining" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftTraining">ChemShiftTraining</a></code></h4>
+<ul class="">
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftTraining.load_data" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftTraining.load_data">load_data</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.model_machine.ChemShiftTraining.train_models" href="#Napshift.src.chemical_shifts.model_machine.ChemShiftTraining.train_models">train_models</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>

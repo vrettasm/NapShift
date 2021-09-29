@@ -1,0 +1,962 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>Napshift.src.random_coil.camcoil API documentation</title>
+<meta name="description" content="This module provides a &#34;Python implementation&#34; of the camcoil
+program (originally written in C) to estimate the random coil
+chemical shift values from …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>Napshift.src.random_coil.camcoil</code></h1>
+</header>
+<section id="section-intro">
+<p>This module provides a "Python implementation" of the camcoil
+program (originally written in C) to estimate the random coil
+chemical shift values from a sequence (string) of amino-acids.</p>
+<p>The work is described in detail at:</p>
+<ol>
+<li>Alfonso De Simone, Andrea Cavalli, Shang-Te Danny Hsu,
+Wim Vranken and Michele Vendruscolo (2009) (<a href="https://doi.org/10.1021/ja904937a">https://doi.org/10.1021/ja904937a</a>).
+"Accurate Random Coil Chemical Shifts from an Analysis of Loop
+Regions in Native States of Proteins". Journal of the American
+Chemical Society (J.A.C.S.), 131 (45), 16332 - 16333.</li>
+</ol>
+<h2 id="note">Note</h2>
+<p>The txt files: 'corr_L1', 'corr_L2', 'corr_R1', 'corr_R2',
+are required for the estimation of the random coil values.
+They should be placed in the same directory with the module
+file. If they do not exist the code will exit with an error.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+This module provides a &#34;Python implementation&#34; of the camcoil
+program (originally written in C) to estimate the random coil
+chemical shift values from a sequence (string) of amino-acids.
+
+The work is described in detail at:
+
+1.  Alfonso De Simone, Andrea Cavalli, Shang-Te Danny Hsu,
+    Wim Vranken and Michele Vendruscolo (2009) (https://doi.org/10.1021/ja904937a).
+    &#34;Accurate Random Coil Chemical Shifts from an Analysis of Loop
+    Regions in Native States of Proteins&#34;. Journal of the American
+    Chemical Society (J.A.C.S.), 131 (45), 16332 - 16333.
+
+NOTE:
+    The txt files: &#39;corr_L1&#39;, &#39;corr_L2&#39;, &#39;corr_R1&#39;, &#39;corr_R2&#39;,
+    are required for the estimation of the random coil values.
+    They should be placed in the same directory with the module
+    file. If they do not exist the code will exit with an error.
+
+&#34;&#34;&#34;
+
+from pathlib import Path
+from pandas import read_csv, DataFrame
+
+from src.chemical_shifts.auxiliaries import TARGET_ATOMS
+from src.random_coil.random_coil_properties import (ACCEPTED_RES_ONE,
+                                                    pH2_prop, pH7_prop, weights)
+
+
+class CamCoil(object):
+    &#34;&#34;&#34;
+    This class implements the CamCoil code in Python.
+    &#34;&#34;&#34;
+
+    # Object variables.
+    __slots__ = (&#34;_pH&#34;, &#34;_cs&#34;, &#34;df&#34;)
+
+    # Constructor.
+    def __init__(self, pH=7.0):
+        &#34;&#34;&#34;
+        Initializes the camcoil object. The pH is given as
+        option during the initialization of the object even
+        though only two actual implementations exist at the
+        moment (i.e., pH=2 and pH=7).
+
+        If the user selects another pH value, this will be
+        set automatically to one of these two in the code.
+
+        :param pH: (float) the default pH value is set to 7.0.
+        &#34;&#34;&#34;
+
+        # Make sure the input is float.
+        pH = float(pH)
+
+        # Check for the correct range.
+        if (pH &lt; 0.0) or (pH &gt; 14.0):
+            raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                             f&#34;pH value should be in [0, 14]: {pH}.&#34;)
+        # _end_if_
+
+        # Load the right chemical shifts.
+        if pH &lt; 4.0:
+            # Assign a fixed pH.
+            self._pH = 2.0
+
+            # Get the reference chemical shifts.
+            self._cs = pH2_prop
+        else:
+            # Assign a fixed pH.
+            self._pH = 6.1
+
+            # Get the reference chemical shifts.
+            self._cs = pH7_prop
+        # _end_if_
+
+        # Dictionary of (correction) dataframes.
+        self.df = {}
+
+        # Get the parent folder of the module.
+        parent_dir = Path(__file__).resolve().parent
+
+        # Load the correction files.
+        for f_name in [&#34;corr_L1&#34;, &#34;corr_L2&#34;, &#34;corr_R1&#34;, &#34;corr_R2&#34;]:
+
+            # Initialize with None.
+            self.df[f_name] = None
+
+            # Make sure the input file is Path.
+            f_path = Path(parent_dir / str(f_name + &#34;.txt&#34;))
+
+            # Sanity check.
+            if not f_path.is_file():
+                raise FileNotFoundError(f&#34;{self.__class__.__name__} : &#34;
+                                        f&#34;File {f_path} doesn&#39;t exist.&#34;)
+            # _end_if_
+
+            # N.B.: We have to set the &#39;keep_default_na=False&#39;, because
+            # the combination of residues &#39;N&#39; + &#39;A&#39; is interpreted here
+            # by default as &#39;NaN&#39;, and that causes the indexing to fail
+            # in that search.
+            self.df[f_name] = read_csv(f_path, header=None, delim_whitespace=&#34; &#34;,
+                                       keep_default_na=False,
+                                       names=[&#34;RES&#34;, &#34;ATOM&#34;, &#34;CS&#34;, &#34;UNKNOWN&#34;])
+            # This is to optimize search.
+            self.df[f_name].set_index([&#34;RES&#34;, &#34;ATOM&#34;], inplace=True)
+        # _end_if_
+
+    # _end_def_
+
+    @property
+    def pH(self):
+        &#34;&#34;&#34;
+        Accessor (getter) of the pH parameter.
+
+        :return: the pH value.
+        &#34;&#34;&#34;
+        return self._pH
+    # _end_def_
+
+    @pH.setter
+    def pH(self, new_value):
+        &#34;&#34;&#34;
+        Accessor (setter) of the pH parameter.
+
+        :param new_value: (float).
+        &#34;&#34;&#34;
+
+        # Check for the correct type.
+        if isinstance(new_value, float):
+
+            # Check the range of the pH.
+            if 0.0 &lt;= new_value &lt;= 14.0:
+
+                # Re-load the right chemical shifts.
+                if new_value &lt; 4.0:
+                    # Set the fixed pH.
+                    self._pH = 2.0
+
+                    # Update the chemical shifts.
+                    self._cs = pH2_prop
+                else:
+                    # Set the fixed pH.
+                    self._pH = 6.1
+
+                    # Update the chemical shifts.
+                    self._cs = pH7_prop
+                # _end_if_
+
+            else:
+                raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                                 f&#34;pH value should be in [0, 14]: {new_value}.&#34;)
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}: &#34;
+                            f&#34;pH value should be float: {type(new_value)}.&#34;)
+        # _end_if_
+    # _end_def_
+
+    # Main functionality.
+    def predict(self, seq=None, verbose=False):
+        &#34;&#34;&#34;
+        Accepts a string amino-acid sequence, and returns
+        a prediction with the random coil chemical shifts.
+
+        :param seq: (string) The input amino-acid sequence.
+
+        :param verbose: (bool) If the flag is set to True
+        it will print more information on the screen.
+
+        :return: a pandas DataFrame, with the results.
+        &#34;&#34;&#34;
+
+        # Sanity check.
+        if seq is None:
+            # Show a message.
+            print(&#34; No input sequence has been given.&#34;)
+
+            # Return nothing.
+            return None
+        # _end_if_
+
+        # Make sure there are not empty spaces.
+        seq = str(seq).strip().upper()
+
+        # Get the length of the sequence.
+        seq_length = len(seq)
+
+        # Check the length of the input.
+        if seq_length &gt; 5000:
+            raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                             f&#34; Sequence length is too long: {seq_length}&#34;)
+        # _end_if_
+
+        # Make a quick check for validity.
+        for res in seq:
+
+            # Valid residue check.
+            if res not in ACCEPTED_RES_ONE:
+                raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                                 f&#34; Input sequence is not valid: {res}&#34;)
+            # _end_if_
+
+        # _end_if_
+
+        # Holds the output values.
+        output = []
+
+        # Localize the append method.
+        output_append = output.append
+
+        # Compute the random coil values.
+        for i, res_i in enumerate(seq, start=0):
+
+            # Create a new dictionary. This will
+            # hold the chemical shift values for
+            # all atoms of the &#34;i-th&#34; residue.
+            cs_i = {&#34;ID&#34;: int(i+1), &#34;RES&#34;: str(res_i),
+                    &#34;CA&#34;: None, &#34;CB&#34;: None, &#34;C&#34;: None,
+                    &#34;H&#34;: None, &#34;HA&#34;: None, &#34;N&#34;: None}
+
+            # Predict the chemical shifts.
+            for atom in TARGET_ATOMS:
+
+                # First get the &#34;reference&#34; chemical shift.
+                cs_i[atom] = getattr(self._cs[res_i], atom)
+
+                # Get the (LOWER) neighbourhood contributions.
+                for j in [i - 2, i - 1]:
+
+                    # Check (LOWER) bounds:
+                    if j &lt; 0:
+                        continue
+                    # _end_if_
+
+                    # Backwards link with the i-th residue.
+                    search_link = (seq[j] + res_i, atom)
+
+                    if j == i - 1:
+                        # Get the weight value.
+                        alpha = getattr(weights[&#34;L1&#34;], atom)
+
+                        # Get the correction value from the dataframe.
+                        corr_val = self.df[&#34;corr_L1&#34;].loc[search_link, &#34;CS&#34;]
+
+                        # Add the weighted correction.
+                        cs_i[atom] += float(alpha * corr_val)
+                    else:
+                        # Get the weight value.
+                        alpha = getattr(weights[&#34;L2&#34;], atom)
+
+                        # Get the correction value from the dataframe.
+                        corr_val = self.df[&#34;corr_L2&#34;].loc[search_link, &#34;CS&#34;]
+
+                        # Add the weighted correction.
+                        cs_i[atom] += float(alpha * corr_val)
+                    # _end_if_
+
+                # _end_for_
+
+                # Get the (UPPER) neighbourhood contributions.
+                for k in [i + 1, i + 2]:
+
+                    # Check (UPPER) bounds:
+                    if k &gt; seq_length - 1:
+                        break
+                    # _end_if_
+
+                    # Forward link with the i-th residue.
+                    search_link = (res_i + seq[k], atom)
+
+                    if k == i + 1:
+                        # Get the weight value.
+                        alpha = getattr(weights[&#34;R1&#34;], atom)
+
+                        # Get the correction value from the dataframe.
+                        corr_val = self.df[&#34;corr_R1&#34;].loc[search_link, &#34;CS&#34;]
+
+                        # Add the weighted correction.
+                        cs_i[atom] += float(alpha * corr_val)
+                    else:
+                        # Get the weight value.
+                        alpha = getattr(weights[&#34;R2&#34;], atom)
+
+                        # Get the correction value from the dataframe.
+                        corr_val = self.df[&#34;corr_R2&#34;].loc[search_link, &#34;CS&#34;]
+
+                        # Add the weighted correction.
+                        cs_i[atom] += float(alpha * corr_val)
+                    # _end_if_
+
+                # _end_for_
+
+            # _end_for_
+
+            # Append the results.
+            output_append(cs_i)
+        # _end_for_
+
+        # Check the flag.
+        if verbose:
+            # Size of the chunks.
+            n = 20
+
+            # Split the amino-acid sequence to chucks of size &#39;n&#39;.
+            chunks = [seq[i:i + n] for i in range(0, seq_length, n)]
+
+            # Print message:
+            print(f&#34;SEQUENCE PROCESSED (pH={self.pH}):&#34;)
+
+            # Print the sequence in chunks of 10 residues.
+            for i, partial in enumerate(chunks, start=1):
+                print(f&#34;{i:&gt;3}: {partial}&#34;)
+            # _end_for_
+        # _end_if_
+
+        # Return the output in dataframe.
+        return DataFrame(data=output)
+    # _end_def_
+
+    # Auxiliary.
+    def __call__(self, *args, **kwargs):
+        &#34;&#34;&#34;
+        This is only a &#34;wrapper&#34; method
+        of the &#34;predict&#34; method.
+        &#34;&#34;&#34;
+        return self.predict(*args, **kwargs)
+    # _end_def_
+
+    # Auxiliary.
+    def __str__(self):
+        &#34;&#34;&#34;
+        Override to print a readable string presentation of
+        the object. This will include its id(.), along with
+        its pH field value.
+
+        :return: a string representation of a CamCoil object.
+        &#34;&#34;&#34;
+        # Return the f-string.
+        return f&#34; CamCoil Id({id(self)}): pH={self._pH}&#34;
+    # _end_def_
+
+# _end_class_</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="Napshift.src.random_coil.camcoil.CamCoil"><code class="flex name class">
+<span>class <span class="ident">CamCoil</span></span>
+<span>(</span><span>pH=7.0)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This class implements the CamCoil code in Python.</p>
+<p>Initializes the camcoil object. The pH is given as
+option during the initialization of the object even
+though only two actual implementations exist at the
+moment (i.e., pH=2 and pH=7).</p>
+<p>If the user selects another pH value, this will be
+set automatically to one of these two in the code.</p>
+<p>:param pH: (float) the default pH value is set to 7.0.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class CamCoil(object):
+    &#34;&#34;&#34;
+    This class implements the CamCoil code in Python.
+    &#34;&#34;&#34;
+
+    # Object variables.
+    __slots__ = (&#34;_pH&#34;, &#34;_cs&#34;, &#34;df&#34;)
+
+    # Constructor.
+    def __init__(self, pH=7.0):
+        &#34;&#34;&#34;
+        Initializes the camcoil object. The pH is given as
+        option during the initialization of the object even
+        though only two actual implementations exist at the
+        moment (i.e., pH=2 and pH=7).
+
+        If the user selects another pH value, this will be
+        set automatically to one of these two in the code.
+
+        :param pH: (float) the default pH value is set to 7.0.
+        &#34;&#34;&#34;
+
+        # Make sure the input is float.
+        pH = float(pH)
+
+        # Check for the correct range.
+        if (pH &lt; 0.0) or (pH &gt; 14.0):
+            raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                             f&#34;pH value should be in [0, 14]: {pH}.&#34;)
+        # _end_if_
+
+        # Load the right chemical shifts.
+        if pH &lt; 4.0:
+            # Assign a fixed pH.
+            self._pH = 2.0
+
+            # Get the reference chemical shifts.
+            self._cs = pH2_prop
+        else:
+            # Assign a fixed pH.
+            self._pH = 6.1
+
+            # Get the reference chemical shifts.
+            self._cs = pH7_prop
+        # _end_if_
+
+        # Dictionary of (correction) dataframes.
+        self.df = {}
+
+        # Get the parent folder of the module.
+        parent_dir = Path(__file__).resolve().parent
+
+        # Load the correction files.
+        for f_name in [&#34;corr_L1&#34;, &#34;corr_L2&#34;, &#34;corr_R1&#34;, &#34;corr_R2&#34;]:
+
+            # Initialize with None.
+            self.df[f_name] = None
+
+            # Make sure the input file is Path.
+            f_path = Path(parent_dir / str(f_name + &#34;.txt&#34;))
+
+            # Sanity check.
+            if not f_path.is_file():
+                raise FileNotFoundError(f&#34;{self.__class__.__name__} : &#34;
+                                        f&#34;File {f_path} doesn&#39;t exist.&#34;)
+            # _end_if_
+
+            # N.B.: We have to set the &#39;keep_default_na=False&#39;, because
+            # the combination of residues &#39;N&#39; + &#39;A&#39; is interpreted here
+            # by default as &#39;NaN&#39;, and that causes the indexing to fail
+            # in that search.
+            self.df[f_name] = read_csv(f_path, header=None, delim_whitespace=&#34; &#34;,
+                                       keep_default_na=False,
+                                       names=[&#34;RES&#34;, &#34;ATOM&#34;, &#34;CS&#34;, &#34;UNKNOWN&#34;])
+            # This is to optimize search.
+            self.df[f_name].set_index([&#34;RES&#34;, &#34;ATOM&#34;], inplace=True)
+        # _end_if_
+
+    # _end_def_
+
+    @property
+    def pH(self):
+        &#34;&#34;&#34;
+        Accessor (getter) of the pH parameter.
+
+        :return: the pH value.
+        &#34;&#34;&#34;
+        return self._pH
+    # _end_def_
+
+    @pH.setter
+    def pH(self, new_value):
+        &#34;&#34;&#34;
+        Accessor (setter) of the pH parameter.
+
+        :param new_value: (float).
+        &#34;&#34;&#34;
+
+        # Check for the correct type.
+        if isinstance(new_value, float):
+
+            # Check the range of the pH.
+            if 0.0 &lt;= new_value &lt;= 14.0:
+
+                # Re-load the right chemical shifts.
+                if new_value &lt; 4.0:
+                    # Set the fixed pH.
+                    self._pH = 2.0
+
+                    # Update the chemical shifts.
+                    self._cs = pH2_prop
+                else:
+                    # Set the fixed pH.
+                    self._pH = 6.1
+
+                    # Update the chemical shifts.
+                    self._cs = pH7_prop
+                # _end_if_
+
+            else:
+                raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                                 f&#34;pH value should be in [0, 14]: {new_value}.&#34;)
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}: &#34;
+                            f&#34;pH value should be float: {type(new_value)}.&#34;)
+        # _end_if_
+    # _end_def_
+
+    # Main functionality.
+    def predict(self, seq=None, verbose=False):
+        &#34;&#34;&#34;
+        Accepts a string amino-acid sequence, and returns
+        a prediction with the random coil chemical shifts.
+
+        :param seq: (string) The input amino-acid sequence.
+
+        :param verbose: (bool) If the flag is set to True
+        it will print more information on the screen.
+
+        :return: a pandas DataFrame, with the results.
+        &#34;&#34;&#34;
+
+        # Sanity check.
+        if seq is None:
+            # Show a message.
+            print(&#34; No input sequence has been given.&#34;)
+
+            # Return nothing.
+            return None
+        # _end_if_
+
+        # Make sure there are not empty spaces.
+        seq = str(seq).strip().upper()
+
+        # Get the length of the sequence.
+        seq_length = len(seq)
+
+        # Check the length of the input.
+        if seq_length &gt; 5000:
+            raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                             f&#34; Sequence length is too long: {seq_length}&#34;)
+        # _end_if_
+
+        # Make a quick check for validity.
+        for res in seq:
+
+            # Valid residue check.
+            if res not in ACCEPTED_RES_ONE:
+                raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                                 f&#34; Input sequence is not valid: {res}&#34;)
+            # _end_if_
+
+        # _end_if_
+
+        # Holds the output values.
+        output = []
+
+        # Localize the append method.
+        output_append = output.append
+
+        # Compute the random coil values.
+        for i, res_i in enumerate(seq, start=0):
+
+            # Create a new dictionary. This will
+            # hold the chemical shift values for
+            # all atoms of the &#34;i-th&#34; residue.
+            cs_i = {&#34;ID&#34;: int(i+1), &#34;RES&#34;: str(res_i),
+                    &#34;CA&#34;: None, &#34;CB&#34;: None, &#34;C&#34;: None,
+                    &#34;H&#34;: None, &#34;HA&#34;: None, &#34;N&#34;: None}
+
+            # Predict the chemical shifts.
+            for atom in TARGET_ATOMS:
+
+                # First get the &#34;reference&#34; chemical shift.
+                cs_i[atom] = getattr(self._cs[res_i], atom)
+
+                # Get the (LOWER) neighbourhood contributions.
+                for j in [i - 2, i - 1]:
+
+                    # Check (LOWER) bounds:
+                    if j &lt; 0:
+                        continue
+                    # _end_if_
+
+                    # Backwards link with the i-th residue.
+                    search_link = (seq[j] + res_i, atom)
+
+                    if j == i - 1:
+                        # Get the weight value.
+                        alpha = getattr(weights[&#34;L1&#34;], atom)
+
+                        # Get the correction value from the dataframe.
+                        corr_val = self.df[&#34;corr_L1&#34;].loc[search_link, &#34;CS&#34;]
+
+                        # Add the weighted correction.
+                        cs_i[atom] += float(alpha * corr_val)
+                    else:
+                        # Get the weight value.
+                        alpha = getattr(weights[&#34;L2&#34;], atom)
+
+                        # Get the correction value from the dataframe.
+                        corr_val = self.df[&#34;corr_L2&#34;].loc[search_link, &#34;CS&#34;]
+
+                        # Add the weighted correction.
+                        cs_i[atom] += float(alpha * corr_val)
+                    # _end_if_
+
+                # _end_for_
+
+                # Get the (UPPER) neighbourhood contributions.
+                for k in [i + 1, i + 2]:
+
+                    # Check (UPPER) bounds:
+                    if k &gt; seq_length - 1:
+                        break
+                    # _end_if_
+
+                    # Forward link with the i-th residue.
+                    search_link = (res_i + seq[k], atom)
+
+                    if k == i + 1:
+                        # Get the weight value.
+                        alpha = getattr(weights[&#34;R1&#34;], atom)
+
+                        # Get the correction value from the dataframe.
+                        corr_val = self.df[&#34;corr_R1&#34;].loc[search_link, &#34;CS&#34;]
+
+                        # Add the weighted correction.
+                        cs_i[atom] += float(alpha * corr_val)
+                    else:
+                        # Get the weight value.
+                        alpha = getattr(weights[&#34;R2&#34;], atom)
+
+                        # Get the correction value from the dataframe.
+                        corr_val = self.df[&#34;corr_R2&#34;].loc[search_link, &#34;CS&#34;]
+
+                        # Add the weighted correction.
+                        cs_i[atom] += float(alpha * corr_val)
+                    # _end_if_
+
+                # _end_for_
+
+            # _end_for_
+
+            # Append the results.
+            output_append(cs_i)
+        # _end_for_
+
+        # Check the flag.
+        if verbose:
+            # Size of the chunks.
+            n = 20
+
+            # Split the amino-acid sequence to chucks of size &#39;n&#39;.
+            chunks = [seq[i:i + n] for i in range(0, seq_length, n)]
+
+            # Print message:
+            print(f&#34;SEQUENCE PROCESSED (pH={self.pH}):&#34;)
+
+            # Print the sequence in chunks of 10 residues.
+            for i, partial in enumerate(chunks, start=1):
+                print(f&#34;{i:&gt;3}: {partial}&#34;)
+            # _end_for_
+        # _end_if_
+
+        # Return the output in dataframe.
+        return DataFrame(data=output)
+    # _end_def_
+
+    # Auxiliary.
+    def __call__(self, *args, **kwargs):
+        &#34;&#34;&#34;
+        This is only a &#34;wrapper&#34; method
+        of the &#34;predict&#34; method.
+        &#34;&#34;&#34;
+        return self.predict(*args, **kwargs)
+    # _end_def_
+
+    # Auxiliary.
+    def __str__(self):
+        &#34;&#34;&#34;
+        Override to print a readable string presentation of
+        the object. This will include its id(.), along with
+        its pH field value.
+
+        :return: a string representation of a CamCoil object.
+        &#34;&#34;&#34;
+        # Return the f-string.
+        return f&#34; CamCoil Id({id(self)}): pH={self._pH}&#34;</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="Napshift.src.random_coil.camcoil.CamCoil.df"><code class="name">var <span class="ident">df</span></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="Napshift.src.random_coil.camcoil.CamCoil.pH"><code class="name">var <span class="ident">pH</span></code></dt>
+<dd>
+<div class="desc"><p>Accessor (getter) of the pH parameter.</p>
+<p>:return: the pH value.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def pH(self):
+    &#34;&#34;&#34;
+    Accessor (getter) of the pH parameter.
+
+    :return: the pH value.
+    &#34;&#34;&#34;
+    return self._pH</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="Napshift.src.random_coil.camcoil.CamCoil.predict"><code class="name flex">
+<span>def <span class="ident">predict</span></span>(<span>self, seq=None, verbose=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Accepts a string amino-acid sequence, and returns
+a prediction with the random coil chemical shifts.</p>
+<p>:param seq: (string) The input amino-acid sequence.</p>
+<p>:param verbose: (bool) If the flag is set to True
+it will print more information on the screen.</p>
+<p>:return: a pandas DataFrame, with the results.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def predict(self, seq=None, verbose=False):
+    &#34;&#34;&#34;
+    Accepts a string amino-acid sequence, and returns
+    a prediction with the random coil chemical shifts.
+
+    :param seq: (string) The input amino-acid sequence.
+
+    :param verbose: (bool) If the flag is set to True
+    it will print more information on the screen.
+
+    :return: a pandas DataFrame, with the results.
+    &#34;&#34;&#34;
+
+    # Sanity check.
+    if seq is None:
+        # Show a message.
+        print(&#34; No input sequence has been given.&#34;)
+
+        # Return nothing.
+        return None
+    # _end_if_
+
+    # Make sure there are not empty spaces.
+    seq = str(seq).strip().upper()
+
+    # Get the length of the sequence.
+    seq_length = len(seq)
+
+    # Check the length of the input.
+    if seq_length &gt; 5000:
+        raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                         f&#34; Sequence length is too long: {seq_length}&#34;)
+    # _end_if_
+
+    # Make a quick check for validity.
+    for res in seq:
+
+        # Valid residue check.
+        if res not in ACCEPTED_RES_ONE:
+            raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                             f&#34; Input sequence is not valid: {res}&#34;)
+        # _end_if_
+
+    # _end_if_
+
+    # Holds the output values.
+    output = []
+
+    # Localize the append method.
+    output_append = output.append
+
+    # Compute the random coil values.
+    for i, res_i in enumerate(seq, start=0):
+
+        # Create a new dictionary. This will
+        # hold the chemical shift values for
+        # all atoms of the &#34;i-th&#34; residue.
+        cs_i = {&#34;ID&#34;: int(i+1), &#34;RES&#34;: str(res_i),
+                &#34;CA&#34;: None, &#34;CB&#34;: None, &#34;C&#34;: None,
+                &#34;H&#34;: None, &#34;HA&#34;: None, &#34;N&#34;: None}
+
+        # Predict the chemical shifts.
+        for atom in TARGET_ATOMS:
+
+            # First get the &#34;reference&#34; chemical shift.
+            cs_i[atom] = getattr(self._cs[res_i], atom)
+
+            # Get the (LOWER) neighbourhood contributions.
+            for j in [i - 2, i - 1]:
+
+                # Check (LOWER) bounds:
+                if j &lt; 0:
+                    continue
+                # _end_if_
+
+                # Backwards link with the i-th residue.
+                search_link = (seq[j] + res_i, atom)
+
+                if j == i - 1:
+                    # Get the weight value.
+                    alpha = getattr(weights[&#34;L1&#34;], atom)
+
+                    # Get the correction value from the dataframe.
+                    corr_val = self.df[&#34;corr_L1&#34;].loc[search_link, &#34;CS&#34;]
+
+                    # Add the weighted correction.
+                    cs_i[atom] += float(alpha * corr_val)
+                else:
+                    # Get the weight value.
+                    alpha = getattr(weights[&#34;L2&#34;], atom)
+
+                    # Get the correction value from the dataframe.
+                    corr_val = self.df[&#34;corr_L2&#34;].loc[search_link, &#34;CS&#34;]
+
+                    # Add the weighted correction.
+                    cs_i[atom] += float(alpha * corr_val)
+                # _end_if_
+
+            # _end_for_
+
+            # Get the (UPPER) neighbourhood contributions.
+            for k in [i + 1, i + 2]:
+
+                # Check (UPPER) bounds:
+                if k &gt; seq_length - 1:
+                    break
+                # _end_if_
+
+                # Forward link with the i-th residue.
+                search_link = (res_i + seq[k], atom)
+
+                if k == i + 1:
+                    # Get the weight value.
+                    alpha = getattr(weights[&#34;R1&#34;], atom)
+
+                    # Get the correction value from the dataframe.
+                    corr_val = self.df[&#34;corr_R1&#34;].loc[search_link, &#34;CS&#34;]
+
+                    # Add the weighted correction.
+                    cs_i[atom] += float(alpha * corr_val)
+                else:
+                    # Get the weight value.
+                    alpha = getattr(weights[&#34;R2&#34;], atom)
+
+                    # Get the correction value from the dataframe.
+                    corr_val = self.df[&#34;corr_R2&#34;].loc[search_link, &#34;CS&#34;]
+
+                    # Add the weighted correction.
+                    cs_i[atom] += float(alpha * corr_val)
+                # _end_if_
+
+            # _end_for_
+
+        # _end_for_
+
+        # Append the results.
+        output_append(cs_i)
+    # _end_for_
+
+    # Check the flag.
+    if verbose:
+        # Size of the chunks.
+        n = 20
+
+        # Split the amino-acid sequence to chucks of size &#39;n&#39;.
+        chunks = [seq[i:i + n] for i in range(0, seq_length, n)]
+
+        # Print message:
+        print(f&#34;SEQUENCE PROCESSED (pH={self.pH}):&#34;)
+
+        # Print the sequence in chunks of 10 residues.
+        for i, partial in enumerate(chunks, start=1):
+            print(f&#34;{i:&gt;3}: {partial}&#34;)
+        # _end_for_
+    # _end_if_
+
+    # Return the output in dataframe.
+    return DataFrame(data=output)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="Napshift.src.random_coil" href="index.html">Napshift.src.random_coil</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="Napshift.src.random_coil.camcoil.CamCoil" href="#Napshift.src.random_coil.camcoil.CamCoil">CamCoil</a></code></h4>
+<ul class="">
+<li><code><a title="Napshift.src.random_coil.camcoil.CamCoil.df" href="#Napshift.src.random_coil.camcoil.CamCoil.df">df</a></code></li>
+<li><code><a title="Napshift.src.random_coil.camcoil.CamCoil.pH" href="#Napshift.src.random_coil.camcoil.CamCoil.pH">pH</a></code></li>
+<li><code><a title="Napshift.src.random_coil.camcoil.CamCoil.predict" href="#Napshift.src.random_coil.camcoil.CamCoil.predict">predict</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>

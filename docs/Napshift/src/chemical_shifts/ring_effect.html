@@ -1,0 +1,1365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>Napshift.src.chemical_shifts.ring_effect API documentation</title>
+<meta name="description" content="This module includes the main class that handles the detection
+of the aromatic rings." />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>Napshift.src.chemical_shifts.ring_effect</code></h1>
+</header>
+<section id="section-intro">
+<p>This module includes the main class that handles the detection
+of the aromatic rings.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+This module includes the main class that handles the detection
+of the aromatic rings.
+&#34;&#34;&#34;
+
+# Python import(s).
+from collections import namedtuple
+import numpy as np
+
+# Private import(s).
+from src.chemical_shifts.auxiliaries import ACCEPTED_RES, RES_3_TO_1
+
+# Add documentation to the NamedTuple.
+__pdoc__ = {}
+
+# Module level declaration,
+RingInfo = namedtuple(&#34;RingInfo&#34;, [&#34;res_name&#34;, &#34;res_id&#34;, &#34;coord&#34;])
+
+# Add documentation for the fields.
+__pdoc__[&#34;RingInfo.res_name&#34;] = &#34;Residue name (one letter code) &#34;\
+                                &#34;that contains the aromatic ring.&#34;
+__pdoc__[&#34;RingInfo.res_id&#34;] = &#34;Residue ID (from the PDB file).&#34;
+__pdoc__[&#34;RingInfo.coord&#34;] = &#34;Coordinates (x,y,z) of the ring centroid.&#34;
+
+
+class RingEffects(object):
+    &#34;&#34;&#34;
+    This class creates an object that will identify the rings
+    (aromatic amino acids) and will also detect the atoms,
+    from a given input chain, that are affected.
+
+        Note: Naming systems used (BMRB / PDB).
+    &#34;&#34;&#34;
+
+    # Backbone (NHx) Hydrogen names.
+    _back_H = (&#34;H&#34;, &#34;H1&#34;, &#34;H2&#34;, &#34;H3&#34;, &#34;1H&#34;, &#34;2H&#34;, &#34;3H&#34;)
+
+    # Aromatic Amino Acids (with 6 ring atoms).
+    _AAA6 = {&#34;PHE&#34;: (&#34;CG&#34;, &#34;CD1&#34;, &#34;CD2&#34;, &#34;CE1&#34;, &#34;CE2&#34;, &#34;CZ&#34;),
+             &#34;TYR&#34;: (&#34;CG&#34;, &#34;CD1&#34;, &#34;CD2&#34;, &#34;CE1&#34;, &#34;CE2&#34;, &#34;CZ&#34;),
+             &#34;TRP&#34;: (&#34;CD2&#34;, &#34;CE2&#34;, &#34;CE3&#34;, &#34;CZ2&#34;, &#34;CZ3&#34;, &#34;CH2&#34;)}
+
+    # Aromatic Amino Acids (with 5 ring atoms).
+    _AAA5 = {&#34;HIS&#34;: (&#34;CG&#34;, &#34;CE1&#34;, &#34;CD2&#34;, &#34;ND1&#34;, &#34;NE2&#34;),
+             &#34;TRP&#34;: (&#34;CG&#34;, &#34;CD1&#34;, &#34;CD2&#34;, &#34;CE2&#34;, &#34;NE1&#34;)}
+
+    # Object variables.
+    __slots__ = (&#34;d_ring&#34;, &#34;five_atoms_rings&#34;, &#34;rings&#34;, &#34;_verbose&#34;)
+
+    # Constructor.
+    def __init__(self, d_ring=1.0, include_five_atoms=False, verbose=False):
+        &#34;&#34;&#34;
+        Constructs an object that will handle the detections of rings in the
+        chain and the atoms that are affected by them.
+
+        :param d_ring: distance threshold [L: Angstrom].
+
+        :param include_five_atoms: (bool) flag for the Tryptophan amino-acid
+        ring (with the five atoms).
+
+        :param verbose: (bool) if true it will display more information while
+        running.
+        &#34;&#34;&#34;
+
+        # Check for the correct type.
+        if isinstance(d_ring, float):
+            # Check for positive value.
+            if d_ring &gt; 0.0:
+                # Assign the distance.
+                self.d_ring = d_ring
+            else:
+                raise ValueError(f&#34;{self.__class__.__name__}:&#34;
+                                 f&#34; Distance value should be positive: {d_ring}.&#34;)
+            # _end_if_
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}:&#34;
+                            f&#34; Distance value should be float: {type(d_ring)}.&#34;)
+        # _end_if_
+
+        # Check for the correct type.
+        if isinstance(include_five_atoms, bool):
+            # Assign the boolean flag.
+            self.five_atoms_rings = include_five_atoms
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}:&#34;
+                            f&#34; Five atoms ring flag should be bool: {type(include_five_atoms)}.&#34;)
+        # _end_if_
+
+        # Make an empty list of rings information.
+        self.rings = []
+
+        # Add the verbose flag.
+        self._verbose = verbose
+    # _end_def_
+
+    def get_rings(self):
+        &#34;&#34;&#34;
+        Accessor of the rings list.
+
+        :return: the list with the ring information.
+        &#34;&#34;&#34;
+        return self.rings
+    # _end_def_
+
+    @property
+    def verbose(self):
+        &#34;&#34;&#34;
+        Accessor (getter) of the verbose flag.
+
+        :return: _verbose.
+        &#34;&#34;&#34;
+        return self._verbose
+    # _end_def_
+
+    @verbose.setter
+    def verbose(self, new_value):
+        &#34;&#34;&#34;
+        Accessor (setter) of the verbose flag.
+
+        :param new_value: (bool).
+        &#34;&#34;&#34;
+
+        # Check for correct type.
+        if isinstance(new_value, bool):
+            self._verbose = new_value
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}:&#34;
+                            f&#34; Verbose flag should be bool: {type(new_value)}.&#34;)
+        # _end_if_
+    # _end_def_
+
+    @property
+    def distance(self):
+        &#34;&#34;&#34;
+        Accessor (getter) of the distance value that sets
+        a threshold on the effect that the ring can have.
+
+        :return: distance threshold value [L: Angstrom]
+        &#34;&#34;&#34;
+        return self.d_ring
+    # _end_def_
+
+    @distance.setter
+    def distance(self, new_value):
+        &#34;&#34;&#34;
+        Accessor (setter) of the distance value that sets
+        a threshold on the effect that the ring can have.
+
+        :param new_value: (float) of the distance beyond
+        which the ring effect is negligible.
+        &#34;&#34;&#34;
+
+        # Check for the correct type.
+        if isinstance(new_value, float):
+            # Check for positive value.
+            if new_value &gt; 0.0:
+                # Assign the distance.
+                self.d_ring = new_value
+            else:
+                raise ValueError(f&#34;{self.__class__.__name__}:&#34;
+                                 f&#34; Distance value should be positive: {new_value}.&#34;)
+            # _end_if_
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}:&#34;
+                            f&#34; Distance value should be float: {type(new_value)}.&#34;)
+        # _end_if_
+    # _end_def_
+
+    @property
+    def include_five_atoms(self):
+        &#34;&#34;&#34;
+        Accessor (getter) of the boolean flag that
+        indicates if we consider both rings of the
+        Tryptophan amino-acid.
+
+        :return: boolean flag.
+        &#34;&#34;&#34;
+        return self.five_atoms_rings
+    # _end_def_
+
+    @include_five_atoms.setter
+    def include_five_atoms(self, new_value):
+        &#34;&#34;&#34;
+        Accessor (setter) of the boolean flag that
+        indicates if we consider both rings of the
+        Tryptophan amino-acid.
+
+        :param new_value: new boolean flag.
+        &#34;&#34;&#34;
+
+        # Check for the correct type.
+        if isinstance(new_value, bool):
+            self.five_atoms_rings = new_value
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}:&#34;
+                            f&#34; Five atoms ring flag should be bool: {type(new_value)}.&#34;)
+        # _end_if_
+
+    # _end_def_
+
+    def find_rings_in_chain(self, chain=None):
+        &#34;&#34;&#34;
+        Scan the input chain and look for aromatic rings.
+        In the case of the Tryptophan, we can optionally
+        consider both rings.
+
+        :param chain: input amino-acid chain.
+
+        :return: None.
+        &#34;&#34;&#34;
+
+        # Check for empty input.
+        if chain is None:
+            return None
+        # _end_if_
+
+        # Make sure the list is empty.
+        self.rings = []
+
+        # Process each residue in the chain.
+        for res_i in chain.get_residues():
+
+            # Get the residue name in three letter code.
+            res_name = str(res_i.get_resname()).strip()
+
+            # Accepted list of residue names.
+            if res_name not in ACCEPTED_RES:
+                # Skip to the next residue.
+                continue
+            # _end_if_
+
+            # Get the residue id from the PDB.
+            res_id = res_i.get_id()[1]
+
+            # Aromatic amino-acids.
+            if res_name in RingEffects._AAA6:
+
+                try:
+                    # XYZ coordinates vector.
+                    xyz_coord = np.zeros(3)
+
+                    # Sum the coordinates of the ring atoms.
+                    for atom in RingEffects._AAA6[res_name]:
+                        xyz_coord += res_i[atom].get_coord()
+                    # _end_for_
+
+                    # Get the average.
+                    xyz_coord /= 6.0
+
+                    # Add the ring centre coordinates.
+                    self.rings.append(RingInfo(RES_3_TO_1[res_name],
+                                               res_id, xyz_coord))
+                except KeyError as e6:
+
+                    # Check for verbose.
+                    if self.verbose:
+                        print(f&#34; Atom {e6} not found in {res_name}.&#34;)
+                    # _end_if_
+
+                    pass
+                # _end_try_
+
+            # _end_if_
+
+            # Check for 5-atoms rings.
+            if self.five_atoms_rings:
+
+                if res_name in RingEffects._AAA5:
+
+                    try:
+                        # XYZ coordinates vector.
+                        xyz_coord = np.zeros(3)
+
+                        # Sum the coordinates of the ring atoms.
+                        for atom in RingEffects._AAA5[res_name]:
+                            xyz_coord += res_i[atom].get_coord()
+                        # _end_for_
+
+                        # Get the average.
+                        xyz_coord /= 5.0
+
+                        # Add the ring centre coordinates.
+                        self.rings.append(RingInfo(RES_3_TO_1[res_name],
+                                                   res_id, xyz_coord))
+                    except KeyError as e5:
+
+                        # Check for verbose.
+                        if self.verbose:
+                            print(f&#34; Atom {e5} not found in {res_name}.&#34;)
+                        # _end_if_
+
+                        # Leave without doing nothing.
+                        pass
+                    # _end_try_
+
+                # _end_if_
+
+            # _end_if_
+
+        # _end_for_
+
+        # Print information (only if empty).
+        if self.verbose and not self.rings:
+            print(&#34; Info: No aromatic rings were found in the input chain.&#34;)
+        # _end_if_
+
+    # _end_def_
+
+    def check_effect(self, chain=None, find_rings=True, exclude_self=True):
+        &#34;&#34;&#34;
+        Checks the input residue-chain to identify which atoms are affected
+        by the aromatics rings.
+
+        :param chain: input amino-acid chain.
+
+        :param find_rings: if True, it will automatically find the rings of
+        the same input chain.
+
+        :param exclude_self: if True, it will automatically exclude all the
+        CB atoms of its own ring. These atoms are usually very close to the
+        center of the ring.
+
+        :return: a list with atoms that are affected (given the threshold
+        distance that we have already define).
+        &#34;&#34;&#34;
+
+        # Check for empty input.
+        if chain is None:
+            return None
+        # _end_if_
+
+        # Check automatically for the rings.
+        if find_rings:
+            # This will override and clear
+            # any previously detected rings.
+            self.find_rings_in_chain(chain)
+        # _end_if_
+
+        # Affected atoms list.
+        affected_atoms = []
+
+        # Check if we have found rings.
+        if not self.rings:
+
+            # Avoid displaying the same message twice.
+            if not find_rings:
+                # Show a warning that there are no rings.
+                print(&#34; Info: No aromatic rings were found.&#34;)
+            # _end_if_
+
+            # Exit without scanning the chain.
+            return affected_atoms
+        # _end_if_
+
+        # Process each residue in the chain.
+        for res_i in chain.get_residues():
+
+            # Get the residue name (three letter code).
+            res_name = str(res_i.get_resname()).strip()
+
+            # Accepted list of residue names.
+            if res_name not in ACCEPTED_RES:
+                # Skip to the next residue.
+                continue
+            # _end_if_
+
+            # Get the residue id from the PDB.
+            res_id = res_i.get_id()[1]
+
+            # Atom (names) list (of interest).
+            # Initialize with each residue, because
+            # the number of hydrogen atoms may vary.
+            atom_list = [&#34;N&#34;, &#34;C&#34;, &#34;CA&#34;, &#34;CB&#34;, &#34;HA&#34;]
+
+            try:
+                # We could have multiple hydrogen atoms
+                # bounded with atom &#39;N&#39; (i.e NH2, NH3):
+                for atom in res_i.get_atoms():
+
+                    # Find the backbone Hydrogen atoms.
+                    if atom.name in RingEffects._back_H:
+                        atom_list.append(atom.name)
+                    # _end_if_
+
+                # _end_for_
+
+                # Check affected atoms.
+                for atom in atom_list:
+
+                    # Get the coordinates of the current atom.
+                    atom_coordinates = res_i[atom].get_coord()
+
+                    # Check against all the rings in the list.
+                    for ring in self.rings:
+
+                        # Skip &#34;self ring effects&#34; for the &#39;CB&#39;
+                        # atoms only.
+                        if exclude_self and (atom == &#34;CB&#34;) and\
+                                (res_id == ring.res_id):
+                            continue
+                        # _end_if_
+
+                        # Distance between coordinates.
+                        diff = atom_coordinates - ring.coord
+
+                        # Equivalent to Euclidean norm(diff).
+                        dist = np.sqrt(np.dot(diff, diff))
+
+                        # Check the threshold.
+                        if np.isfinite(dist) and dist &lt;= self.d_ring:
+                            # Include the following information:
+                            # 1) residue name, 2) residue id,
+                            # 3) atom name and 4) distance [Angstrom].
+                            affected_atoms.append((RES_3_TO_1[res_name],
+                                                   res_id, atom, dist))
+                        # _end_if_
+
+                    # _end_for_
+                    
+                # _end_for_
+            except (AttributeError, KeyError):
+                # Skip to the next residue.
+                continue
+            # _end_try_
+        # _end_for_
+
+        # Return the list with the affected atoms.
+        return affected_atoms
+    # _end_def_
+
+    # Auxiliary.
+    def __str__(self):
+        &#34;&#34;&#34;
+        Override to print a readable string presentation of the object.
+        This will include its id(.), along with its distance threshold
+        value and five atom ring flag.
+
+        :return: a string representation of a RingEffects object.
+        &#34;&#34;&#34;
+        # New line in character.
+        new_line = &#39;\n&#39;
+
+        # Return the f-string.
+        return f&#34; RingEffects Id({id(self)}): {new_line}&#34; \
+               f&#34; Distance={self.d_ring} {new_line}&#34; \
+               f&#34; Include-Five-Atom-Rings={self.five_atoms_rings}&#34;
+    # _end_def_
+
+# _end_class_</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="Napshift.src.chemical_shifts.ring_effect.RingEffects"><code class="flex name class">
+<span>class <span class="ident">RingEffects</span></span>
+<span>(</span><span>d_ring=1.0, include_five_atoms=False, verbose=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This class creates an object that will identify the rings
+(aromatic amino acids) and will also detect the atoms,
+from a given input chain, that are affected.</p>
+<pre><code>Note: Naming systems used (BMRB / PDB).
+</code></pre>
+<p>Constructs an object that will handle the detections of rings in the
+chain and the atoms that are affected by them.</p>
+<p>:param d_ring: distance threshold [L: Angstrom].</p>
+<p>:param include_five_atoms: (bool) flag for the Tryptophan amino-acid
+ring (with the five atoms).</p>
+<p>:param verbose: (bool) if true it will display more information while
+running.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class RingEffects(object):
+    &#34;&#34;&#34;
+    This class creates an object that will identify the rings
+    (aromatic amino acids) and will also detect the atoms,
+    from a given input chain, that are affected.
+
+        Note: Naming systems used (BMRB / PDB).
+    &#34;&#34;&#34;
+
+    # Backbone (NHx) Hydrogen names.
+    _back_H = (&#34;H&#34;, &#34;H1&#34;, &#34;H2&#34;, &#34;H3&#34;, &#34;1H&#34;, &#34;2H&#34;, &#34;3H&#34;)
+
+    # Aromatic Amino Acids (with 6 ring atoms).
+    _AAA6 = {&#34;PHE&#34;: (&#34;CG&#34;, &#34;CD1&#34;, &#34;CD2&#34;, &#34;CE1&#34;, &#34;CE2&#34;, &#34;CZ&#34;),
+             &#34;TYR&#34;: (&#34;CG&#34;, &#34;CD1&#34;, &#34;CD2&#34;, &#34;CE1&#34;, &#34;CE2&#34;, &#34;CZ&#34;),
+             &#34;TRP&#34;: (&#34;CD2&#34;, &#34;CE2&#34;, &#34;CE3&#34;, &#34;CZ2&#34;, &#34;CZ3&#34;, &#34;CH2&#34;)}
+
+    # Aromatic Amino Acids (with 5 ring atoms).
+    _AAA5 = {&#34;HIS&#34;: (&#34;CG&#34;, &#34;CE1&#34;, &#34;CD2&#34;, &#34;ND1&#34;, &#34;NE2&#34;),
+             &#34;TRP&#34;: (&#34;CG&#34;, &#34;CD1&#34;, &#34;CD2&#34;, &#34;CE2&#34;, &#34;NE1&#34;)}
+
+    # Object variables.
+    __slots__ = (&#34;d_ring&#34;, &#34;five_atoms_rings&#34;, &#34;rings&#34;, &#34;_verbose&#34;)
+
+    # Constructor.
+    def __init__(self, d_ring=1.0, include_five_atoms=False, verbose=False):
+        &#34;&#34;&#34;
+        Constructs an object that will handle the detections of rings in the
+        chain and the atoms that are affected by them.
+
+        :param d_ring: distance threshold [L: Angstrom].
+
+        :param include_five_atoms: (bool) flag for the Tryptophan amino-acid
+        ring (with the five atoms).
+
+        :param verbose: (bool) if true it will display more information while
+        running.
+        &#34;&#34;&#34;
+
+        # Check for the correct type.
+        if isinstance(d_ring, float):
+            # Check for positive value.
+            if d_ring &gt; 0.0:
+                # Assign the distance.
+                self.d_ring = d_ring
+            else:
+                raise ValueError(f&#34;{self.__class__.__name__}:&#34;
+                                 f&#34; Distance value should be positive: {d_ring}.&#34;)
+            # _end_if_
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}:&#34;
+                            f&#34; Distance value should be float: {type(d_ring)}.&#34;)
+        # _end_if_
+
+        # Check for the correct type.
+        if isinstance(include_five_atoms, bool):
+            # Assign the boolean flag.
+            self.five_atoms_rings = include_five_atoms
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}:&#34;
+                            f&#34; Five atoms ring flag should be bool: {type(include_five_atoms)}.&#34;)
+        # _end_if_
+
+        # Make an empty list of rings information.
+        self.rings = []
+
+        # Add the verbose flag.
+        self._verbose = verbose
+    # _end_def_
+
+    def get_rings(self):
+        &#34;&#34;&#34;
+        Accessor of the rings list.
+
+        :return: the list with the ring information.
+        &#34;&#34;&#34;
+        return self.rings
+    # _end_def_
+
+    @property
+    def verbose(self):
+        &#34;&#34;&#34;
+        Accessor (getter) of the verbose flag.
+
+        :return: _verbose.
+        &#34;&#34;&#34;
+        return self._verbose
+    # _end_def_
+
+    @verbose.setter
+    def verbose(self, new_value):
+        &#34;&#34;&#34;
+        Accessor (setter) of the verbose flag.
+
+        :param new_value: (bool).
+        &#34;&#34;&#34;
+
+        # Check for correct type.
+        if isinstance(new_value, bool):
+            self._verbose = new_value
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}:&#34;
+                            f&#34; Verbose flag should be bool: {type(new_value)}.&#34;)
+        # _end_if_
+    # _end_def_
+
+    @property
+    def distance(self):
+        &#34;&#34;&#34;
+        Accessor (getter) of the distance value that sets
+        a threshold on the effect that the ring can have.
+
+        :return: distance threshold value [L: Angstrom]
+        &#34;&#34;&#34;
+        return self.d_ring
+    # _end_def_
+
+    @distance.setter
+    def distance(self, new_value):
+        &#34;&#34;&#34;
+        Accessor (setter) of the distance value that sets
+        a threshold on the effect that the ring can have.
+
+        :param new_value: (float) of the distance beyond
+        which the ring effect is negligible.
+        &#34;&#34;&#34;
+
+        # Check for the correct type.
+        if isinstance(new_value, float):
+            # Check for positive value.
+            if new_value &gt; 0.0:
+                # Assign the distance.
+                self.d_ring = new_value
+            else:
+                raise ValueError(f&#34;{self.__class__.__name__}:&#34;
+                                 f&#34; Distance value should be positive: {new_value}.&#34;)
+            # _end_if_
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}:&#34;
+                            f&#34; Distance value should be float: {type(new_value)}.&#34;)
+        # _end_if_
+    # _end_def_
+
+    @property
+    def include_five_atoms(self):
+        &#34;&#34;&#34;
+        Accessor (getter) of the boolean flag that
+        indicates if we consider both rings of the
+        Tryptophan amino-acid.
+
+        :return: boolean flag.
+        &#34;&#34;&#34;
+        return self.five_atoms_rings
+    # _end_def_
+
+    @include_five_atoms.setter
+    def include_five_atoms(self, new_value):
+        &#34;&#34;&#34;
+        Accessor (setter) of the boolean flag that
+        indicates if we consider both rings of the
+        Tryptophan amino-acid.
+
+        :param new_value: new boolean flag.
+        &#34;&#34;&#34;
+
+        # Check for the correct type.
+        if isinstance(new_value, bool):
+            self.five_atoms_rings = new_value
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}:&#34;
+                            f&#34; Five atoms ring flag should be bool: {type(new_value)}.&#34;)
+        # _end_if_
+
+    # _end_def_
+
+    def find_rings_in_chain(self, chain=None):
+        &#34;&#34;&#34;
+        Scan the input chain and look for aromatic rings.
+        In the case of the Tryptophan, we can optionally
+        consider both rings.
+
+        :param chain: input amino-acid chain.
+
+        :return: None.
+        &#34;&#34;&#34;
+
+        # Check for empty input.
+        if chain is None:
+            return None
+        # _end_if_
+
+        # Make sure the list is empty.
+        self.rings = []
+
+        # Process each residue in the chain.
+        for res_i in chain.get_residues():
+
+            # Get the residue name in three letter code.
+            res_name = str(res_i.get_resname()).strip()
+
+            # Accepted list of residue names.
+            if res_name not in ACCEPTED_RES:
+                # Skip to the next residue.
+                continue
+            # _end_if_
+
+            # Get the residue id from the PDB.
+            res_id = res_i.get_id()[1]
+
+            # Aromatic amino-acids.
+            if res_name in RingEffects._AAA6:
+
+                try:
+                    # XYZ coordinates vector.
+                    xyz_coord = np.zeros(3)
+
+                    # Sum the coordinates of the ring atoms.
+                    for atom in RingEffects._AAA6[res_name]:
+                        xyz_coord += res_i[atom].get_coord()
+                    # _end_for_
+
+                    # Get the average.
+                    xyz_coord /= 6.0
+
+                    # Add the ring centre coordinates.
+                    self.rings.append(RingInfo(RES_3_TO_1[res_name],
+                                               res_id, xyz_coord))
+                except KeyError as e6:
+
+                    # Check for verbose.
+                    if self.verbose:
+                        print(f&#34; Atom {e6} not found in {res_name}.&#34;)
+                    # _end_if_
+
+                    pass
+                # _end_try_
+
+            # _end_if_
+
+            # Check for 5-atoms rings.
+            if self.five_atoms_rings:
+
+                if res_name in RingEffects._AAA5:
+
+                    try:
+                        # XYZ coordinates vector.
+                        xyz_coord = np.zeros(3)
+
+                        # Sum the coordinates of the ring atoms.
+                        for atom in RingEffects._AAA5[res_name]:
+                            xyz_coord += res_i[atom].get_coord()
+                        # _end_for_
+
+                        # Get the average.
+                        xyz_coord /= 5.0
+
+                        # Add the ring centre coordinates.
+                        self.rings.append(RingInfo(RES_3_TO_1[res_name],
+                                                   res_id, xyz_coord))
+                    except KeyError as e5:
+
+                        # Check for verbose.
+                        if self.verbose:
+                            print(f&#34; Atom {e5} not found in {res_name}.&#34;)
+                        # _end_if_
+
+                        # Leave without doing nothing.
+                        pass
+                    # _end_try_
+
+                # _end_if_
+
+            # _end_if_
+
+        # _end_for_
+
+        # Print information (only if empty).
+        if self.verbose and not self.rings:
+            print(&#34; Info: No aromatic rings were found in the input chain.&#34;)
+        # _end_if_
+
+    # _end_def_
+
+    def check_effect(self, chain=None, find_rings=True, exclude_self=True):
+        &#34;&#34;&#34;
+        Checks the input residue-chain to identify which atoms are affected
+        by the aromatics rings.
+
+        :param chain: input amino-acid chain.
+
+        :param find_rings: if True, it will automatically find the rings of
+        the same input chain.
+
+        :param exclude_self: if True, it will automatically exclude all the
+        CB atoms of its own ring. These atoms are usually very close to the
+        center of the ring.
+
+        :return: a list with atoms that are affected (given the threshold
+        distance that we have already define).
+        &#34;&#34;&#34;
+
+        # Check for empty input.
+        if chain is None:
+            return None
+        # _end_if_
+
+        # Check automatically for the rings.
+        if find_rings:
+            # This will override and clear
+            # any previously detected rings.
+            self.find_rings_in_chain(chain)
+        # _end_if_
+
+        # Affected atoms list.
+        affected_atoms = []
+
+        # Check if we have found rings.
+        if not self.rings:
+
+            # Avoid displaying the same message twice.
+            if not find_rings:
+                # Show a warning that there are no rings.
+                print(&#34; Info: No aromatic rings were found.&#34;)
+            # _end_if_
+
+            # Exit without scanning the chain.
+            return affected_atoms
+        # _end_if_
+
+        # Process each residue in the chain.
+        for res_i in chain.get_residues():
+
+            # Get the residue name (three letter code).
+            res_name = str(res_i.get_resname()).strip()
+
+            # Accepted list of residue names.
+            if res_name not in ACCEPTED_RES:
+                # Skip to the next residue.
+                continue
+            # _end_if_
+
+            # Get the residue id from the PDB.
+            res_id = res_i.get_id()[1]
+
+            # Atom (names) list (of interest).
+            # Initialize with each residue, because
+            # the number of hydrogen atoms may vary.
+            atom_list = [&#34;N&#34;, &#34;C&#34;, &#34;CA&#34;, &#34;CB&#34;, &#34;HA&#34;]
+
+            try:
+                # We could have multiple hydrogen atoms
+                # bounded with atom &#39;N&#39; (i.e NH2, NH3):
+                for atom in res_i.get_atoms():
+
+                    # Find the backbone Hydrogen atoms.
+                    if atom.name in RingEffects._back_H:
+                        atom_list.append(atom.name)
+                    # _end_if_
+
+                # _end_for_
+
+                # Check affected atoms.
+                for atom in atom_list:
+
+                    # Get the coordinates of the current atom.
+                    atom_coordinates = res_i[atom].get_coord()
+
+                    # Check against all the rings in the list.
+                    for ring in self.rings:
+
+                        # Skip &#34;self ring effects&#34; for the &#39;CB&#39;
+                        # atoms only.
+                        if exclude_self and (atom == &#34;CB&#34;) and\
+                                (res_id == ring.res_id):
+                            continue
+                        # _end_if_
+
+                        # Distance between coordinates.
+                        diff = atom_coordinates - ring.coord
+
+                        # Equivalent to Euclidean norm(diff).
+                        dist = np.sqrt(np.dot(diff, diff))
+
+                        # Check the threshold.
+                        if np.isfinite(dist) and dist &lt;= self.d_ring:
+                            # Include the following information:
+                            # 1) residue name, 2) residue id,
+                            # 3) atom name and 4) distance [Angstrom].
+                            affected_atoms.append((RES_3_TO_1[res_name],
+                                                   res_id, atom, dist))
+                        # _end_if_
+
+                    # _end_for_
+                    
+                # _end_for_
+            except (AttributeError, KeyError):
+                # Skip to the next residue.
+                continue
+            # _end_try_
+        # _end_for_
+
+        # Return the list with the affected atoms.
+        return affected_atoms
+    # _end_def_
+
+    # Auxiliary.
+    def __str__(self):
+        &#34;&#34;&#34;
+        Override to print a readable string presentation of the object.
+        This will include its id(.), along with its distance threshold
+        value and five atom ring flag.
+
+        :return: a string representation of a RingEffects object.
+        &#34;&#34;&#34;
+        # New line in character.
+        new_line = &#39;\n&#39;
+
+        # Return the f-string.
+        return f&#34; RingEffects Id({id(self)}): {new_line}&#34; \
+               f&#34; Distance={self.d_ring} {new_line}&#34; \
+               f&#34; Include-Five-Atom-Rings={self.five_atoms_rings}&#34;</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="Napshift.src.chemical_shifts.ring_effect.RingEffects.d_ring"><code class="name">var <span class="ident">d_ring</span></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="Napshift.src.chemical_shifts.ring_effect.RingEffects.distance"><code class="name">var <span class="ident">distance</span></code></dt>
+<dd>
+<div class="desc"><p>Accessor (getter) of the distance value that sets
+a threshold on the effect that the ring can have.</p>
+<p>:return: distance threshold value [L: Angstrom]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def distance(self):
+    &#34;&#34;&#34;
+    Accessor (getter) of the distance value that sets
+    a threshold on the effect that the ring can have.
+
+    :return: distance threshold value [L: Angstrom]
+    &#34;&#34;&#34;
+    return self.d_ring</code></pre>
+</details>
+</dd>
+<dt id="Napshift.src.chemical_shifts.ring_effect.RingEffects.five_atoms_rings"><code class="name">var <span class="ident">five_atoms_rings</span></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="Napshift.src.chemical_shifts.ring_effect.RingEffects.include_five_atoms"><code class="name">var <span class="ident">include_five_atoms</span></code></dt>
+<dd>
+<div class="desc"><p>Accessor (getter) of the boolean flag that
+indicates if we consider both rings of the
+Tryptophan amino-acid.</p>
+<p>:return: boolean flag.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def include_five_atoms(self):
+    &#34;&#34;&#34;
+    Accessor (getter) of the boolean flag that
+    indicates if we consider both rings of the
+    Tryptophan amino-acid.
+
+    :return: boolean flag.
+    &#34;&#34;&#34;
+    return self.five_atoms_rings</code></pre>
+</details>
+</dd>
+<dt id="Napshift.src.chemical_shifts.ring_effect.RingEffects.rings"><code class="name">var <span class="ident">rings</span></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="Napshift.src.chemical_shifts.ring_effect.RingEffects.verbose"><code class="name">var <span class="ident">verbose</span></code></dt>
+<dd>
+<div class="desc"><p>Accessor (getter) of the verbose flag.</p>
+<p>:return: _verbose.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def verbose(self):
+    &#34;&#34;&#34;
+    Accessor (getter) of the verbose flag.
+
+    :return: _verbose.
+    &#34;&#34;&#34;
+    return self._verbose</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="Napshift.src.chemical_shifts.ring_effect.RingEffects.check_effect"><code class="name flex">
+<span>def <span class="ident">check_effect</span></span>(<span>self, chain=None, find_rings=True, exclude_self=True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Checks the input residue-chain to identify which atoms are affected
+by the aromatics rings.</p>
+<p>:param chain: input amino-acid chain.</p>
+<p>:param find_rings: if True, it will automatically find the rings of
+the same input chain.</p>
+<p>:param exclude_self: if True, it will automatically exclude all the
+CB atoms of its own ring. These atoms are usually very close to the
+center of the ring.</p>
+<p>:return: a list with atoms that are affected (given the threshold
+distance that we have already define).</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def check_effect(self, chain=None, find_rings=True, exclude_self=True):
+    &#34;&#34;&#34;
+    Checks the input residue-chain to identify which atoms are affected
+    by the aromatics rings.
+
+    :param chain: input amino-acid chain.
+
+    :param find_rings: if True, it will automatically find the rings of
+    the same input chain.
+
+    :param exclude_self: if True, it will automatically exclude all the
+    CB atoms of its own ring. These atoms are usually very close to the
+    center of the ring.
+
+    :return: a list with atoms that are affected (given the threshold
+    distance that we have already define).
+    &#34;&#34;&#34;
+
+    # Check for empty input.
+    if chain is None:
+        return None
+    # _end_if_
+
+    # Check automatically for the rings.
+    if find_rings:
+        # This will override and clear
+        # any previously detected rings.
+        self.find_rings_in_chain(chain)
+    # _end_if_
+
+    # Affected atoms list.
+    affected_atoms = []
+
+    # Check if we have found rings.
+    if not self.rings:
+
+        # Avoid displaying the same message twice.
+        if not find_rings:
+            # Show a warning that there are no rings.
+            print(&#34; Info: No aromatic rings were found.&#34;)
+        # _end_if_
+
+        # Exit without scanning the chain.
+        return affected_atoms
+    # _end_if_
+
+    # Process each residue in the chain.
+    for res_i in chain.get_residues():
+
+        # Get the residue name (three letter code).
+        res_name = str(res_i.get_resname()).strip()
+
+        # Accepted list of residue names.
+        if res_name not in ACCEPTED_RES:
+            # Skip to the next residue.
+            continue
+        # _end_if_
+
+        # Get the residue id from the PDB.
+        res_id = res_i.get_id()[1]
+
+        # Atom (names) list (of interest).
+        # Initialize with each residue, because
+        # the number of hydrogen atoms may vary.
+        atom_list = [&#34;N&#34;, &#34;C&#34;, &#34;CA&#34;, &#34;CB&#34;, &#34;HA&#34;]
+
+        try:
+            # We could have multiple hydrogen atoms
+            # bounded with atom &#39;N&#39; (i.e NH2, NH3):
+            for atom in res_i.get_atoms():
+
+                # Find the backbone Hydrogen atoms.
+                if atom.name in RingEffects._back_H:
+                    atom_list.append(atom.name)
+                # _end_if_
+
+            # _end_for_
+
+            # Check affected atoms.
+            for atom in atom_list:
+
+                # Get the coordinates of the current atom.
+                atom_coordinates = res_i[atom].get_coord()
+
+                # Check against all the rings in the list.
+                for ring in self.rings:
+
+                    # Skip &#34;self ring effects&#34; for the &#39;CB&#39;
+                    # atoms only.
+                    if exclude_self and (atom == &#34;CB&#34;) and\
+                            (res_id == ring.res_id):
+                        continue
+                    # _end_if_
+
+                    # Distance between coordinates.
+                    diff = atom_coordinates - ring.coord
+
+                    # Equivalent to Euclidean norm(diff).
+                    dist = np.sqrt(np.dot(diff, diff))
+
+                    # Check the threshold.
+                    if np.isfinite(dist) and dist &lt;= self.d_ring:
+                        # Include the following information:
+                        # 1) residue name, 2) residue id,
+                        # 3) atom name and 4) distance [Angstrom].
+                        affected_atoms.append((RES_3_TO_1[res_name],
+                                               res_id, atom, dist))
+                    # _end_if_
+
+                # _end_for_
+                
+            # _end_for_
+        except (AttributeError, KeyError):
+            # Skip to the next residue.
+            continue
+        # _end_try_
+    # _end_for_
+
+    # Return the list with the affected atoms.
+    return affected_atoms</code></pre>
+</details>
+</dd>
+<dt id="Napshift.src.chemical_shifts.ring_effect.RingEffects.find_rings_in_chain"><code class="name flex">
+<span>def <span class="ident">find_rings_in_chain</span></span>(<span>self, chain=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Scan the input chain and look for aromatic rings.
+In the case of the Tryptophan, we can optionally
+consider both rings.</p>
+<p>:param chain: input amino-acid chain.</p>
+<p>:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def find_rings_in_chain(self, chain=None):
+    &#34;&#34;&#34;
+    Scan the input chain and look for aromatic rings.
+    In the case of the Tryptophan, we can optionally
+    consider both rings.
+
+    :param chain: input amino-acid chain.
+
+    :return: None.
+    &#34;&#34;&#34;
+
+    # Check for empty input.
+    if chain is None:
+        return None
+    # _end_if_
+
+    # Make sure the list is empty.
+    self.rings = []
+
+    # Process each residue in the chain.
+    for res_i in chain.get_residues():
+
+        # Get the residue name in three letter code.
+        res_name = str(res_i.get_resname()).strip()
+
+        # Accepted list of residue names.
+        if res_name not in ACCEPTED_RES:
+            # Skip to the next residue.
+            continue
+        # _end_if_
+
+        # Get the residue id from the PDB.
+        res_id = res_i.get_id()[1]
+
+        # Aromatic amino-acids.
+        if res_name in RingEffects._AAA6:
+
+            try:
+                # XYZ coordinates vector.
+                xyz_coord = np.zeros(3)
+
+                # Sum the coordinates of the ring atoms.
+                for atom in RingEffects._AAA6[res_name]:
+                    xyz_coord += res_i[atom].get_coord()
+                # _end_for_
+
+                # Get the average.
+                xyz_coord /= 6.0
+
+                # Add the ring centre coordinates.
+                self.rings.append(RingInfo(RES_3_TO_1[res_name],
+                                           res_id, xyz_coord))
+            except KeyError as e6:
+
+                # Check for verbose.
+                if self.verbose:
+                    print(f&#34; Atom {e6} not found in {res_name}.&#34;)
+                # _end_if_
+
+                pass
+            # _end_try_
+
+        # _end_if_
+
+        # Check for 5-atoms rings.
+        if self.five_atoms_rings:
+
+            if res_name in RingEffects._AAA5:
+
+                try:
+                    # XYZ coordinates vector.
+                    xyz_coord = np.zeros(3)
+
+                    # Sum the coordinates of the ring atoms.
+                    for atom in RingEffects._AAA5[res_name]:
+                        xyz_coord += res_i[atom].get_coord()
+                    # _end_for_
+
+                    # Get the average.
+                    xyz_coord /= 5.0
+
+                    # Add the ring centre coordinates.
+                    self.rings.append(RingInfo(RES_3_TO_1[res_name],
+                                               res_id, xyz_coord))
+                except KeyError as e5:
+
+                    # Check for verbose.
+                    if self.verbose:
+                        print(f&#34; Atom {e5} not found in {res_name}.&#34;)
+                    # _end_if_
+
+                    # Leave without doing nothing.
+                    pass
+                # _end_try_
+
+            # _end_if_
+
+        # _end_if_
+
+    # _end_for_
+
+    # Print information (only if empty).
+    if self.verbose and not self.rings:
+        print(&#34; Info: No aromatic rings were found in the input chain.&#34;)</code></pre>
+</details>
+</dd>
+<dt id="Napshift.src.chemical_shifts.ring_effect.RingEffects.get_rings"><code class="name flex">
+<span>def <span class="ident">get_rings</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Accessor of the rings list.</p>
+<p>:return: the list with the ring information.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_rings(self):
+    &#34;&#34;&#34;
+    Accessor of the rings list.
+
+    :return: the list with the ring information.
+    &#34;&#34;&#34;
+    return self.rings</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="Napshift.src.chemical_shifts.ring_effect.RingInfo"><code class="flex name class">
+<span>class <span class="ident">RingInfo</span></span>
+<span>(</span><span>res_name, res_id, coord)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>RingInfo(res_name, res_id, coord)</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.tuple</li>
+</ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="Napshift.src.chemical_shifts.ring_effect.RingInfo.coord"><code class="name">var <span class="ident">coord</span></code></dt>
+<dd>
+<div class="desc"><p>Coordinates (x,y,z) of the ring centroid.</p></div>
+</dd>
+<dt id="Napshift.src.chemical_shifts.ring_effect.RingInfo.res_id"><code class="name">var <span class="ident">res_id</span></code></dt>
+<dd>
+<div class="desc"><p>Residue ID (from the PDB file).</p></div>
+</dd>
+<dt id="Napshift.src.chemical_shifts.ring_effect.RingInfo.res_name"><code class="name">var <span class="ident">res_name</span></code></dt>
+<dd>
+<div class="desc"><p>Residue name (one letter code) that contains the aromatic ring.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="Napshift.src.chemical_shifts" href="index.html">Napshift.src.chemical_shifts</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="Napshift.src.chemical_shifts.ring_effect.RingEffects" href="#Napshift.src.chemical_shifts.ring_effect.RingEffects">RingEffects</a></code></h4>
+<ul class="two-column">
+<li><code><a title="Napshift.src.chemical_shifts.ring_effect.RingEffects.check_effect" href="#Napshift.src.chemical_shifts.ring_effect.RingEffects.check_effect">check_effect</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.ring_effect.RingEffects.d_ring" href="#Napshift.src.chemical_shifts.ring_effect.RingEffects.d_ring">d_ring</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.ring_effect.RingEffects.distance" href="#Napshift.src.chemical_shifts.ring_effect.RingEffects.distance">distance</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.ring_effect.RingEffects.find_rings_in_chain" href="#Napshift.src.chemical_shifts.ring_effect.RingEffects.find_rings_in_chain">find_rings_in_chain</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.ring_effect.RingEffects.five_atoms_rings" href="#Napshift.src.chemical_shifts.ring_effect.RingEffects.five_atoms_rings">five_atoms_rings</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.ring_effect.RingEffects.get_rings" href="#Napshift.src.chemical_shifts.ring_effect.RingEffects.get_rings">get_rings</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.ring_effect.RingEffects.include_five_atoms" href="#Napshift.src.chemical_shifts.ring_effect.RingEffects.include_five_atoms">include_five_atoms</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.ring_effect.RingEffects.rings" href="#Napshift.src.chemical_shifts.ring_effect.RingEffects.rings">rings</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.ring_effect.RingEffects.verbose" href="#Napshift.src.chemical_shifts.ring_effect.RingEffects.verbose">verbose</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="Napshift.src.chemical_shifts.ring_effect.RingInfo" href="#Napshift.src.chemical_shifts.ring_effect.RingInfo">RingInfo</a></code></h4>
+<ul class="">
+<li><code><a title="Napshift.src.chemical_shifts.ring_effect.RingInfo.coord" href="#Napshift.src.chemical_shifts.ring_effect.RingInfo.coord">coord</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.ring_effect.RingInfo.res_id" href="#Napshift.src.chemical_shifts.ring_effect.RingInfo.res_id">res_id</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.ring_effect.RingInfo.res_name" href="#Napshift.src.chemical_shifts.ring_effect.RingInfo.res_name">res_name</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>

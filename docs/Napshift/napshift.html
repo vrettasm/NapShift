@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>Napshift.napshift API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>Napshift.napshift</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">#!/usr/bin/env python3
+
+import os
+import sys
+
+# Check the current python version before running.
+if sys.version_info &lt; (3, 6, 0):
+    sys.exit(&#34;Error: NapShift program requires Python 3.6 or greater.&#34;)
+# _end_if_
+
+# Disable some tensor-flow warning messages.
+os.environ[&#39;TF_XLA_FLAGS&#39;] = &#39;--tf_xla_enable_xla_devices&#39;
+
+from pathlib import Path
+from src.chemical_shifts.model_machine import ChemShiftPredictor
+
+# INFO:
+__author__ = &#34;Michail Vrettas, PhD&#34;
+__email__ = &#34;michail.vrettas@gmail.com&#34;
+
+
+# Main function.
+def main(pdb_file=None, pH=None, output_path=None, random_coil_path=None,
+         talos_fmt=True, all_models=False, verbose=False):
+    &#34;&#34;&#34;
+    Main function that  wraps the call of  the predict method. First we create
+    a ChemShiftPredictor object. We assume that the trained models are located
+    in a folder named &#34;/models/&#34; that exists inside the parent directory (i.e.
+    the same directory where the current script is stored).  The output of the
+    prediction is stored in the &#34;output_path/&#34; directory using a predetermined
+    name that includes the PDB-ID from the input file.
+
+    :param pdb_file: This is the input (PDB) file that we want to predict the
+    chemical shift values.
+
+    :param pH: The pH value (default is set to 7).
+
+    :param output_path: The directory (path) where we want to store the output
+    file.
+
+    :param random_coil_path: If we have available random coil values for the
+    same input file, we can use it here. If not (the default) we will generate
+    automatically new values using the camcoil engine module.
+
+    :param talos_fmt: This is the TALOS format for the output file. If not set
+    to True, than we will use a tabular format, where each row corresponds to
+    a single residue and each atom has each own column.
+
+    :param all_models: If &#34;True&#34; the method will process all the models in the
+    PDB file, otherwise only the first model.
+
+    :param verbose: This is a boolean flag that determines whether or not we
+    want to display additional information on the screen.
+
+    :return: None.
+    &#34;&#34;&#34;
+
+    try:
+        # Get the parent folder of the module.
+        parent_dir = Path(__file__).resolve().parent
+
+        # Make sure the input file is Path.
+        input_dir = Path(parent_dir/&#34;models/&#34;)
+
+        # Sanity check.
+        if not input_dir.is_dir():
+            raise FileNotFoundError(f&#34;Input directory {input_dir} doesn&#39;t exist.&#34;)
+        # _end_if_
+
+        # Create a predictor object. NOTE: By default we
+        # will overwrite the results file (if it exists).
+        nn_predict = ChemShiftPredictor(dir_model=input_dir, dir_output=output_path,
+                                        overwrite=True)
+
+        # Check if we need to alter the pH value. This makes
+        # sense only if we have not given a random coil file.
+        if random_coil_path is None and pH:
+            # Make sure its float.
+            pH = float(pH)
+
+            # Change the value of the random_coil object.
+            nn_predict.random_coil.pH = pH
+        # _end_if_
+
+        # Make sure is a Path.
+        f_path = Path(pdb_file)
+
+        # If the file exists.
+        if f_path.is_file():
+            # Make the predictions.
+            nn_predict(f_path, n_peptides=3, all_models=all_models,
+                       random_coil_path=random_coil_path,
+                       talos_fmt=talos_fmt, verbose=verbose)
+        # _end_if_
+
+        # Final message.
+        if verbose:
+            print(f&#34; Successfully saved results to: {nn_predict.dir_output}&#34;)
+        # _end_if_
+
+    except Exception as e1:
+
+        # Exit the program.
+        sys.exit(f&#34; Program ended with -&gt; {e1}&#34;)
+    # _end_try_
+
+# _end_main_
+
+
+# Run the main script.
+if __name__ == &#34;__main__&#34;:
+
+    # Check if we have given input parameters.
+    if len(sys.argv) &gt; 1:
+        # Local import.
+        import argparse
+
+        # Create a parser object.
+        parser = argparse.ArgumentParser(description=&#34;Python chemical shift predictor (of NMR PDB files), &#34;
+                                                     &#34;with the usage of Artificial Neural Networks (ANN). &#34;)
+
+        # Input (PDB) file with the residue coordinates.
+        parser.add_argument(&#34;-f&#34;, &#34;--file&#34;, type=str, required=True,
+                            help=&#34;Input PDB file (Path/String).&#34;)
+
+        # Input pH value for the random coil shift values.
+        parser.add_argument(&#34;--pH&#34;, type=float, default=7.0,
+                            help=&#34;The pH value of reference chemical shifts. &#34;
+                                 &#34;Default value is set to 7.0.&#34;)
+
+        # Output path to save the predicted chemical shifts.
+        parser.add_argument(&#34;-o&#34;, &#34;--out&#34;, type=str, default=None,
+                            help=&#34;Output path to save the predicted values. Note: &#34;
+                                 &#34;The name of the file will be generated automatically,  &#34;
+                                 &#34;e.g.: &#39;prediction_X_model_Y_chain_Z.tab&#39;, where &#39;X&#39; is &#34;
+                                 &#34;the input filename, &#39;Y&#39; is the model number and &#39;Z&#39; is &#34;
+                                 &#34;the chain-id.&#34;)
+
+        # Random coil path to load the pre-estimated values.
+        parser.add_argument(&#34;--rc_path&#34;, type=str, default=None,
+                            help=&#34;File with the random coil chemical shift values.&#34;)
+
+        # Add the output format (True=Talos).
+        parser.add_argument(&#34;--talos&#34;, dest=&#34;talos&#34;, action=&#34;store_true&#34;,
+                            help=&#34;The default output is the &#39;TALOS&#39; format.&#34;)
+
+        # Add the output format (False=Tabular).
+        parser.add_argument(&#34;--no-talos&#34;, dest=&#34;talos&#34;, action=&#34;store_false&#34;,
+                            help=&#34;Alternatively we set a tabular (output) format.&#34;)
+
+        # Enables verbosity.
+        parser.add_argument(&#34;--verbose&#34;, dest=&#34;verbose&#34;, action=&#34;store_true&#34;,
+                            help=&#34;Display information while running.&#34;)
+
+        # Enables prediction for all the models in the PDB file.
+        parser.add_argument(&#34;--all-models&#34;, dest=&#34;all_models&#34;, action=&#34;store_true&#34;,
+                            help=&#34;Allows prediction for all the models in the PDB file.&#34;)
+
+        # Make sure the defaults are set.
+        parser.set_defaults(talos=True, verose=False, all_models=False)
+
+        # Parse the arguments.
+        args = parser.parse_args()
+
+        # Call the main function.
+        main(pdb_file=args.file, pH=args.pH, output_path=args.out,
+             random_coil_path=args.rc_path, talos_fmt=args.talos,
+             all_models=args.all_models, verbose=args.verbose)
+    else:
+        # Display error message.
+        sys.exit(&#34;Error: Not enough input parameters.&#34;)
+    # _end_if_
+
+# _end_program_</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="Napshift.napshift.main"><code class="name flex">
+<span>def <span class="ident">main</span></span>(<span>pdb_file=None, pH=None, output_path=None, random_coil_path=None, talos_fmt=True, all_models=False, verbose=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Main function that
+wraps the call of
+the predict method. First we create
+a ChemShiftPredictor object. We assume that the trained models are located
+in a folder named "/models/" that exists inside the parent directory (i.e.
+the same directory where the current script is stored).
+The output of the
+prediction is stored in the "output_path/" directory using a predetermined
+name that includes the PDB-ID from the input file.</p>
+<p>:param pdb_file: This is the input (PDB) file that we want to predict the
+chemical shift values.</p>
+<p>:param pH: The pH value (default is set to 7).</p>
+<p>:param output_path: The directory (path) where we want to store the output
+file.</p>
+<p>:param random_coil_path: If we have available random coil values for the
+same input file, we can use it here. If not (the default) we will generate
+automatically new values using the camcoil engine module.</p>
+<p>:param talos_fmt: This is the TALOS format for the output file. If not set
+to True, than we will use a tabular format, where each row corresponds to
+a single residue and each atom has each own column.</p>
+<p>:param all_models: If "True" the method will process all the models in the
+PDB file, otherwise only the first model.</p>
+<p>:param verbose: This is a boolean flag that determines whether or not we
+want to display additional information on the screen.</p>
+<p>:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def main(pdb_file=None, pH=None, output_path=None, random_coil_path=None,
+         talos_fmt=True, all_models=False, verbose=False):
+    &#34;&#34;&#34;
+    Main function that  wraps the call of  the predict method. First we create
+    a ChemShiftPredictor object. We assume that the trained models are located
+    in a folder named &#34;/models/&#34; that exists inside the parent directory (i.e.
+    the same directory where the current script is stored).  The output of the
+    prediction is stored in the &#34;output_path/&#34; directory using a predetermined
+    name that includes the PDB-ID from the input file.
+
+    :param pdb_file: This is the input (PDB) file that we want to predict the
+    chemical shift values.
+
+    :param pH: The pH value (default is set to 7).
+
+    :param output_path: The directory (path) where we want to store the output
+    file.
+
+    :param random_coil_path: If we have available random coil values for the
+    same input file, we can use it here. If not (the default) we will generate
+    automatically new values using the camcoil engine module.
+
+    :param talos_fmt: This is the TALOS format for the output file. If not set
+    to True, than we will use a tabular format, where each row corresponds to
+    a single residue and each atom has each own column.
+
+    :param all_models: If &#34;True&#34; the method will process all the models in the
+    PDB file, otherwise only the first model.
+
+    :param verbose: This is a boolean flag that determines whether or not we
+    want to display additional information on the screen.
+
+    :return: None.
+    &#34;&#34;&#34;
+
+    try:
+        # Get the parent folder of the module.
+        parent_dir = Path(__file__).resolve().parent
+
+        # Make sure the input file is Path.
+        input_dir = Path(parent_dir/&#34;models/&#34;)
+
+        # Sanity check.
+        if not input_dir.is_dir():
+            raise FileNotFoundError(f&#34;Input directory {input_dir} doesn&#39;t exist.&#34;)
+        # _end_if_
+
+        # Create a predictor object. NOTE: By default we
+        # will overwrite the results file (if it exists).
+        nn_predict = ChemShiftPredictor(dir_model=input_dir, dir_output=output_path,
+                                        overwrite=True)
+
+        # Check if we need to alter the pH value. This makes
+        # sense only if we have not given a random coil file.
+        if random_coil_path is None and pH:
+            # Make sure its float.
+            pH = float(pH)
+
+            # Change the value of the random_coil object.
+            nn_predict.random_coil.pH = pH
+        # _end_if_
+
+        # Make sure is a Path.
+        f_path = Path(pdb_file)
+
+        # If the file exists.
+        if f_path.is_file():
+            # Make the predictions.
+            nn_predict(f_path, n_peptides=3, all_models=all_models,
+                       random_coil_path=random_coil_path,
+                       talos_fmt=talos_fmt, verbose=verbose)
+        # _end_if_
+
+        # Final message.
+        if verbose:
+            print(f&#34; Successfully saved results to: {nn_predict.dir_output}&#34;)
+        # _end_if_
+
+    except Exception as e1:
+
+        # Exit the program.
+        sys.exit(f&#34; Program ended with -&gt; {e1}&#34;)</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="Napshift" href="index.html">Napshift</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="Napshift.napshift.main" href="#Napshift.napshift.main">main</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>

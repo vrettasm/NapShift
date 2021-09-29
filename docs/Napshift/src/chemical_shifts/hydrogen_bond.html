@@ -1,0 +1,1254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>Napshift.src.chemical_shifts.hydrogen_bond API documentation</title>
+<meta name="description" content="This module includes the main class that handles the calculation
+of the hydrogen bonds." />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>Napshift.src.chemical_shifts.hydrogen_bond</code></h1>
+</header>
+<section id="section-intro">
+<p>This module includes the main class that handles the calculation
+of the hydrogen bonds.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+This module includes the main class that handles the calculation
+of the hydrogen bonds.
+&#34;&#34;&#34;
+
+# Python import(s).
+from collections import namedtuple
+import numpy as np
+
+# BIO-python import(s).
+from Bio.PDB.vectors import Vector, calc_angle
+
+# Private import(s).
+from src.chemical_shifts.auxiliaries import ACCEPTED_RES
+
+# Add documentation to the NamedTuple.
+__pdoc__ = {}
+
+# Module level declaration,
+BondInfo = namedtuple(&#34;BondInfo&#34;, [&#34;res_name&#34;, &#34;res_id&#34;, &#34;H_&#34;, &#34;O_&#34;])
+
+# Add documentation for the fields.
+__pdoc__[&#34;BondInfo.res_name&#34;] = &#34;Residue name (three letter code) &#34;\
+                                &#34;that contains the hydrogen bond.&#34;
+__pdoc__[&#34;BondInfo.res_id&#34;] = &#34;Residue ID (from the PDB file).&#34;
+__pdoc__[&#34;BondInfo.H_&#34;] = &#34;Information about the NH-bond: &#34;\
+                          &#34;(distance, cos(phi), cos(psi), 1.0).&#34;
+__pdoc__[&#34;BondInfo.O_&#34;] = &#34;Information about the CO-bond: &#34;\
+                          &#34;(distance, cos(phi), cos(psi), 1.0).&#34;
+
+
+class HBond(object):
+    &#34;&#34;&#34;
+    This class creates an object that handles hydrogen
+    bonds formation between atoms (amino-acid chains).
+
+        Note: Naming systems used (BMRB / PDB).
+    &#34;&#34;&#34;
+
+    # Side-chain Hydrogen atoms: Asparagine (ASN):
+    _ASN_H = {&#34;HD21&#34;: &#34;ND2&#34;, &#34;HD22&#34;: &#34;ND2&#34;,
+              &#34;1HD2&#34;: &#34;ND2&#34;, &#34;2HD2&#34;: &#34;ND2&#34;}
+
+    # Side-chain Hydrogen atoms: Arginine (ARG):
+    _ARG_H = {&#34;HH11&#34;: &#34;NH1&#34;, &#34;HH12&#34;: &#34;NH1&#34;,
+              &#34;HH21&#34;: &#34;NH2&#34;, &#34;HH22&#34;: &#34;NH2&#34;,
+              &#34;1HH1&#34;: &#34;NH1&#34;, &#34;2HH1&#34;: &#34;NH1&#34;,
+              &#34;1HH2&#34;: &#34;NH2&#34;, &#34;2HH2&#34;: &#34;NH2&#34;}
+
+    # Side-chain Hydrogen atoms: Glutamine (GLN):
+    _GLN_H = {&#34;HE21&#34;: &#34;NE2&#34;, &#34;HE22&#34;: &#34;NE2&#34;,
+              &#34;1HE2&#34;: &#34;NE2&#34;, &#34;2HE2&#34;: &#34;NE2&#34;}
+
+    # Side-chain Hydrogen atoms: Lysine (LYS):
+    _LYS_H = {&#34;HZ1&#34;: &#34;NZ&#34;, &#34;HZ2&#34;: &#34;NZ&#34;, &#34;HZ3&#34;: &#34;NZ&#34;,
+              &#34;1HZ&#34;: &#34;NZ&#34;, &#34;2HZ&#34;: &#34;NZ&#34;, &#34;3HZ&#34;: &#34;NZ&#34;}
+
+    # Side-chain Oxygen atoms with their corresponding
+    # Carbon atoms (used in hydrogen acceptor atoms).
+    _ASN_O = {&#34;OD1&#34;: &#34;CG&#34;}
+    _ASP_O = {&#34;OD1&#34;: &#34;CG&#34;, &#34;OD2&#34;: &#34;CG&#34;}
+    _GLN_O = {&#34;OE1&#34;: &#34;CD&#34;}
+    _GLU_O = {&#34;OE1&#34;: &#34;CD&#34;, &#34;OE2&#34;: &#34;CD&#34;}
+    _SER_O = {&#34;OG&#34;: &#34;CB&#34;}
+    _THR_O = {&#34;OG1&#34;: &#34;CB&#34;}
+    _TYR_O = {&#34;OH&#34;: &#34;CZ&#34;}
+
+    # Object variables.
+    __slots__ = (&#34;back_H&#34;, &#34;side_H&#34;, &#34;side_O&#34;, &#34;rule&#34;, &#34;_verbose&#34;)
+
+    def __init__(self, verbose=False):
+        &#34;&#34;&#34;
+        Constructs an object that will handle the detections
+        of hydrogen bonds in residue-chains.
+
+        :param verbose: boolean flag. If true it will display
+        more information while running.
+        &#34;&#34;&#34;
+
+        # Backbone (NHx) Hydrogen names.
+        self.back_H = [&#34;H&#34;,
+                       &#34;H1&#34;, &#34;H2&#34;, &#34;H3&#34;,
+                       &#34;1H&#34;, &#34;2H&#34;, &#34;3H&#34;]
+
+        # Combine all side-chain (H) atoms.
+        self.side_H = {**HBond._ASN_H, **HBond._ARG_H,
+                       **HBond._GLN_H, **HBond._LYS_H}
+
+        # Combine all side-chain (O) atoms.
+        self.side_O = {**HBond._ASN_O, **HBond._ASP_O,
+                       **HBond._GLN_O, **HBond._GLU_O,
+                       **HBond._SER_O, **HBond._THR_O,
+                       **HBond._TYR_O}
+
+        # Default criteria for hydrogen bonds formation:
+        # 1) Distances between atoms [L: Angstroms]:
+        #  1.1)   donor  atom &#39;D&#39; and acceptor atom &#39;A&#39;.
+        #  1.2) hydrogen atom &#39;H&#39; and acceptor atom &#39;A&#39;.
+        #
+        # 2) Angles between atoms (U: Degrees):
+        #  2.1) (Base-Acceptor) B-A ... (Hydrogen)  H.
+        #  2.2) (Acceptor) A ... (Hydrogen-Donor) H-D.
+        self.rule = {&#34;D-A&#34;: 3.90, &#34;H-A&#34;: 2.50,
+                     &#34;PHI&#34;: 90.0, &#34;PSI&#34;: 90.0}
+
+        # Add the verbose flag.
+        self._verbose = verbose
+    # _end_def_
+
+    @property
+    def verbose(self):
+        &#34;&#34;&#34;
+        Accessor (getter) of the verbose flag.
+
+        :return: _verbose.
+        &#34;&#34;&#34;
+        return self._verbose
+    # _end_def_
+
+    @verbose.setter
+    def verbose(self, new_value):
+        &#34;&#34;&#34;
+        Accessor (setter) of the verbose flag.
+
+        :param new_value: (bool).
+        &#34;&#34;&#34;
+
+        # Check for correct type.
+        if isinstance(new_value, bool):
+
+            # Assign the new value.
+            self._verbose = new_value
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}:&#34;
+                            f&#34; Verbose flag should be bool: {type(new_value)}.&#34;)
+        # _end_if_
+    # _end_def_
+
+    def __call__(self, chain=None):
+        &#34;&#34;&#34;
+        Compute the hydrogen bonds of the given input of
+        amino-acid (residue) chain. These are determined
+        with the internal criteria (rules) of the angles
+        and distances between the (H+) and (O-) atoms.
+
+        :param chain: Residue chain (amino-acids)
+
+        :return: List with all the estimated hydrogen bonds.
+        &#34;&#34;&#34;
+
+        # Return list with the h-bonds.
+        h_bonds = []
+
+        # Localize the append method.
+        h_bonds_append = h_bonds.append
+
+        # Check for empty input.
+        if chain is None:
+            return h_bonds
+        # _end_if_
+
+        # Process each residue in the chain.
+        for res_i in chain.get_residues():
+
+            # Get the residue name in three letter code.
+            # Ensure there are no spaces before / after.
+            res_name = str(res_i.get_resname()).strip()
+
+            # Get the residue id from the PDB.
+            res_id = res_i.get_id()[1]
+
+            # Initialize the parameter lists.
+            bond_H_vec = [0.0, 0.0, 0.0, 0.0]
+            bond_O_vec = [0.0, 0.0, 0.0, 0.0]
+
+            # Make sure the residue is in the accepted list.
+            # This is to avoid parsing DNA or RNA molecules.
+            if res_name not in ACCEPTED_RES:
+                # Add an empty tuple to the list.
+                h_bonds_append(BondInfo(res_name, res_id, bond_H_vec, bond_O_vec))
+
+                # Skip to the next residue.
+                continue
+            # _end_if_
+
+            # Get the backbone &#39;N&#39; / &#39;C&#39; / &#39;O&#39; and &#39;H&#39; atoms.
+            atom_N, atom_C, atom_O, atom_H = None, None, None, []
+
+            try:
+                # Get the Nitrogen.
+                atom_N = res_i[&#34;N&#34;]
+
+                # Get the Carbon.
+                atom_C = res_i[&#34;C&#34;]
+
+                # Get the Oxygen.
+                atom_O = res_i[&#34;O&#34;]
+
+                # We could have multiple hydrogen atoms
+                # bounded with atom &#39;N&#39; (i.e NH2, NH3):
+                for atom in res_i.get_atoms():
+
+                    # Find the backbone Hydrogen atoms.
+                    if atom.name in self.back_H:
+                        atom_H.append(atom)
+                    # _end_if_
+
+                # _end_for_
+            except (AttributeError, KeyError):
+
+                # Add an empty tuple to the list.
+                h_bonds_append(BondInfo(res_name, res_id, bond_H_vec, bond_O_vec))
+
+                # Skip to the next residue.
+                continue
+            # _end_try_
+
+            # H-Bond auxiliaries (1/2): N-H ... O
+            bond_NH = {&#34;r_min&#34;: np.inf,
+                       &#34;N&#34;: None, &#34;H&#34;: None,
+                       &#34;O&#34;: None, &#34;C&#34;: None}
+
+            # H-Bond auxiliaries (2/2): C=0 ... H
+            bond_CO = {&#34;r_min&#34;: np.inf,
+                       &#34;N&#34;: None, &#34;H&#34;: None,
+                       &#34;O&#34;: None, &#34;C&#34;: None}
+
+            # Scan the whole residue chain from the start.
+            for res_j in chain.get_residues():
+
+                # Get the name of the &#34;j-th&#34; residue.
+                RES_NAME_J = str(res_j.get_resname()).strip()
+
+                # Make sure the residue is in the accepted list.
+                if RES_NAME_J not in ACCEPTED_RES:
+                    # Skip to the next residue.
+                    continue
+                # _end_if_
+
+                # Get the &#39;O&#39;, &#39;C&#39;, &#39;N&#39; atoms.
+                try:
+                    atom_N_j = res_j[&#34;N&#34;]
+                    atom_O_j = res_j[&#34;O&#34;]
+                    atom_C_j = res_j[&#34;C&#34;]
+                except (AttributeError, KeyError):
+                    # Skip to the next residue.
+                    continue
+                # _end_try_
+
+                # Store the H/O atoms.
+                back_chain_H, side_chain_H, side_chain_O = [], [], []
+
+                # Find the Hydrogen and Oxygen.
+                for atom_j in res_j.get_atoms():
+
+                    if atom_j.name in self.back_H:
+                        back_chain_H.append(atom_j)
+                    # _end_if_
+
+                    if atom_j.name in self.side_H:
+                        side_chain_H.append(atom_j)
+                    # _end_if_
+
+                    if atom_j.name in self.side_O:
+                        side_chain_O.append(atom_j)
+                    # _end_if_
+
+                # _end_for_
+
+                # Because the &#39;N-Hx&#39; can have several &#39;H&#39; atoms
+                # we compare distances of the j-th &#39;O&#39; with all
+                # the i-th &#39;H&#39; atoms.
+                for atom_h in atom_H:
+
+                    # Distance.
+                    d_h = atom_h - atom_O_j
+
+                    # Find the minimum.
+                    if np.isfinite(d_h) and (d_h &lt; bond_NH[&#34;r_min&#34;]):
+                        # Store the current minimum.
+                        bond_NH[&#34;r_min&#34;] = d_h
+
+                        # Store the relevant atoms.
+                        bond_NH[&#34;N&#34;] = atom_N
+                        bond_NH[&#34;H&#34;] = atom_h
+
+                        # Store the relevant atoms.
+                        bond_NH[&#34;O&#34;] = atom_O_j
+                        bond_NH[&#34;C&#34;] = atom_C_j
+                    # _end_if_
+
+                    # Search for side-chain &#39;O&#39; atoms.
+                    for atom_o in side_chain_O:
+
+                        # Distance.
+                        d_h = atom_o - atom_h
+
+                        # Find the minimum.
+                        if np.isfinite(d_h) and (d_h &lt; bond_NH[&#34;r_min&#34;]):
+
+                            try:
+                                # Get the connected &#39;C&#39; atom.
+                                side_C = res_j[self.side_O[atom_o.name]]
+
+                                # Store the current minimum.
+                                bond_NH[&#34;r_min&#34;] = d_h
+
+                                # Store the relevant atoms.
+                                bond_NH[&#34;N&#34;] = atom_N
+                                bond_NH[&#34;H&#34;] = atom_h
+
+                                # Store the relevant atoms.
+                                bond_NH[&#34;O&#34;] = atom_o
+                                bond_NH[&#34;C&#34;] = side_C
+                            except (AttributeError, KeyError):
+                                # If the atom does not exist
+                                # simply ignore it and pass.
+                                pass
+                            # _end_try_
+
+                        # _end_if_
+
+                    # _end_for_
+
+                # _end_for_
+
+                # First find the distances between the i-th &#39;O&#39;
+                # and the backbone j-th &#39;H&#39; atoms.
+                for atom_l in back_chain_H:
+
+                    # Distance.
+                    d_k = atom_l - atom_O
+
+                    # Find the minimum.
+                    if np.isfinite(d_k) and (d_k &lt; bond_CO[&#34;r_min&#34;]):
+                        # Store the current minimum.
+                        bond_CO[&#34;r_min&#34;] = d_k
+
+                        # Store the pair of atoms.
+                        bond_CO[&#34;H&#34;] = atom_l
+                        bond_CO[&#34;N&#34;] = atom_N_j
+
+                        # Store the relevant atoms.
+                        bond_CO[&#34;O&#34;] = atom_O
+                        bond_CO[&#34;C&#34;] = atom_C
+                    # _end_if_
+
+                # _end_for_
+
+                # For specific residues check the side-chains.
+                if RES_NAME_J in {&#34;ASN&#34;, &#34;ARG&#34;, &#34;GLN&#34;, &#34;LYS&#34;}:
+
+                    # Go through all the side-chain &#39;H&#39;.
+                    for atom_l in side_chain_H:
+
+                        try:
+                            # Distance.
+                            d_k = atom_l - atom_O
+
+                            # Find the minimum.
+                            if np.isfinite(d_k) and (d_k &lt; bond_CO[&#34;r_min&#34;]):
+                                # Extract the side-chain -N-
+                                side_N = res_j[self.side_H[atom_l.name]]
+
+                                # Store the current minimum.
+                                bond_CO[&#34;r_min&#34;] = d_k
+
+                                # Store the pair of atoms.
+                                bond_CO[&#34;H&#34;] = atom_l
+                                bond_CO[&#34;N&#34;] = side_N
+
+                                # Store the relevant atoms.
+                                bond_CO[&#34;O&#34;] = atom_O
+                                bond_CO[&#34;C&#34;] = atom_C
+                            # _end_if_
+                        except (AttributeError, KeyError):
+                            # If the atom does not exist
+                            # simply ignore it and pass.
+                            pass
+                        # _end_try_
+
+                    # _end_for_
+
+                # _end_if_
+
+            # _end_for_
+
+            # Check if the criteria for the distances are satisfied.
+            if (bond_NH[&#34;r_min&#34;] &lt; self.rule[&#34;H-A&#34;]) \
+                    and (atom_N - bond_NH[&#34;O&#34;] &lt; self.rule[&#34;D-A&#34;]):
+
+                # Get the &#34;N-H&#34; coordinates.
+                vec_N = Vector(bond_NH[&#34;N&#34;].get_coord())
+                vec_H = Vector(bond_NH[&#34;H&#34;].get_coord())
+
+                # Get the &#34;C-O&#34; coordinates.
+                vec_C = Vector(bond_NH[&#34;C&#34;].get_coord())
+                vec_O = Vector(bond_NH[&#34;O&#34;].get_coord())
+
+                # This angle is in radians.
+                phi = calc_angle(vec_N, vec_H, vec_O)
+
+                # This angle is in radians.
+                psi = calc_angle(vec_C, vec_O, vec_H)
+                
+                # Check both angles.
+                if (np.rad2deg(phi) &gt; self.rule[&#34;PHI&#34;]) and\
+                        (np.rad2deg(psi) &gt; self.rule[&#34;PSI&#34;]):
+                    bond_H_vec = [bond_NH[&#34;r_min&#34;], *np.cos([phi, psi]), 1.0]
+                # _end_if_
+
+            # _end_if_
+
+            # Check if the criteria for the distances are satisfied.
+            if (bond_CO[&#34;r_min&#34;] &lt; self.rule[&#34;H-A&#34;]) \
+                    and (atom_C - bond_CO[&#34;H&#34;] &lt; self.rule[&#34;D-A&#34;]):
+
+                # Get the &#34;N-H&#34; coordinates.
+                vec_N = Vector(bond_CO[&#34;N&#34;].get_coord())
+                vec_H = Vector(bond_CO[&#34;H&#34;].get_coord())
+
+                # Get the &#34;C-O&#34; coordinates.
+                vec_C = Vector(bond_CO[&#34;C&#34;].get_coord())
+                vec_O = Vector(bond_CO[&#34;O&#34;].get_coord())
+
+                # This angle is in radians.
+                phi = calc_angle(vec_N, vec_H, vec_O)
+
+                # This angle is in radians.
+                psi = calc_angle(vec_C, vec_O, vec_H)
+
+                # Check both angles.
+                if (np.rad2deg(phi) &gt; self.rule[&#34;PHI&#34;]) and\
+                        (np.rad2deg(psi) &gt; self.rule[&#34;PSI&#34;]):
+                    bond_O_vec = [bond_CO[&#34;r_min&#34;], *np.cos([phi, psi]), 1.0]
+                # _end_if_
+
+            # _end_if_
+
+            # Add the complete named-tuple to the list.
+            h_bonds_append(BondInfo(res_name, res_id, bond_H_vec, bond_O_vec))
+        # _end_for_
+
+        # Return the list with all the bonds.
+        return h_bonds
+    # _end_def_
+
+    @property
+    def rules(self):
+        &#34;&#34;&#34;
+        Accessor of the hydrogen bond rules.
+
+        :return: Dictionary with the current
+        distances and angles.
+        &#34;&#34;&#34;
+        return self.rule
+    # _end_def_
+
+    def update_rule(self, new_value, code_str=None):
+        &#34;&#34;&#34;
+        Update the values of the hydrogen bond rules.
+
+        :param new_value: distance (Angstrom) or angle (degrees).
+
+        :param code_str: Rule codes are [&#34;D-A&#34;, &#34;H-A&#34;, &#34;PHI&#34;, &#34;PSI&#34;].
+
+        :return: None.
+        &#34;&#34;&#34;
+
+        # Check if the given code is correct.
+        if code_str not in [&#34;D-A&#34;, &#34;H-A&#34;, &#34;PHI&#34;, &#34;PSI&#34;]:
+            raise ValueError(f&#34;{self.__class__.__name__}:&#34;
+                             f&#34; Unknown code string: {code_str}.&#34;)
+        # _end_if_
+
+        # Make sure the new_value is float.
+        new_value = float(new_value)
+
+        # Check if it is a &#34;distance&#34; rule.
+        if (code_str == &#34;D-A&#34;) or (code_str == &#34;H-A&#34;):
+            # Accept only positive values.
+            if new_value &gt; 0.0:
+                self.rule[code_str] = new_value
+            else:
+                # Check for verbose.
+                if self.verbose:
+                    print(f&#34; Wrong update distance value: {new_value}&#34;)
+                # _end_if_
+            # _end_if_
+        # _end_if_
+
+        # Check if it is an &#34;angle&#34; rule.
+        if (code_str == &#34;PHI&#34;) or (code_str == &#34;PSI&#34;):
+            # Accept only values in range [0.0 - 360.0].
+            if 0.0 &lt;= new_value &lt;= 360.0:
+                self.rule[code_str] = new_value
+            else:
+                # Check for verbose.
+                if self.verbose:
+                    print(f&#34; Wrong update angle value: {new_value}&#34;)
+                # _end_if_
+        # _end_if_
+    # _end_def_
+
+    # Auxiliary.
+    def __str__(self):
+        &#34;&#34;&#34;
+        Override to print a readable string presentation of the
+        object. This will include its id() along with its rules
+        for forming h-bonds.
+
+        :return: a string representation of a HBond object.
+        &#34;&#34;&#34;
+        return f&#34; HBond Id({id(self)}): Rules={self.rules}&#34;
+    # _end_def_
+
+# _end_class_</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="Napshift.src.chemical_shifts.hydrogen_bond.BondInfo"><code class="flex name class">
+<span>class <span class="ident">BondInfo</span></span>
+<span>(</span><span>res_name, res_id, H_, O_)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>BondInfo(res_name, res_id, H_, O_)</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.tuple</li>
+</ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="Napshift.src.chemical_shifts.hydrogen_bond.BondInfo.H_"><code class="name">var <span class="ident">H_</span></code></dt>
+<dd>
+<div class="desc"><p>Information about the NH-bond: (distance, cos(phi), cos(psi), 1.0).</p></div>
+</dd>
+<dt id="Napshift.src.chemical_shifts.hydrogen_bond.BondInfo.O_"><code class="name">var <span class="ident">O_</span></code></dt>
+<dd>
+<div class="desc"><p>Information about the CO-bond: (distance, cos(phi), cos(psi), 1.0).</p></div>
+</dd>
+<dt id="Napshift.src.chemical_shifts.hydrogen_bond.BondInfo.res_id"><code class="name">var <span class="ident">res_id</span></code></dt>
+<dd>
+<div class="desc"><p>Residue ID (from the PDB file).</p></div>
+</dd>
+<dt id="Napshift.src.chemical_shifts.hydrogen_bond.BondInfo.res_name"><code class="name">var <span class="ident">res_name</span></code></dt>
+<dd>
+<div class="desc"><p>Residue name (three letter code) that contains the hydrogen bond.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="Napshift.src.chemical_shifts.hydrogen_bond.HBond"><code class="flex name class">
+<span>class <span class="ident">HBond</span></span>
+<span>(</span><span>verbose=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This class creates an object that handles hydrogen
+bonds formation between atoms (amino-acid chains).</p>
+<pre><code>Note: Naming systems used (BMRB / PDB).
+</code></pre>
+<p>Constructs an object that will handle the detections
+of hydrogen bonds in residue-chains.</p>
+<p>:param verbose: boolean flag. If true it will display
+more information while running.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class HBond(object):
+    &#34;&#34;&#34;
+    This class creates an object that handles hydrogen
+    bonds formation between atoms (amino-acid chains).
+
+        Note: Naming systems used (BMRB / PDB).
+    &#34;&#34;&#34;
+
+    # Side-chain Hydrogen atoms: Asparagine (ASN):
+    _ASN_H = {&#34;HD21&#34;: &#34;ND2&#34;, &#34;HD22&#34;: &#34;ND2&#34;,
+              &#34;1HD2&#34;: &#34;ND2&#34;, &#34;2HD2&#34;: &#34;ND2&#34;}
+
+    # Side-chain Hydrogen atoms: Arginine (ARG):
+    _ARG_H = {&#34;HH11&#34;: &#34;NH1&#34;, &#34;HH12&#34;: &#34;NH1&#34;,
+              &#34;HH21&#34;: &#34;NH2&#34;, &#34;HH22&#34;: &#34;NH2&#34;,
+              &#34;1HH1&#34;: &#34;NH1&#34;, &#34;2HH1&#34;: &#34;NH1&#34;,
+              &#34;1HH2&#34;: &#34;NH2&#34;, &#34;2HH2&#34;: &#34;NH2&#34;}
+
+    # Side-chain Hydrogen atoms: Glutamine (GLN):
+    _GLN_H = {&#34;HE21&#34;: &#34;NE2&#34;, &#34;HE22&#34;: &#34;NE2&#34;,
+              &#34;1HE2&#34;: &#34;NE2&#34;, &#34;2HE2&#34;: &#34;NE2&#34;}
+
+    # Side-chain Hydrogen atoms: Lysine (LYS):
+    _LYS_H = {&#34;HZ1&#34;: &#34;NZ&#34;, &#34;HZ2&#34;: &#34;NZ&#34;, &#34;HZ3&#34;: &#34;NZ&#34;,
+              &#34;1HZ&#34;: &#34;NZ&#34;, &#34;2HZ&#34;: &#34;NZ&#34;, &#34;3HZ&#34;: &#34;NZ&#34;}
+
+    # Side-chain Oxygen atoms with their corresponding
+    # Carbon atoms (used in hydrogen acceptor atoms).
+    _ASN_O = {&#34;OD1&#34;: &#34;CG&#34;}
+    _ASP_O = {&#34;OD1&#34;: &#34;CG&#34;, &#34;OD2&#34;: &#34;CG&#34;}
+    _GLN_O = {&#34;OE1&#34;: &#34;CD&#34;}
+    _GLU_O = {&#34;OE1&#34;: &#34;CD&#34;, &#34;OE2&#34;: &#34;CD&#34;}
+    _SER_O = {&#34;OG&#34;: &#34;CB&#34;}
+    _THR_O = {&#34;OG1&#34;: &#34;CB&#34;}
+    _TYR_O = {&#34;OH&#34;: &#34;CZ&#34;}
+
+    # Object variables.
+    __slots__ = (&#34;back_H&#34;, &#34;side_H&#34;, &#34;side_O&#34;, &#34;rule&#34;, &#34;_verbose&#34;)
+
+    def __init__(self, verbose=False):
+        &#34;&#34;&#34;
+        Constructs an object that will handle the detections
+        of hydrogen bonds in residue-chains.
+
+        :param verbose: boolean flag. If true it will display
+        more information while running.
+        &#34;&#34;&#34;
+
+        # Backbone (NHx) Hydrogen names.
+        self.back_H = [&#34;H&#34;,
+                       &#34;H1&#34;, &#34;H2&#34;, &#34;H3&#34;,
+                       &#34;1H&#34;, &#34;2H&#34;, &#34;3H&#34;]
+
+        # Combine all side-chain (H) atoms.
+        self.side_H = {**HBond._ASN_H, **HBond._ARG_H,
+                       **HBond._GLN_H, **HBond._LYS_H}
+
+        # Combine all side-chain (O) atoms.
+        self.side_O = {**HBond._ASN_O, **HBond._ASP_O,
+                       **HBond._GLN_O, **HBond._GLU_O,
+                       **HBond._SER_O, **HBond._THR_O,
+                       **HBond._TYR_O}
+
+        # Default criteria for hydrogen bonds formation:
+        # 1) Distances between atoms [L: Angstroms]:
+        #  1.1)   donor  atom &#39;D&#39; and acceptor atom &#39;A&#39;.
+        #  1.2) hydrogen atom &#39;H&#39; and acceptor atom &#39;A&#39;.
+        #
+        # 2) Angles between atoms (U: Degrees):
+        #  2.1) (Base-Acceptor) B-A ... (Hydrogen)  H.
+        #  2.2) (Acceptor) A ... (Hydrogen-Donor) H-D.
+        self.rule = {&#34;D-A&#34;: 3.90, &#34;H-A&#34;: 2.50,
+                     &#34;PHI&#34;: 90.0, &#34;PSI&#34;: 90.0}
+
+        # Add the verbose flag.
+        self._verbose = verbose
+    # _end_def_
+
+    @property
+    def verbose(self):
+        &#34;&#34;&#34;
+        Accessor (getter) of the verbose flag.
+
+        :return: _verbose.
+        &#34;&#34;&#34;
+        return self._verbose
+    # _end_def_
+
+    @verbose.setter
+    def verbose(self, new_value):
+        &#34;&#34;&#34;
+        Accessor (setter) of the verbose flag.
+
+        :param new_value: (bool).
+        &#34;&#34;&#34;
+
+        # Check for correct type.
+        if isinstance(new_value, bool):
+
+            # Assign the new value.
+            self._verbose = new_value
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}:&#34;
+                            f&#34; Verbose flag should be bool: {type(new_value)}.&#34;)
+        # _end_if_
+    # _end_def_
+
+    def __call__(self, chain=None):
+        &#34;&#34;&#34;
+        Compute the hydrogen bonds of the given input of
+        amino-acid (residue) chain. These are determined
+        with the internal criteria (rules) of the angles
+        and distances between the (H+) and (O-) atoms.
+
+        :param chain: Residue chain (amino-acids)
+
+        :return: List with all the estimated hydrogen bonds.
+        &#34;&#34;&#34;
+
+        # Return list with the h-bonds.
+        h_bonds = []
+
+        # Localize the append method.
+        h_bonds_append = h_bonds.append
+
+        # Check for empty input.
+        if chain is None:
+            return h_bonds
+        # _end_if_
+
+        # Process each residue in the chain.
+        for res_i in chain.get_residues():
+
+            # Get the residue name in three letter code.
+            # Ensure there are no spaces before / after.
+            res_name = str(res_i.get_resname()).strip()
+
+            # Get the residue id from the PDB.
+            res_id = res_i.get_id()[1]
+
+            # Initialize the parameter lists.
+            bond_H_vec = [0.0, 0.0, 0.0, 0.0]
+            bond_O_vec = [0.0, 0.0, 0.0, 0.0]
+
+            # Make sure the residue is in the accepted list.
+            # This is to avoid parsing DNA or RNA molecules.
+            if res_name not in ACCEPTED_RES:
+                # Add an empty tuple to the list.
+                h_bonds_append(BondInfo(res_name, res_id, bond_H_vec, bond_O_vec))
+
+                # Skip to the next residue.
+                continue
+            # _end_if_
+
+            # Get the backbone &#39;N&#39; / &#39;C&#39; / &#39;O&#39; and &#39;H&#39; atoms.
+            atom_N, atom_C, atom_O, atom_H = None, None, None, []
+
+            try:
+                # Get the Nitrogen.
+                atom_N = res_i[&#34;N&#34;]
+
+                # Get the Carbon.
+                atom_C = res_i[&#34;C&#34;]
+
+                # Get the Oxygen.
+                atom_O = res_i[&#34;O&#34;]
+
+                # We could have multiple hydrogen atoms
+                # bounded with atom &#39;N&#39; (i.e NH2, NH3):
+                for atom in res_i.get_atoms():
+
+                    # Find the backbone Hydrogen atoms.
+                    if atom.name in self.back_H:
+                        atom_H.append(atom)
+                    # _end_if_
+
+                # _end_for_
+            except (AttributeError, KeyError):
+
+                # Add an empty tuple to the list.
+                h_bonds_append(BondInfo(res_name, res_id, bond_H_vec, bond_O_vec))
+
+                # Skip to the next residue.
+                continue
+            # _end_try_
+
+            # H-Bond auxiliaries (1/2): N-H ... O
+            bond_NH = {&#34;r_min&#34;: np.inf,
+                       &#34;N&#34;: None, &#34;H&#34;: None,
+                       &#34;O&#34;: None, &#34;C&#34;: None}
+
+            # H-Bond auxiliaries (2/2): C=0 ... H
+            bond_CO = {&#34;r_min&#34;: np.inf,
+                       &#34;N&#34;: None, &#34;H&#34;: None,
+                       &#34;O&#34;: None, &#34;C&#34;: None}
+
+            # Scan the whole residue chain from the start.
+            for res_j in chain.get_residues():
+
+                # Get the name of the &#34;j-th&#34; residue.
+                RES_NAME_J = str(res_j.get_resname()).strip()
+
+                # Make sure the residue is in the accepted list.
+                if RES_NAME_J not in ACCEPTED_RES:
+                    # Skip to the next residue.
+                    continue
+                # _end_if_
+
+                # Get the &#39;O&#39;, &#39;C&#39;, &#39;N&#39; atoms.
+                try:
+                    atom_N_j = res_j[&#34;N&#34;]
+                    atom_O_j = res_j[&#34;O&#34;]
+                    atom_C_j = res_j[&#34;C&#34;]
+                except (AttributeError, KeyError):
+                    # Skip to the next residue.
+                    continue
+                # _end_try_
+
+                # Store the H/O atoms.
+                back_chain_H, side_chain_H, side_chain_O = [], [], []
+
+                # Find the Hydrogen and Oxygen.
+                for atom_j in res_j.get_atoms():
+
+                    if atom_j.name in self.back_H:
+                        back_chain_H.append(atom_j)
+                    # _end_if_
+
+                    if atom_j.name in self.side_H:
+                        side_chain_H.append(atom_j)
+                    # _end_if_
+
+                    if atom_j.name in self.side_O:
+                        side_chain_O.append(atom_j)
+                    # _end_if_
+
+                # _end_for_
+
+                # Because the &#39;N-Hx&#39; can have several &#39;H&#39; atoms
+                # we compare distances of the j-th &#39;O&#39; with all
+                # the i-th &#39;H&#39; atoms.
+                for atom_h in atom_H:
+
+                    # Distance.
+                    d_h = atom_h - atom_O_j
+
+                    # Find the minimum.
+                    if np.isfinite(d_h) and (d_h &lt; bond_NH[&#34;r_min&#34;]):
+                        # Store the current minimum.
+                        bond_NH[&#34;r_min&#34;] = d_h
+
+                        # Store the relevant atoms.
+                        bond_NH[&#34;N&#34;] = atom_N
+                        bond_NH[&#34;H&#34;] = atom_h
+
+                        # Store the relevant atoms.
+                        bond_NH[&#34;O&#34;] = atom_O_j
+                        bond_NH[&#34;C&#34;] = atom_C_j
+                    # _end_if_
+
+                    # Search for side-chain &#39;O&#39; atoms.
+                    for atom_o in side_chain_O:
+
+                        # Distance.
+                        d_h = atom_o - atom_h
+
+                        # Find the minimum.
+                        if np.isfinite(d_h) and (d_h &lt; bond_NH[&#34;r_min&#34;]):
+
+                            try:
+                                # Get the connected &#39;C&#39; atom.
+                                side_C = res_j[self.side_O[atom_o.name]]
+
+                                # Store the current minimum.
+                                bond_NH[&#34;r_min&#34;] = d_h
+
+                                # Store the relevant atoms.
+                                bond_NH[&#34;N&#34;] = atom_N
+                                bond_NH[&#34;H&#34;] = atom_h
+
+                                # Store the relevant atoms.
+                                bond_NH[&#34;O&#34;] = atom_o
+                                bond_NH[&#34;C&#34;] = side_C
+                            except (AttributeError, KeyError):
+                                # If the atom does not exist
+                                # simply ignore it and pass.
+                                pass
+                            # _end_try_
+
+                        # _end_if_
+
+                    # _end_for_
+
+                # _end_for_
+
+                # First find the distances between the i-th &#39;O&#39;
+                # and the backbone j-th &#39;H&#39; atoms.
+                for atom_l in back_chain_H:
+
+                    # Distance.
+                    d_k = atom_l - atom_O
+
+                    # Find the minimum.
+                    if np.isfinite(d_k) and (d_k &lt; bond_CO[&#34;r_min&#34;]):
+                        # Store the current minimum.
+                        bond_CO[&#34;r_min&#34;] = d_k
+
+                        # Store the pair of atoms.
+                        bond_CO[&#34;H&#34;] = atom_l
+                        bond_CO[&#34;N&#34;] = atom_N_j
+
+                        # Store the relevant atoms.
+                        bond_CO[&#34;O&#34;] = atom_O
+                        bond_CO[&#34;C&#34;] = atom_C
+                    # _end_if_
+
+                # _end_for_
+
+                # For specific residues check the side-chains.
+                if RES_NAME_J in {&#34;ASN&#34;, &#34;ARG&#34;, &#34;GLN&#34;, &#34;LYS&#34;}:
+
+                    # Go through all the side-chain &#39;H&#39;.
+                    for atom_l in side_chain_H:
+
+                        try:
+                            # Distance.
+                            d_k = atom_l - atom_O
+
+                            # Find the minimum.
+                            if np.isfinite(d_k) and (d_k &lt; bond_CO[&#34;r_min&#34;]):
+                                # Extract the side-chain -N-
+                                side_N = res_j[self.side_H[atom_l.name]]
+
+                                # Store the current minimum.
+                                bond_CO[&#34;r_min&#34;] = d_k
+
+                                # Store the pair of atoms.
+                                bond_CO[&#34;H&#34;] = atom_l
+                                bond_CO[&#34;N&#34;] = side_N
+
+                                # Store the relevant atoms.
+                                bond_CO[&#34;O&#34;] = atom_O
+                                bond_CO[&#34;C&#34;] = atom_C
+                            # _end_if_
+                        except (AttributeError, KeyError):
+                            # If the atom does not exist
+                            # simply ignore it and pass.
+                            pass
+                        # _end_try_
+
+                    # _end_for_
+
+                # _end_if_
+
+            # _end_for_
+
+            # Check if the criteria for the distances are satisfied.
+            if (bond_NH[&#34;r_min&#34;] &lt; self.rule[&#34;H-A&#34;]) \
+                    and (atom_N - bond_NH[&#34;O&#34;] &lt; self.rule[&#34;D-A&#34;]):
+
+                # Get the &#34;N-H&#34; coordinates.
+                vec_N = Vector(bond_NH[&#34;N&#34;].get_coord())
+                vec_H = Vector(bond_NH[&#34;H&#34;].get_coord())
+
+                # Get the &#34;C-O&#34; coordinates.
+                vec_C = Vector(bond_NH[&#34;C&#34;].get_coord())
+                vec_O = Vector(bond_NH[&#34;O&#34;].get_coord())
+
+                # This angle is in radians.
+                phi = calc_angle(vec_N, vec_H, vec_O)
+
+                # This angle is in radians.
+                psi = calc_angle(vec_C, vec_O, vec_H)
+                
+                # Check both angles.
+                if (np.rad2deg(phi) &gt; self.rule[&#34;PHI&#34;]) and\
+                        (np.rad2deg(psi) &gt; self.rule[&#34;PSI&#34;]):
+                    bond_H_vec = [bond_NH[&#34;r_min&#34;], *np.cos([phi, psi]), 1.0]
+                # _end_if_
+
+            # _end_if_
+
+            # Check if the criteria for the distances are satisfied.
+            if (bond_CO[&#34;r_min&#34;] &lt; self.rule[&#34;H-A&#34;]) \
+                    and (atom_C - bond_CO[&#34;H&#34;] &lt; self.rule[&#34;D-A&#34;]):
+
+                # Get the &#34;N-H&#34; coordinates.
+                vec_N = Vector(bond_CO[&#34;N&#34;].get_coord())
+                vec_H = Vector(bond_CO[&#34;H&#34;].get_coord())
+
+                # Get the &#34;C-O&#34; coordinates.
+                vec_C = Vector(bond_CO[&#34;C&#34;].get_coord())
+                vec_O = Vector(bond_CO[&#34;O&#34;].get_coord())
+
+                # This angle is in radians.
+                phi = calc_angle(vec_N, vec_H, vec_O)
+
+                # This angle is in radians.
+                psi = calc_angle(vec_C, vec_O, vec_H)
+
+                # Check both angles.
+                if (np.rad2deg(phi) &gt; self.rule[&#34;PHI&#34;]) and\
+                        (np.rad2deg(psi) &gt; self.rule[&#34;PSI&#34;]):
+                    bond_O_vec = [bond_CO[&#34;r_min&#34;], *np.cos([phi, psi]), 1.0]
+                # _end_if_
+
+            # _end_if_
+
+            # Add the complete named-tuple to the list.
+            h_bonds_append(BondInfo(res_name, res_id, bond_H_vec, bond_O_vec))
+        # _end_for_
+
+        # Return the list with all the bonds.
+        return h_bonds
+    # _end_def_
+
+    @property
+    def rules(self):
+        &#34;&#34;&#34;
+        Accessor of the hydrogen bond rules.
+
+        :return: Dictionary with the current
+        distances and angles.
+        &#34;&#34;&#34;
+        return self.rule
+    # _end_def_
+
+    def update_rule(self, new_value, code_str=None):
+        &#34;&#34;&#34;
+        Update the values of the hydrogen bond rules.
+
+        :param new_value: distance (Angstrom) or angle (degrees).
+
+        :param code_str: Rule codes are [&#34;D-A&#34;, &#34;H-A&#34;, &#34;PHI&#34;, &#34;PSI&#34;].
+
+        :return: None.
+        &#34;&#34;&#34;
+
+        # Check if the given code is correct.
+        if code_str not in [&#34;D-A&#34;, &#34;H-A&#34;, &#34;PHI&#34;, &#34;PSI&#34;]:
+            raise ValueError(f&#34;{self.__class__.__name__}:&#34;
+                             f&#34; Unknown code string: {code_str}.&#34;)
+        # _end_if_
+
+        # Make sure the new_value is float.
+        new_value = float(new_value)
+
+        # Check if it is a &#34;distance&#34; rule.
+        if (code_str == &#34;D-A&#34;) or (code_str == &#34;H-A&#34;):
+            # Accept only positive values.
+            if new_value &gt; 0.0:
+                self.rule[code_str] = new_value
+            else:
+                # Check for verbose.
+                if self.verbose:
+                    print(f&#34; Wrong update distance value: {new_value}&#34;)
+                # _end_if_
+            # _end_if_
+        # _end_if_
+
+        # Check if it is an &#34;angle&#34; rule.
+        if (code_str == &#34;PHI&#34;) or (code_str == &#34;PSI&#34;):
+            # Accept only values in range [0.0 - 360.0].
+            if 0.0 &lt;= new_value &lt;= 360.0:
+                self.rule[code_str] = new_value
+            else:
+                # Check for verbose.
+                if self.verbose:
+                    print(f&#34; Wrong update angle value: {new_value}&#34;)
+                # _end_if_
+        # _end_if_
+    # _end_def_
+
+    # Auxiliary.
+    def __str__(self):
+        &#34;&#34;&#34;
+        Override to print a readable string presentation of the
+        object. This will include its id() along with its rules
+        for forming h-bonds.
+
+        :return: a string representation of a HBond object.
+        &#34;&#34;&#34;
+        return f&#34; HBond Id({id(self)}): Rules={self.rules}&#34;</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="Napshift.src.chemical_shifts.hydrogen_bond.HBond.back_H"><code class="name">var <span class="ident">back_H</span></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="Napshift.src.chemical_shifts.hydrogen_bond.HBond.rule"><code class="name">var <span class="ident">rule</span></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="Napshift.src.chemical_shifts.hydrogen_bond.HBond.rules"><code class="name">var <span class="ident">rules</span></code></dt>
+<dd>
+<div class="desc"><p>Accessor of the hydrogen bond rules.</p>
+<p>:return: Dictionary with the current
+distances and angles.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def rules(self):
+    &#34;&#34;&#34;
+    Accessor of the hydrogen bond rules.
+
+    :return: Dictionary with the current
+    distances and angles.
+    &#34;&#34;&#34;
+    return self.rule</code></pre>
+</details>
+</dd>
+<dt id="Napshift.src.chemical_shifts.hydrogen_bond.HBond.side_H"><code class="name">var <span class="ident">side_H</span></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="Napshift.src.chemical_shifts.hydrogen_bond.HBond.side_O"><code class="name">var <span class="ident">side_O</span></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="Napshift.src.chemical_shifts.hydrogen_bond.HBond.verbose"><code class="name">var <span class="ident">verbose</span></code></dt>
+<dd>
+<div class="desc"><p>Accessor (getter) of the verbose flag.</p>
+<p>:return: _verbose.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def verbose(self):
+    &#34;&#34;&#34;
+    Accessor (getter) of the verbose flag.
+
+    :return: _verbose.
+    &#34;&#34;&#34;
+    return self._verbose</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="Napshift.src.chemical_shifts.hydrogen_bond.HBond.update_rule"><code class="name flex">
+<span>def <span class="ident">update_rule</span></span>(<span>self, new_value, code_str=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Update the values of the hydrogen bond rules.</p>
+<p>:param new_value: distance (Angstrom) or angle (degrees).</p>
+<p>:param code_str: Rule codes are ["D-A", "H-A", "PHI", "PSI"].</p>
+<p>:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_rule(self, new_value, code_str=None):
+    &#34;&#34;&#34;
+    Update the values of the hydrogen bond rules.
+
+    :param new_value: distance (Angstrom) or angle (degrees).
+
+    :param code_str: Rule codes are [&#34;D-A&#34;, &#34;H-A&#34;, &#34;PHI&#34;, &#34;PSI&#34;].
+
+    :return: None.
+    &#34;&#34;&#34;
+
+    # Check if the given code is correct.
+    if code_str not in [&#34;D-A&#34;, &#34;H-A&#34;, &#34;PHI&#34;, &#34;PSI&#34;]:
+        raise ValueError(f&#34;{self.__class__.__name__}:&#34;
+                         f&#34; Unknown code string: {code_str}.&#34;)
+    # _end_if_
+
+    # Make sure the new_value is float.
+    new_value = float(new_value)
+
+    # Check if it is a &#34;distance&#34; rule.
+    if (code_str == &#34;D-A&#34;) or (code_str == &#34;H-A&#34;):
+        # Accept only positive values.
+        if new_value &gt; 0.0:
+            self.rule[code_str] = new_value
+        else:
+            # Check for verbose.
+            if self.verbose:
+                print(f&#34; Wrong update distance value: {new_value}&#34;)
+            # _end_if_
+        # _end_if_
+    # _end_if_
+
+    # Check if it is an &#34;angle&#34; rule.
+    if (code_str == &#34;PHI&#34;) or (code_str == &#34;PSI&#34;):
+        # Accept only values in range [0.0 - 360.0].
+        if 0.0 &lt;= new_value &lt;= 360.0:
+            self.rule[code_str] = new_value
+        else:
+            # Check for verbose.
+            if self.verbose:
+                print(f&#34; Wrong update angle value: {new_value}&#34;)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="Napshift.src.chemical_shifts" href="index.html">Napshift.src.chemical_shifts</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="Napshift.src.chemical_shifts.hydrogen_bond.BondInfo" href="#Napshift.src.chemical_shifts.hydrogen_bond.BondInfo">BondInfo</a></code></h4>
+<ul class="">
+<li><code><a title="Napshift.src.chemical_shifts.hydrogen_bond.BondInfo.H_" href="#Napshift.src.chemical_shifts.hydrogen_bond.BondInfo.H_">H_</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.hydrogen_bond.BondInfo.O_" href="#Napshift.src.chemical_shifts.hydrogen_bond.BondInfo.O_">O_</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.hydrogen_bond.BondInfo.res_id" href="#Napshift.src.chemical_shifts.hydrogen_bond.BondInfo.res_id">res_id</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.hydrogen_bond.BondInfo.res_name" href="#Napshift.src.chemical_shifts.hydrogen_bond.BondInfo.res_name">res_name</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="Napshift.src.chemical_shifts.hydrogen_bond.HBond" href="#Napshift.src.chemical_shifts.hydrogen_bond.HBond">HBond</a></code></h4>
+<ul class="two-column">
+<li><code><a title="Napshift.src.chemical_shifts.hydrogen_bond.HBond.back_H" href="#Napshift.src.chemical_shifts.hydrogen_bond.HBond.back_H">back_H</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.hydrogen_bond.HBond.rule" href="#Napshift.src.chemical_shifts.hydrogen_bond.HBond.rule">rule</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.hydrogen_bond.HBond.rules" href="#Napshift.src.chemical_shifts.hydrogen_bond.HBond.rules">rules</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.hydrogen_bond.HBond.side_H" href="#Napshift.src.chemical_shifts.hydrogen_bond.HBond.side_H">side_H</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.hydrogen_bond.HBond.side_O" href="#Napshift.src.chemical_shifts.hydrogen_bond.HBond.side_O">side_O</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.hydrogen_bond.HBond.update_rule" href="#Napshift.src.chemical_shifts.hydrogen_bond.HBond.update_rule">update_rule</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.hydrogen_bond.HBond.verbose" href="#Napshift.src.chemical_shifts.hydrogen_bond.HBond.verbose">verbose</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,2537 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>Napshift.src.chemical_shifts.input_vector API documentation</title>
+<meta name="description" content="This module includes the main class that handles
+the data generation from the (input) PDB files." />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>Napshift.src.chemical_shifts.input_vector</code></h1>
+</header>
+<section id="section-intro">
+<p>This module includes the main class that handles
+the data generation from the (input) PDB files.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+This module includes the main class that handles
+the data generation from the (input) PDB files.
+&#34;&#34;&#34;
+
+# Python import(s).
+from pathlib import Path
+import numpy as np
+from pandas import DataFrame
+from numba import njit
+
+# BIO-python import(s).
+from Bio.PDB.PDBParser import PDBParser
+
+# Private import(s).
+from src.chemical_shifts.auxiliaries import (RES_3_TO_1, BLOSUM,
+                                             TARGET_ATOMS, ACCEPTED_RES,
+                                             get_sequence, modify_models_OX)
+
+from src.chemical_shifts.hydrogen_bond import HBond
+from src.chemical_shifts.ring_effect import RingEffects
+
+
+class InputVector(object):
+    &#34;&#34;&#34;
+    This class creates an input vector for the artificial neural network.
+    The hydrogen bonds, and aromatic rings calculations are performed by
+    class objects. We usually don&#39;t want to change these often once they
+    are fixed.
+    &#34;&#34;&#34;
+
+    # Hydrogen bond calculator (default settings):
+    hydrogen_bond_calc = HBond()
+    &#34;&#34;&#34;
+    The default setting for the hydrogen bond calculator are:
+    
+        &gt; &#34;D-A&#34;: 3.90, &#34;H-A&#34;: 2.50
+        &gt; &#34;PHI&#34;: 90.0, &#34;PSI&#34;: 90.0
+    
+    Note: The distance units are in &#34;Angstrom&#34; and the angle
+    units are in &#34;degrees&#34;.
+    &#34;&#34;&#34;
+
+    # Aromatic ring effects detector.
+    aromatic_ring_calc = RingEffects(d_ring=3.0,
+                                     include_five_atoms=True)
+    &#34;&#34;&#34;
+    The default distance threshold is set equal to 3 Angstrom.
+    It is also enabled to include five atom rings (default).
+    &#34;&#34;&#34;
+
+    # Object variables.
+    __slots__ = (&#34;blosum_id&#34;, &#34;blosum&#34;, &#34;hydrogen_bonds&#34;, &#34;data_type&#34;,
+                 &#34;aromatic_rings&#34;)
+
+    # Constructor.
+    def __init__(self, blosum_id=62, include_hydrogen_bonds=False,
+                 check_aromatic_rings=True, data_type=np.float16):
+        &#34;&#34;&#34;
+        Constructs an object that will create the input vectors from
+        a given PDB (protein) file.
+
+        :param blosum_id: (integer) value that defines the version of
+        the block substitution matrix.
+
+        :param include_hydrogen_bonds: (boolean) flag. If true it will
+        detect and include all the hydrogen bonds information as part
+        of the input vectors.
+
+        :param check_aromatic_rings: (boolean) flag. If true it will
+        detect the target atoms that are affected by an aromatic ring.
+        This will flag them out so that we will not use them while
+        training/testing of the ANN.
+
+        :param data_type: This is the datatype of the input vector.
+        This will affect the size (unit is MB) of the return vectors.
+        Default here is set to float16.
+        &#34;&#34;&#34;
+
+        # Check the version of the matrix.
+        if str(blosum_id) in BLOSUM:
+            # Accept the BLOSUM ID.
+            self.blosum_id = blosum_id
+
+            # Get the right version.
+            self.blosum = BLOSUM[str(blosum_id)]
+        else:
+            raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                             f&#34;Available BLOSUM versions are {list(BLOSUM.keys())}: &#34;
+                             f&#34;{blosum_id}.&#34;)
+        # _end_if_
+
+        # Boolean flag. If true the class will estimate
+        # the hydrogen bonds of the given model, before
+        # it creates the return vector.
+        if isinstance(include_hydrogen_bonds, bool):
+            # Assign the boolean flag.
+            self.hydrogen_bonds = include_hydrogen_bonds
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}: &#34;
+                            f&#34;Include hydrogen bonds flag should be bool: &#34;
+                            f&#34;{type(include_hydrogen_bonds)}.&#34;)
+        # _end_if_
+
+        # Boolean flag. If true the class will detect which
+        # of the model atoms are affected by aromatic rings
+        # and will return a list of them.
+        if isinstance(check_aromatic_rings, bool):
+            # Assign the boolean flag.
+            self.aromatic_rings = check_aromatic_rings
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}: &#34;
+                            f&#34;Check aromatic rings flag should be bool: &#34;
+                            f&#34;{type(check_aromatic_rings)}.&#34;)
+        # _end_if_
+
+        # Make sure &#34;data_type&#34; is type.
+        if isinstance(data_type, type):
+            # Accept only specific floating point types.
+            # &gt; np.half   == np.float16
+            # &gt; np.single == np.float32
+            # &gt; np.double == np.float64
+            if data_type in {np.float16, np.float32, np.float64}:
+                # Accept the datatype.
+                self.data_type = data_type
+            else:
+                raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                                 f&#34;Datatype should be float(16/32/64): {data_type}.&#34;)
+            # _end_if_
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}: &#34;
+                            f&#34;Datatype should be a type: {type(data_type)}.&#34;)
+        # _end_if_
+    # _end_def_
+
+    @property
+    def blosum_version(self):
+        &#34;&#34;&#34;
+        Accessor (getter) of the version of the BLOSUM.
+
+        :return: integer value.
+        &#34;&#34;&#34;
+        return self.blosum_id
+    # _end_def_
+
+    @blosum_version.setter
+    def blosum_version(self, new_value):
+        &#34;&#34;&#34;
+        Accessor (setter) of the BLOSUM.
+
+        :param new_value: new integer version.
+        &#34;&#34;&#34;
+
+        # Check the version of the accepted matrix.
+        if str(new_value) in BLOSUM:
+            # Update the BLOSUM ID.
+            self.blosum_id = new_value
+
+            # Update the BLOSUM.
+            self.blosum = BLOSUM[str(new_value)]
+        else:
+            raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                             f&#34;Available BLOSUM versions {list(BLOSUM.keys())}:&#34;
+                             f&#34;{new_value}.&#34;)
+        # _end_if_
+    # _end_def_
+
+    @property
+    def include_hydrogen_bonds(self):
+        &#34;&#34;&#34;
+        Accessor (getter) of the boolean flag that
+        indicates if we include the hydrogen bonds
+        in the formulation of the input vector.
+
+        :return: boolean flag.
+        &#34;&#34;&#34;
+        return self.hydrogen_bonds
+    # _end_def_
+
+    @include_hydrogen_bonds.setter
+    def include_hydrogen_bonds(self, new_value):
+        &#34;&#34;&#34;
+        Accessor (setter) of the boolean flag.
+
+        :param new_value: new boolean flag.
+        &#34;&#34;&#34;
+
+        # Check for correct type.
+        if isinstance(new_value, bool):
+            # Assign the new value.
+            self.hydrogen_bonds = new_value
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}: &#34;
+                            f&#34;Hydrogen bonds flag should be bool: {type(new_value)}.&#34;)
+        # _end_if_
+    # _end_def_
+
+    @property
+    def check_aromatic_rings(self):
+        &#34;&#34;&#34;
+        Accessor (getter) of the boolean flag that
+        indicates if we detect the aromatic rings.
+
+        :return: boolean flag.
+        &#34;&#34;&#34;
+        return self.aromatic_rings
+    # _end_def_
+
+    @check_aromatic_rings.setter
+    def check_aromatic_rings(self, new_value):
+        &#34;&#34;&#34;
+        Accessor (setter) of the boolean flag.
+
+        :param new_value: new boolean flag.
+        &#34;&#34;&#34;
+
+        # Check for correct type.
+        if isinstance(new_value, bool):
+            # Assign the new value.
+            self.aromatic_rings = new_value
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}: &#34;
+                            f&#34;Aromatic rings flag should be bool: {type(new_value)}.&#34;)
+        # _end_if_
+    # _end_def_
+
+    @staticmethod
+    @njit(fastmath=True)
+    def sine_cosine(angle):
+        &#34;&#34;&#34;
+        Auxiliary function that returns the sin(x) / cos(x) for
+        a given input angle &#39;x&#39;. This method is using Numba for
+        speed up. Upon testing the performance we found that we
+        average an ~23x speed up comparing to using only numpy.
+
+        NOTE:  We don&#39;t make any checks on the input angle as we
+        assume that it has already been checked before this call.
+        The whole point is to speed up the repeated calls to the
+        trigonometric functions.
+
+        :param angle: the angle (in degrees) that we want to get
+        the sine / cosine.
+
+        :return: sin(angle), cos(angle)
+        &#34;&#34;&#34;
+        # First convert to radians.
+        angle = np.deg2rad(angle)
+
+        # Return the results.
+        return np.sin(angle), np.cos(angle)
+    # _end_def_
+
+    @staticmethod
+    def save_auxiliary(f_id, rec_data, kind=None, output=None):
+        &#34;&#34;&#34;
+        This auxiliary (static)  function will save the auxiliary
+        bi-products of the input vector construction, such as the
+        hydrogen bonds, torsion angles and aromatic rings.
+
+        :param f_id: File id. Usually the PDB-ID is ok to be used
+        as a filename to identify the contents.
+
+        :param rec_data: The data we want to save. Usually it is
+        a list of things (tuples, dicts, etc.)
+
+        :param kind: This is the type / kind of data that we are
+        saving. It can only be of four types: 1) &#34;t_peptides&#34;,
+        2) &#34;h_bonds&#34;, 3) &#34;a_rings&#34; and 4) &#34;t_angles&#34;. Anything
+        else will force the method to raise an exception.
+
+        :param output: This is the main (parent) output directory
+        where the data will be saved.
+
+        :return: None.
+        &#34;&#34;&#34;
+
+        # Set the local variables according to the
+        # kind of data that we have to save.
+        if kind == &#34;t_peptides&#34;:
+            f_ext, folder_name = &#34;tripep&#34;, &#34;Tri_Peptides&#34;
+
+        elif kind == &#34;h_bonds&#34;:
+            f_ext, folder_name = &#34;bonds&#34;, &#34;Hydrogen_Bonds&#34;
+
+        elif kind == &#34;a_rings&#34;:
+            f_ext, folder_name = &#34;rings&#34;, &#34;Aromatic_Rings&#34;
+
+        elif kind == &#34;t_angles&#34;:
+            f_ext, folder_name = &#34;angles&#34;, &#34;Torsion_Angles&#34;
+
+        else:
+            raise ValueError(f&#34; Unknown type of data: {kind}.&#34;)
+        # _end_if_
+
+        # Check for the output.
+        if output is None:
+            output = Path.cwd()
+        # _end_if_
+
+        # Create an output filename.
+        output_path = Path(output / folder_name)
+
+        # This will be true only once (for each kind).
+        if not output_path.is_dir():
+            output_path.mkdir(parents=True)
+        # _end_if_
+
+        # Convert to DataFrame.
+        df = DataFrame(data=rec_data)
+
+        # Save to csv file.
+        df.to_csv(Path(output_path / f&#34;{f_id}.{f_ext}&#34;), header=False)
+    # _end_def_
+
+    # Auxiliary method.
+    def _zero_padding(self, x_in, n_peptides, terminal=&#34;front&#34;):
+        &#34;&#34;&#34;
+        This auxiliary method is used to add the front and back
+        terminal vectors, using zero padding. The method can be
+        used for any (odd) number of peptides (3-, 5-, 7-, etc).
+
+        :param x_in: This is the input that will be used to make
+        the front or back terminal poly-peptide entries.
+
+        :param n_peptides: This is the number (int) of the poly-
+        peptides that we are constructing. It should be strictly
+        an odd number.
+
+        :param terminal: This is the type of the terminal. It
+        accepts only two (string) values &#34;front&#34; / &#34;back&#34;.
+
+        :return: a list with the front or back terminal entries.
+        &#34;&#34;&#34;
+
+        # Quick sanity check.
+        if terminal not in {&#34;front&#34;, &#34;back&#34;}:
+            raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                             f&#34;Zero padding type can be &#39;front&#39; | &#39;back&#39;: {terminal}.&#34;)
+        # _end_if_
+
+        # Extract the data from the input.
+        x_peptides = x_in[&#34;poly-peptides&#34;]
+        x_targets = x_in[&#34;targets&#34;]
+        x_vector = x_in[&#34;vector&#34;]
+
+        # Total length of the vector.
+        K = x_vector.size
+
+        # Number of elements (per peptide).
+        L = K // int(n_peptides)
+
+        # Declare the return list.
+        list_out = []
+
+        # Number of required padded elements.
+        number_of_pads = int(n_peptides) // 2
+
+        # Iterate to get all the zero padding
+        # elements (front or back).
+        for i in range(number_of_pads):
+            # Create a temporary vector.
+            t_vector = np.zeros_like(x_vector)
+
+            # Make a temporary peptides copy.
+            t_peptides = x_peptides.copy()
+
+            # Compute the index where we want
+            # to start copying elements from.
+            kappa = L * (i + 1)
+
+            # Switch according to the front/back side.
+            if terminal == &#34;front&#34;:
+                # Copy the vector elements.
+                t_vector[kappa:] = x_vector[kappa:].copy()
+
+                # Rotate the elements forwards.
+                t_peptides = t_peptides[-(i+1):] + t_peptides[:-(i+1)]
+
+                # Mark the empty entries with None.
+                for j in range(i+1):
+                    t_peptides[j] = (None, &#39;-&#39;, None)
+                # _end_for_
+            else:
+                # Copy the vector elements.
+                t_vector[:K-kappa] = x_vector[:K-kappa].copy()
+
+                # Rotate the elements backwards.
+                t_peptides = t_peptides[(i+1):] + t_peptides[:(i+1)]
+
+                # Mark the empty entries with None.
+                for j in range(i+1):
+                    t_peptides[-(j+1)] = (None, &#39;-&#39;, None)
+                # _end_for_
+            # _end_if_
+
+            # Add it to the return list.
+            list_out.append({&#34;poly-peptides&#34;: t_peptides,
+                             &#34;targets&#34;: x_targets,
+                             &#34;vector&#34;: t_vector})
+        # _end_for_
+
+        # Return the list.
+        return list_out
+
+    # _end_def_
+
+    # Main functionality.
+    def get_data(self, f_path, n_peptides=3, all_models=False,
+                 save_output_path=None, verbose=False):
+        &#34;&#34;&#34;
+        This is the main function of the &#39;InputVector&#39; class. It accepts
+        as input a &#34;Path(/path/to/the/PDB)&#34; and returns a  list with all
+        the information that is extracted.  This can be used as input to
+        the ANN for predicting the chemical shift values of specific pre
+        determined, atoms (e.g. &#34;N&#34;, &#34;C&#34;, &#34;CA&#34;, &#34;CB&#34;, &#34;H&#34;, &#34;HA&#34;).
+
+        :param f_path: Path of the (protein) PDB file.
+
+        :param n_peptides: Number of peptides to consider for the input
+        vectors. By default it considers tri-peptides.
+
+        :param all_models: (bool) flag. If True the method will process
+        all the models in the PDB file, otherwise only the first model.
+
+        :param save_output_path: (Path/String) If given it will be the
+        output path where all the auxiliary data will be saved.
+
+        :param verbose: (bool) flag. If True it will print more info on
+        the screen. The default is set to False.
+
+        :return: A dictionary with (data + sequence) for each processed
+        model from the PDB file. The data + sequence are given as:
+
+            1) a list with the following information:
+                1.1) poly-peptides that have been generated
+                     (index + three letter code)
+                1.2) vector with the input values
+                1.3) a list with the target atoms that are
+                     available for each vector.
+
+            2) the (modified) amino-acid sequence in string.
+        &#34;&#34;&#34;
+
+        # Make sure peptides is int.
+        n_peptides = int(n_peptides)
+
+        # Make sure the input peptide is a positive number.
+        if n_peptides &lt;= 0:
+            raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                             f&#34;Input peptide should be greater than zero: {n_peptides}.&#34;)
+        # _end_if_
+
+        # Make sure the input peptide is an odd number.
+        if np.mod(n_peptides, 2) == 0:
+            raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                             f&#34;Input peptide should be odd number: {n_peptides}.&#34;)
+        # _end_if_
+
+        # Index of the middle element.
+        # E.g.: tri-peptide: (0, 1, 2) -&gt; &#39;1&#39;.
+        mid_index = n_peptides // 2
+
+        # Ensure the f_path is Path.
+        f_path = Path(f_path)
+
+        # Get the filename.
+        f_name = f_path.stem
+
+        # Get the structure(s) from the PDB file.
+        structure = PDBParser(PERMISSIVE=True, QUIET=True).get_structure(f_name, f_path)
+
+        # Sanity check.
+        if not structure:
+            raise ValueError(f&#34;{self.__class__.__name__}:&#34;
+                             f&#34; PDB file {f_path} is empty.&#34;)
+        # _end_if_
+
+        # Modify all models in the input structure.
+        # N.B. : CYS -&gt; CYO/CYR and PRO -&gt; PRC/PRT.
+        # N.B. : The modification is done in place.
+        modify_models_OX(structure, all_models=all_models, all_chains=True, in_place=True)
+
+        # Localize the static method.
+        get_sin_cos = self.sine_cosine
+
+        # Output dictionary.
+        output_data = {}
+
+        # Start processing all the structures in the list.
+        for it, model in enumerate(structure, start=1):
+
+            # Check if we want to process
+            # all models, or only the 1st.
+            if not all_models and (it &gt; 1):
+                break
+            # _end_if_
+
+            # Get the modified sequence(s).
+            # Modified means that it contains the distinction
+            # between: CYO / CYR and PRC / PRT.
+            amino_acid_seq = get_sequence(model, modified=True)
+
+            # Will hold the extracted data.
+            x_out = {}
+
+            # Compute the internal coordinates.
+            model.atom_to_internal_coordinates()
+
+            # We process every chain in the model.
+            for ic, chain in enumerate(model, start=0):
+
+                # Get the chain ID.
+                chain_id = str(chain.get_id()).upper()
+
+                # Create a new data entry
+                # (for the current chain).
+                x_out[chain_id] = []
+
+                # Initially set these to &#34;None&#34;.
+                hd_bonds, ring_atoms = None, None
+
+                # Stores all the poly-peptides / torsion angles.
+                poly_peptides, torsion_angles = [], []
+
+                # Localize the append method.
+                poly_peptides_append = poly_peptides.append
+
+                # Localize the append method.
+                torsion_angles_append = torsion_angles.append
+
+                # Get the h-bonds.
+                if self.hydrogen_bonds:
+                    hd_bonds = self.hydrogen_bond_calc(chain)
+                # _end_if_
+
+                # Atoms affected by aromatic rings.
+                if self.aromatic_rings:
+                    ring_atoms = self.aromatic_ring_calc.check_effect(chain,
+                                                                      find_rings=True)
+                # _end_if_
+
+                # Extract all the residues in a list.
+                residue_list = [*chain.get_residues()]
+
+                # Get the length of the chain.
+                chain_length = len(residue_list)
+
+                # This should not happen.
+                if verbose and self.hydrogen_bonds and len(hd_bonds) != chain_length:
+                    # Display a warning rather than raising an exception.
+                    print(f&#34; {self.__class__.__name__}:&#34;
+                          f&#34; WARNING! {f_name} : {len(hd_bonds)} : {chain_length}&#34;)
+                # _end_if_
+
+                # Amino-acid counter.
+                aa_counter = 0
+
+                # Go through all the residues in the chain.
+                for i, res_i in enumerate(chain.get_residues(), start=0):
+
+                    # Skip hetero-atoms.
+                    if res_i.id[0] != &#34; &#34;:
+                        continue
+                    # _end_if_
+
+                    # Check the index two residues ahead to
+                    # ensure that we don&#39;t go out of bounds.
+                    if (i + n_peptides - 1) &gt;= chain_length:
+                        break
+                    # _end_if_
+
+                    # Increase by one.
+                    aa_counter += 1
+
+                    # Auxiliary poly-peptide level lists.
+                    vec_i, t_peptide, t_angles = [], [], []
+
+                    # Localize the extend method.
+                    vec_i_extend = vec_i.extend
+
+                    # Boolean flag: Reset to &#34;True&#34;
+                    # for every single poly-peptide.
+                    all_good = True
+
+                    # Get the poly-peptide information.
+                    for k, res_k in enumerate(residue_list[i:i + n_peptides], start=0):
+
+                        # Index (one-based).
+                        INDEX = aa_counter + k
+
+                        # Residue name (three-letter-code).
+                        RES_NAME = str(res_k.get_resname()).strip()
+
+                        # Accepted list of residue names.
+                        if (RES_NAME not in ACCEPTED_RES) or \
+                                (res_k.internal_coord is None):
+                            # Change the flag value.
+                            all_good = False
+
+                            # Move on to the next poly-peptide.
+                            break
+                        # _end_if_
+
+                        # Use this name to extract
+                        # the info from the BLOSUM.
+                        BLM_RES_NAME = RES_NAME
+
+                        # Distinguish for CYS and PRO.
+                        if RES_NAME in {&#34;CYS&#34;, &#34;PRO&#34;}:
+
+                            try:
+                                # Get the value of the b-factor.
+                                b_factor = res_k[&#34;C&#34;].get_bfactor()
+
+                                # Check for Cysteine.
+                                if RES_NAME == &#34;CYS&#34;:
+                                    # Distinguish CYS in CYR/CYO.
+                                    BLM_RES_NAME = &#34;CYR&#34; if b_factor == -1.0 else &#34;CYO&#34;
+                                else:
+                                    # In this case its a Proline.
+                                    # Distinguish PRO in PRC/PRT.
+                                    BLM_RES_NAME = &#34;PRC&#34; if b_factor == -1.0 else &#34;PRT&#34;
+                                # _end_if_
+
+                            except KeyError as e0:
+                                # Occasionally, some PDB files might have errors and
+                                # missing atoms in their residues. In this case just
+                                # ignore the error and keep the default residue name.
+                                print(f&#34;Residue {RES_NAME} has a missing {e0} atom.&#34;)
+                            # _end_try_
+
+                        # _end_if_
+
+                        # N.B: The res_k.get_id() returns the ID directly from
+                        # the PDB file, so it might not be linearly increasing.
+                        RES_ID = res_k.get_id()[1]
+
+                        # Append the residue info to a separate list. This will
+                        # built the poly-peptides information for later storage.
+                        t_peptide.append((INDEX, BLM_RES_NAME, RES_ID))
+
+                        # Add the BLOSUM score vector.
+                        vec_i_extend(self.blosum[BLM_RES_NAME])
+
+                        # Get the &#39;phi&#39;/&#39;psi&#39; angles (in degrees).
+                        phi_k = res_k.internal_coord.get_angle(&#34;phi&#34;)
+                        psi_k = res_k.internal_coord.get_angle(&#34;psi&#34;)
+
+                        # Get the &#39;chi1&#39;/&#39;chi2&#39; angles (in degrees).
+                        chi1_k = res_k.internal_coord.get_angle(&#34;chi1&#34;)
+                        chi2_k = res_k.internal_coord.get_angle(&#34;chi2&#34;)
+
+                        # Add all the angles (if they exist).
+                        for angle in [phi_k, psi_k, chi1_k, chi2_k]:
+
+                            # Check for &#34;None&#34; angles.
+                            if angle is None:
+                                # Since there is no angle in [0, 2pi]
+                                # that satisfies both sine and cosine
+                                # to be zero this will imply that the
+                                # the angle is missing (i.e. is None).
+                                vec_i_extend([0.0, 0.0])
+                            else:
+                                # Add in the vector: [sin(x), cos(x)].
+                                vec_i_extend(get_sin_cos(angle))
+                            # _end_if_
+
+                        # _end_for_
+
+                        # Append the torsion angles (here in degrees).
+                        t_angles.append((INDEX, RES_3_TO_1[RES_NAME],
+                                         phi_k, psi_k, chi1_k, chi2_k))
+
+                        # Compute only if requested.
+                        if self.hydrogen_bonds and hd_bonds:
+
+                            # Make sure we are on the same residue.
+                            if hd_bonds[i + k].res_name == RES_NAME:
+
+                                # First residue in the list.
+                                if k == 0:
+                                    # Add the &#39;O-&#39; bond.
+                                    vec_i_extend(hd_bonds[i + k].O_)
+
+                                # Last residue in the list.
+                                elif k == n_peptides - 1:
+                                    # Add the &#39;H-&#39; bond.
+                                    vec_i_extend(hd_bonds[i + k].H_)
+
+                                # Middle residues in the list.
+                                else:
+                                    # Add the &#39;H-&#39; bond.
+                                    vec_i_extend(hd_bonds[i + k].H_)
+
+                                    # Add the &#39;O-&#39; bond.
+                                    vec_i_extend(hd_bonds[i + k].O_)
+                                # _end_if_
+                            else:
+                                # Print if verbose is true.
+                                if verbose:
+                                    # Display a warning message.
+                                    print(f&#34; {self.__class__.__name__}:&#34;
+                                          f&#34; WARNING! {hd_bonds[i + k].res_name} {RES_NAME}.&#34;)
+                                # _end_if_
+
+                            # _end_if_
+
+                        # _end_if_
+
+                    # _end_for_
+
+                    # The total number of entries will vary according
+                    # to what we will include in the data list vec_i.
+                    if all_good:
+                        # Holds the target atoms that can
+                        # be used with that input vector.
+                        unaffected_atoms = []
+
+                        # If the flag is enabled we need to check if
+                        # there are atoms affected by aromatic rings.
+                        if self.aromatic_rings:
+
+                            # Get the center residue info.
+                            _, r_name, r_id = t_peptide[mid_index]
+
+                            # Use the one-letter code.
+                            r_name = RES_3_TO_1[r_name]
+
+                            # Check all the target atoms.
+                            for target in TARGET_ATOMS:
+
+                                # We don&#39;t have yet the delta ring effect
+                                # values. NOTE: we use only the FIRST TWO
+                                # values from the center poly-peptide.
+                                if (r_name, r_id, target, _) in ring_atoms:
+                                    # Skip to the next.
+                                    continue
+                                # _end_if_
+
+                                # Add the target atom in the &#34;unaffected&#34; list.
+                                unaffected_atoms.append(target)
+                            # _end_for_
+
+                        # _end_if_
+
+                        # Append all information to a final (return) list.
+                        # The entries here are combined into a dictionary.
+                        # This way we have easier access using the &#34;keys&#34;,
+                        # to access the right data for each record.
+                        x_out[chain_id].append({&#34;poly-peptides&#34;: t_peptide,
+                                                &#34;targets&#34;: unaffected_atoms,
+                                                &#34;vector&#34;: np.array(vec_i, dtype=self.data_type)})
+
+                        # Update the list with the poly-peptides.
+                        poly_peptides_append(t_peptide)
+
+                        # Update the list with the torsion angles.
+                        torsion_angles_append(t_angles)
+                    # _end_if_
+
+                # _end_for_
+
+                # Check if the list is empty.
+                if len(x_out[chain_id]) &gt; 1:
+                    # Copy the first entry.
+                    x_front = x_out[chain_id][0].copy()
+
+                    # Get the front end points.
+                    front_end = self._zero_padding(x_front, n_peptides, terminal=&#34;front&#34;)
+
+                    # Copy the last entry.
+                    x_back = x_out[chain_id][-1].copy()
+
+                    # Get the back end points.
+                    back_end = self._zero_padding(x_back, n_peptides, terminal=&#34;back&#34;)
+
+                    # Insert the front terminal points.
+                    for f, vec_f in enumerate(front_end):
+                        x_out[chain_id].insert(f, vec_f)
+                    # _end_for_
+
+                    # Append the back terminal points.
+                    for vec_b in back_end:
+                        x_out[chain_id].append(vec_b)
+                    # _end_for_
+
+                # _end_if_
+
+                # Check if we want to save the data.
+                if save_output_path:
+
+                    # Make sure the save path exists.
+                    if not Path(save_output_path).is_dir():
+                        # This should run only the first time.
+                        Path(save_output_path).mkdir(parents=True)
+                    # _end_if_
+
+                    # File ID includes:
+                    # - 0) the filename &#34;f_name&#34;
+                    # - 1) the model number &#34;it&#34;
+                    # - 2) and chain number &#34;ic&#34;
+                    file_id = f&#34;{f_name}_{it}_{ic}&#34;
+
+                    # Poly-peptides.
+                    if poly_peptides:
+                        self.save_auxiliary(file_id, poly_peptides,
+                                            &#34;t_peptides&#34;, save_output_path)
+                    # _end_if_
+
+                    # Torsion angles.
+                    if torsion_angles:
+                        self.save_auxiliary(file_id, torsion_angles,
+                                            &#34;t_angles&#34;, save_output_path)
+                    # _end_if_
+
+                    # Aromatic rings.
+                    if ring_atoms:
+                        self.save_auxiliary(file_id, ring_atoms,
+                                            &#34;a_rings&#34;, save_output_path)
+                    # _end_if_
+
+                    # Hydrogen bonds.
+                    if hd_bonds:
+                        self.save_auxiliary(file_id, hd_bonds,
+                                            &#34;h_bonds&#34;, save_output_path)
+                    # _end_if_
+
+                # _end_if_
+
+            # _end_for_model_
+
+            # Add the {&#34;data&#34; + &#34;sequence&#34;} to the output dictionary.
+            # NOTE: Both &#34;data&#34; and &#34;sequence&#34;, are dictionaries too.
+            output_data[f&#34;model-{it}&#34;] = {&#34;data&#34;: x_out,
+                                          &#34;sequence&#34;: amino_acid_seq}
+        # _end_for_structures_
+
+        # Output data.
+        return output_data
+    # _end_def_
+
+    # Auxiliary.
+    def __call__(self, *args, **kwargs):
+        &#34;&#34;&#34;
+        This is only a &#34;wrapper&#34; method
+        of the &#34;get_data&#34; method.
+        &#34;&#34;&#34;
+        return self.get_data(*args, **kwargs)
+    # _end_def_
+
+    # Auxiliary.
+    def __str__(self):
+        &#34;&#34;&#34;
+        Override to print a readable string presentation of the object.
+        This will include its id(), along with its values of its flags.
+
+        :return: a string representation of a InputVector object.
+        &#34;&#34;&#34;
+
+        # New line in character.
+        new_line = &#39;\n&#39;
+
+        # Return the f-string.
+        return f&#34; InputVector Id({id(self)}): {new_line}&#34;\
+               f&#34; Include-HBonds={self.hydrogen_bonds} {new_line}&#34;\
+               f&#34; Check-ARings={self.aromatic_rings} {new_line}&#34;\
+               f&#34; Datatype={self.data_type} {new_line}&#34;\
+               f&#34; BLOSUM={self.blosum_id}&#34;
+    # _end_def_
+
+# _end_class_</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="Napshift.src.chemical_shifts.input_vector.InputVector"><code class="flex name class">
+<span>class <span class="ident">InputVector</span></span>
+<span>(</span><span>blosum_id=62, include_hydrogen_bonds=False, check_aromatic_rings=True, data_type=numpy.float16)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This class creates an input vector for the artificial neural network.
+The hydrogen bonds, and aromatic rings calculations are performed by
+class objects. We usually don't want to change these often once they
+are fixed.</p>
+<p>Constructs an object that will create the input vectors from
+a given PDB (protein) file.</p>
+<p>:param blosum_id: (integer) value that defines the version of
+the block substitution matrix.</p>
+<p>:param include_hydrogen_bonds: (boolean) flag. If true it will
+detect and include all the hydrogen bonds information as part
+of the input vectors.</p>
+<p>:param check_aromatic_rings: (boolean) flag. If true it will
+detect the target atoms that are affected by an aromatic ring.
+This will flag them out so that we will not use them while
+training/testing of the ANN.</p>
+<p>:param data_type: This is the datatype of the input vector.
+This will affect the size (unit is MB) of the return vectors.
+Default here is set to float16.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class InputVector(object):
+    &#34;&#34;&#34;
+    This class creates an input vector for the artificial neural network.
+    The hydrogen bonds, and aromatic rings calculations are performed by
+    class objects. We usually don&#39;t want to change these often once they
+    are fixed.
+    &#34;&#34;&#34;
+
+    # Hydrogen bond calculator (default settings):
+    hydrogen_bond_calc = HBond()
+    &#34;&#34;&#34;
+    The default setting for the hydrogen bond calculator are:
+    
+        &gt; &#34;D-A&#34;: 3.90, &#34;H-A&#34;: 2.50
+        &gt; &#34;PHI&#34;: 90.0, &#34;PSI&#34;: 90.0
+    
+    Note: The distance units are in &#34;Angstrom&#34; and the angle
+    units are in &#34;degrees&#34;.
+    &#34;&#34;&#34;
+
+    # Aromatic ring effects detector.
+    aromatic_ring_calc = RingEffects(d_ring=3.0,
+                                     include_five_atoms=True)
+    &#34;&#34;&#34;
+    The default distance threshold is set equal to 3 Angstrom.
+    It is also enabled to include five atom rings (default).
+    &#34;&#34;&#34;
+
+    # Object variables.
+    __slots__ = (&#34;blosum_id&#34;, &#34;blosum&#34;, &#34;hydrogen_bonds&#34;, &#34;data_type&#34;,
+                 &#34;aromatic_rings&#34;)
+
+    # Constructor.
+    def __init__(self, blosum_id=62, include_hydrogen_bonds=False,
+                 check_aromatic_rings=True, data_type=np.float16):
+        &#34;&#34;&#34;
+        Constructs an object that will create the input vectors from
+        a given PDB (protein) file.
+
+        :param blosum_id: (integer) value that defines the version of
+        the block substitution matrix.
+
+        :param include_hydrogen_bonds: (boolean) flag. If true it will
+        detect and include all the hydrogen bonds information as part
+        of the input vectors.
+
+        :param check_aromatic_rings: (boolean) flag. If true it will
+        detect the target atoms that are affected by an aromatic ring.
+        This will flag them out so that we will not use them while
+        training/testing of the ANN.
+
+        :param data_type: This is the datatype of the input vector.
+        This will affect the size (unit is MB) of the return vectors.
+        Default here is set to float16.
+        &#34;&#34;&#34;
+
+        # Check the version of the matrix.
+        if str(blosum_id) in BLOSUM:
+            # Accept the BLOSUM ID.
+            self.blosum_id = blosum_id
+
+            # Get the right version.
+            self.blosum = BLOSUM[str(blosum_id)]
+        else:
+            raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                             f&#34;Available BLOSUM versions are {list(BLOSUM.keys())}: &#34;
+                             f&#34;{blosum_id}.&#34;)
+        # _end_if_
+
+        # Boolean flag. If true the class will estimate
+        # the hydrogen bonds of the given model, before
+        # it creates the return vector.
+        if isinstance(include_hydrogen_bonds, bool):
+            # Assign the boolean flag.
+            self.hydrogen_bonds = include_hydrogen_bonds
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}: &#34;
+                            f&#34;Include hydrogen bonds flag should be bool: &#34;
+                            f&#34;{type(include_hydrogen_bonds)}.&#34;)
+        # _end_if_
+
+        # Boolean flag. If true the class will detect which
+        # of the model atoms are affected by aromatic rings
+        # and will return a list of them.
+        if isinstance(check_aromatic_rings, bool):
+            # Assign the boolean flag.
+            self.aromatic_rings = check_aromatic_rings
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}: &#34;
+                            f&#34;Check aromatic rings flag should be bool: &#34;
+                            f&#34;{type(check_aromatic_rings)}.&#34;)
+        # _end_if_
+
+        # Make sure &#34;data_type&#34; is type.
+        if isinstance(data_type, type):
+            # Accept only specific floating point types.
+            # &gt; np.half   == np.float16
+            # &gt; np.single == np.float32
+            # &gt; np.double == np.float64
+            if data_type in {np.float16, np.float32, np.float64}:
+                # Accept the datatype.
+                self.data_type = data_type
+            else:
+                raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                                 f&#34;Datatype should be float(16/32/64): {data_type}.&#34;)
+            # _end_if_
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}: &#34;
+                            f&#34;Datatype should be a type: {type(data_type)}.&#34;)
+        # _end_if_
+    # _end_def_
+
+    @property
+    def blosum_version(self):
+        &#34;&#34;&#34;
+        Accessor (getter) of the version of the BLOSUM.
+
+        :return: integer value.
+        &#34;&#34;&#34;
+        return self.blosum_id
+    # _end_def_
+
+    @blosum_version.setter
+    def blosum_version(self, new_value):
+        &#34;&#34;&#34;
+        Accessor (setter) of the BLOSUM.
+
+        :param new_value: new integer version.
+        &#34;&#34;&#34;
+
+        # Check the version of the accepted matrix.
+        if str(new_value) in BLOSUM:
+            # Update the BLOSUM ID.
+            self.blosum_id = new_value
+
+            # Update the BLOSUM.
+            self.blosum = BLOSUM[str(new_value)]
+        else:
+            raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                             f&#34;Available BLOSUM versions {list(BLOSUM.keys())}:&#34;
+                             f&#34;{new_value}.&#34;)
+        # _end_if_
+    # _end_def_
+
+    @property
+    def include_hydrogen_bonds(self):
+        &#34;&#34;&#34;
+        Accessor (getter) of the boolean flag that
+        indicates if we include the hydrogen bonds
+        in the formulation of the input vector.
+
+        :return: boolean flag.
+        &#34;&#34;&#34;
+        return self.hydrogen_bonds
+    # _end_def_
+
+    @include_hydrogen_bonds.setter
+    def include_hydrogen_bonds(self, new_value):
+        &#34;&#34;&#34;
+        Accessor (setter) of the boolean flag.
+
+        :param new_value: new boolean flag.
+        &#34;&#34;&#34;
+
+        # Check for correct type.
+        if isinstance(new_value, bool):
+            # Assign the new value.
+            self.hydrogen_bonds = new_value
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}: &#34;
+                            f&#34;Hydrogen bonds flag should be bool: {type(new_value)}.&#34;)
+        # _end_if_
+    # _end_def_
+
+    @property
+    def check_aromatic_rings(self):
+        &#34;&#34;&#34;
+        Accessor (getter) of the boolean flag that
+        indicates if we detect the aromatic rings.
+
+        :return: boolean flag.
+        &#34;&#34;&#34;
+        return self.aromatic_rings
+    # _end_def_
+
+    @check_aromatic_rings.setter
+    def check_aromatic_rings(self, new_value):
+        &#34;&#34;&#34;
+        Accessor (setter) of the boolean flag.
+
+        :param new_value: new boolean flag.
+        &#34;&#34;&#34;
+
+        # Check for correct type.
+        if isinstance(new_value, bool):
+            # Assign the new value.
+            self.aromatic_rings = new_value
+        else:
+            raise TypeError(f&#34;{self.__class__.__name__}: &#34;
+                            f&#34;Aromatic rings flag should be bool: {type(new_value)}.&#34;)
+        # _end_if_
+    # _end_def_
+
+    @staticmethod
+    @njit(fastmath=True)
+    def sine_cosine(angle):
+        &#34;&#34;&#34;
+        Auxiliary function that returns the sin(x) / cos(x) for
+        a given input angle &#39;x&#39;. This method is using Numba for
+        speed up. Upon testing the performance we found that we
+        average an ~23x speed up comparing to using only numpy.
+
+        NOTE:  We don&#39;t make any checks on the input angle as we
+        assume that it has already been checked before this call.
+        The whole point is to speed up the repeated calls to the
+        trigonometric functions.
+
+        :param angle: the angle (in degrees) that we want to get
+        the sine / cosine.
+
+        :return: sin(angle), cos(angle)
+        &#34;&#34;&#34;
+        # First convert to radians.
+        angle = np.deg2rad(angle)
+
+        # Return the results.
+        return np.sin(angle), np.cos(angle)
+    # _end_def_
+
+    @staticmethod
+    def save_auxiliary(f_id, rec_data, kind=None, output=None):
+        &#34;&#34;&#34;
+        This auxiliary (static)  function will save the auxiliary
+        bi-products of the input vector construction, such as the
+        hydrogen bonds, torsion angles and aromatic rings.
+
+        :param f_id: File id. Usually the PDB-ID is ok to be used
+        as a filename to identify the contents.
+
+        :param rec_data: The data we want to save. Usually it is
+        a list of things (tuples, dicts, etc.)
+
+        :param kind: This is the type / kind of data that we are
+        saving. It can only be of four types: 1) &#34;t_peptides&#34;,
+        2) &#34;h_bonds&#34;, 3) &#34;a_rings&#34; and 4) &#34;t_angles&#34;. Anything
+        else will force the method to raise an exception.
+
+        :param output: This is the main (parent) output directory
+        where the data will be saved.
+
+        :return: None.
+        &#34;&#34;&#34;
+
+        # Set the local variables according to the
+        # kind of data that we have to save.
+        if kind == &#34;t_peptides&#34;:
+            f_ext, folder_name = &#34;tripep&#34;, &#34;Tri_Peptides&#34;
+
+        elif kind == &#34;h_bonds&#34;:
+            f_ext, folder_name = &#34;bonds&#34;, &#34;Hydrogen_Bonds&#34;
+
+        elif kind == &#34;a_rings&#34;:
+            f_ext, folder_name = &#34;rings&#34;, &#34;Aromatic_Rings&#34;
+
+        elif kind == &#34;t_angles&#34;:
+            f_ext, folder_name = &#34;angles&#34;, &#34;Torsion_Angles&#34;
+
+        else:
+            raise ValueError(f&#34; Unknown type of data: {kind}.&#34;)
+        # _end_if_
+
+        # Check for the output.
+        if output is None:
+            output = Path.cwd()
+        # _end_if_
+
+        # Create an output filename.
+        output_path = Path(output / folder_name)
+
+        # This will be true only once (for each kind).
+        if not output_path.is_dir():
+            output_path.mkdir(parents=True)
+        # _end_if_
+
+        # Convert to DataFrame.
+        df = DataFrame(data=rec_data)
+
+        # Save to csv file.
+        df.to_csv(Path(output_path / f&#34;{f_id}.{f_ext}&#34;), header=False)
+    # _end_def_
+
+    # Auxiliary method.
+    def _zero_padding(self, x_in, n_peptides, terminal=&#34;front&#34;):
+        &#34;&#34;&#34;
+        This auxiliary method is used to add the front and back
+        terminal vectors, using zero padding. The method can be
+        used for any (odd) number of peptides (3-, 5-, 7-, etc).
+
+        :param x_in: This is the input that will be used to make
+        the front or back terminal poly-peptide entries.
+
+        :param n_peptides: This is the number (int) of the poly-
+        peptides that we are constructing. It should be strictly
+        an odd number.
+
+        :param terminal: This is the type of the terminal. It
+        accepts only two (string) values &#34;front&#34; / &#34;back&#34;.
+
+        :return: a list with the front or back terminal entries.
+        &#34;&#34;&#34;
+
+        # Quick sanity check.
+        if terminal not in {&#34;front&#34;, &#34;back&#34;}:
+            raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                             f&#34;Zero padding type can be &#39;front&#39; | &#39;back&#39;: {terminal}.&#34;)
+        # _end_if_
+
+        # Extract the data from the input.
+        x_peptides = x_in[&#34;poly-peptides&#34;]
+        x_targets = x_in[&#34;targets&#34;]
+        x_vector = x_in[&#34;vector&#34;]
+
+        # Total length of the vector.
+        K = x_vector.size
+
+        # Number of elements (per peptide).
+        L = K // int(n_peptides)
+
+        # Declare the return list.
+        list_out = []
+
+        # Number of required padded elements.
+        number_of_pads = int(n_peptides) // 2
+
+        # Iterate to get all the zero padding
+        # elements (front or back).
+        for i in range(number_of_pads):
+            # Create a temporary vector.
+            t_vector = np.zeros_like(x_vector)
+
+            # Make a temporary peptides copy.
+            t_peptides = x_peptides.copy()
+
+            # Compute the index where we want
+            # to start copying elements from.
+            kappa = L * (i + 1)
+
+            # Switch according to the front/back side.
+            if terminal == &#34;front&#34;:
+                # Copy the vector elements.
+                t_vector[kappa:] = x_vector[kappa:].copy()
+
+                # Rotate the elements forwards.
+                t_peptides = t_peptides[-(i+1):] + t_peptides[:-(i+1)]
+
+                # Mark the empty entries with None.
+                for j in range(i+1):
+                    t_peptides[j] = (None, &#39;-&#39;, None)
+                # _end_for_
+            else:
+                # Copy the vector elements.
+                t_vector[:K-kappa] = x_vector[:K-kappa].copy()
+
+                # Rotate the elements backwards.
+                t_peptides = t_peptides[(i+1):] + t_peptides[:(i+1)]
+
+                # Mark the empty entries with None.
+                for j in range(i+1):
+                    t_peptides[-(j+1)] = (None, &#39;-&#39;, None)
+                # _end_for_
+            # _end_if_
+
+            # Add it to the return list.
+            list_out.append({&#34;poly-peptides&#34;: t_peptides,
+                             &#34;targets&#34;: x_targets,
+                             &#34;vector&#34;: t_vector})
+        # _end_for_
+
+        # Return the list.
+        return list_out
+
+    # _end_def_
+
+    # Main functionality.
+    def get_data(self, f_path, n_peptides=3, all_models=False,
+                 save_output_path=None, verbose=False):
+        &#34;&#34;&#34;
+        This is the main function of the &#39;InputVector&#39; class. It accepts
+        as input a &#34;Path(/path/to/the/PDB)&#34; and returns a  list with all
+        the information that is extracted.  This can be used as input to
+        the ANN for predicting the chemical shift values of specific pre
+        determined, atoms (e.g. &#34;N&#34;, &#34;C&#34;, &#34;CA&#34;, &#34;CB&#34;, &#34;H&#34;, &#34;HA&#34;).
+
+        :param f_path: Path of the (protein) PDB file.
+
+        :param n_peptides: Number of peptides to consider for the input
+        vectors. By default it considers tri-peptides.
+
+        :param all_models: (bool) flag. If True the method will process
+        all the models in the PDB file, otherwise only the first model.
+
+        :param save_output_path: (Path/String) If given it will be the
+        output path where all the auxiliary data will be saved.
+
+        :param verbose: (bool) flag. If True it will print more info on
+        the screen. The default is set to False.
+
+        :return: A dictionary with (data + sequence) for each processed
+        model from the PDB file. The data + sequence are given as:
+
+            1) a list with the following information:
+                1.1) poly-peptides that have been generated
+                     (index + three letter code)
+                1.2) vector with the input values
+                1.3) a list with the target atoms that are
+                     available for each vector.
+
+            2) the (modified) amino-acid sequence in string.
+        &#34;&#34;&#34;
+
+        # Make sure peptides is int.
+        n_peptides = int(n_peptides)
+
+        # Make sure the input peptide is a positive number.
+        if n_peptides &lt;= 0:
+            raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                             f&#34;Input peptide should be greater than zero: {n_peptides}.&#34;)
+        # _end_if_
+
+        # Make sure the input peptide is an odd number.
+        if np.mod(n_peptides, 2) == 0:
+            raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                             f&#34;Input peptide should be odd number: {n_peptides}.&#34;)
+        # _end_if_
+
+        # Index of the middle element.
+        # E.g.: tri-peptide: (0, 1, 2) -&gt; &#39;1&#39;.
+        mid_index = n_peptides // 2
+
+        # Ensure the f_path is Path.
+        f_path = Path(f_path)
+
+        # Get the filename.
+        f_name = f_path.stem
+
+        # Get the structure(s) from the PDB file.
+        structure = PDBParser(PERMISSIVE=True, QUIET=True).get_structure(f_name, f_path)
+
+        # Sanity check.
+        if not structure:
+            raise ValueError(f&#34;{self.__class__.__name__}:&#34;
+                             f&#34; PDB file {f_path} is empty.&#34;)
+        # _end_if_
+
+        # Modify all models in the input structure.
+        # N.B. : CYS -&gt; CYO/CYR and PRO -&gt; PRC/PRT.
+        # N.B. : The modification is done in place.
+        modify_models_OX(structure, all_models=all_models, all_chains=True, in_place=True)
+
+        # Localize the static method.
+        get_sin_cos = self.sine_cosine
+
+        # Output dictionary.
+        output_data = {}
+
+        # Start processing all the structures in the list.
+        for it, model in enumerate(structure, start=1):
+
+            # Check if we want to process
+            # all models, or only the 1st.
+            if not all_models and (it &gt; 1):
+                break
+            # _end_if_
+
+            # Get the modified sequence(s).
+            # Modified means that it contains the distinction
+            # between: CYO / CYR and PRC / PRT.
+            amino_acid_seq = get_sequence(model, modified=True)
+
+            # Will hold the extracted data.
+            x_out = {}
+
+            # Compute the internal coordinates.
+            model.atom_to_internal_coordinates()
+
+            # We process every chain in the model.
+            for ic, chain in enumerate(model, start=0):
+
+                # Get the chain ID.
+                chain_id = str(chain.get_id()).upper()
+
+                # Create a new data entry
+                # (for the current chain).
+                x_out[chain_id] = []
+
+                # Initially set these to &#34;None&#34;.
+                hd_bonds, ring_atoms = None, None
+
+                # Stores all the poly-peptides / torsion angles.
+                poly_peptides, torsion_angles = [], []
+
+                # Localize the append method.
+                poly_peptides_append = poly_peptides.append
+
+                # Localize the append method.
+                torsion_angles_append = torsion_angles.append
+
+                # Get the h-bonds.
+                if self.hydrogen_bonds:
+                    hd_bonds = self.hydrogen_bond_calc(chain)
+                # _end_if_
+
+                # Atoms affected by aromatic rings.
+                if self.aromatic_rings:
+                    ring_atoms = self.aromatic_ring_calc.check_effect(chain,
+                                                                      find_rings=True)
+                # _end_if_
+
+                # Extract all the residues in a list.
+                residue_list = [*chain.get_residues()]
+
+                # Get the length of the chain.
+                chain_length = len(residue_list)
+
+                # This should not happen.
+                if verbose and self.hydrogen_bonds and len(hd_bonds) != chain_length:
+                    # Display a warning rather than raising an exception.
+                    print(f&#34; {self.__class__.__name__}:&#34;
+                          f&#34; WARNING! {f_name} : {len(hd_bonds)} : {chain_length}&#34;)
+                # _end_if_
+
+                # Amino-acid counter.
+                aa_counter = 0
+
+                # Go through all the residues in the chain.
+                for i, res_i in enumerate(chain.get_residues(), start=0):
+
+                    # Skip hetero-atoms.
+                    if res_i.id[0] != &#34; &#34;:
+                        continue
+                    # _end_if_
+
+                    # Check the index two residues ahead to
+                    # ensure that we don&#39;t go out of bounds.
+                    if (i + n_peptides - 1) &gt;= chain_length:
+                        break
+                    # _end_if_
+
+                    # Increase by one.
+                    aa_counter += 1
+
+                    # Auxiliary poly-peptide level lists.
+                    vec_i, t_peptide, t_angles = [], [], []
+
+                    # Localize the extend method.
+                    vec_i_extend = vec_i.extend
+
+                    # Boolean flag: Reset to &#34;True&#34;
+                    # for every single poly-peptide.
+                    all_good = True
+
+                    # Get the poly-peptide information.
+                    for k, res_k in enumerate(residue_list[i:i + n_peptides], start=0):
+
+                        # Index (one-based).
+                        INDEX = aa_counter + k
+
+                        # Residue name (three-letter-code).
+                        RES_NAME = str(res_k.get_resname()).strip()
+
+                        # Accepted list of residue names.
+                        if (RES_NAME not in ACCEPTED_RES) or \
+                                (res_k.internal_coord is None):
+                            # Change the flag value.
+                            all_good = False
+
+                            # Move on to the next poly-peptide.
+                            break
+                        # _end_if_
+
+                        # Use this name to extract
+                        # the info from the BLOSUM.
+                        BLM_RES_NAME = RES_NAME
+
+                        # Distinguish for CYS and PRO.
+                        if RES_NAME in {&#34;CYS&#34;, &#34;PRO&#34;}:
+
+                            try:
+                                # Get the value of the b-factor.
+                                b_factor = res_k[&#34;C&#34;].get_bfactor()
+
+                                # Check for Cysteine.
+                                if RES_NAME == &#34;CYS&#34;:
+                                    # Distinguish CYS in CYR/CYO.
+                                    BLM_RES_NAME = &#34;CYR&#34; if b_factor == -1.0 else &#34;CYO&#34;
+                                else:
+                                    # In this case its a Proline.
+                                    # Distinguish PRO in PRC/PRT.
+                                    BLM_RES_NAME = &#34;PRC&#34; if b_factor == -1.0 else &#34;PRT&#34;
+                                # _end_if_
+
+                            except KeyError as e0:
+                                # Occasionally, some PDB files might have errors and
+                                # missing atoms in their residues. In this case just
+                                # ignore the error and keep the default residue name.
+                                print(f&#34;Residue {RES_NAME} has a missing {e0} atom.&#34;)
+                            # _end_try_
+
+                        # _end_if_
+
+                        # N.B: The res_k.get_id() returns the ID directly from
+                        # the PDB file, so it might not be linearly increasing.
+                        RES_ID = res_k.get_id()[1]
+
+                        # Append the residue info to a separate list. This will
+                        # built the poly-peptides information for later storage.
+                        t_peptide.append((INDEX, BLM_RES_NAME, RES_ID))
+
+                        # Add the BLOSUM score vector.
+                        vec_i_extend(self.blosum[BLM_RES_NAME])
+
+                        # Get the &#39;phi&#39;/&#39;psi&#39; angles (in degrees).
+                        phi_k = res_k.internal_coord.get_angle(&#34;phi&#34;)
+                        psi_k = res_k.internal_coord.get_angle(&#34;psi&#34;)
+
+                        # Get the &#39;chi1&#39;/&#39;chi2&#39; angles (in degrees).
+                        chi1_k = res_k.internal_coord.get_angle(&#34;chi1&#34;)
+                        chi2_k = res_k.internal_coord.get_angle(&#34;chi2&#34;)
+
+                        # Add all the angles (if they exist).
+                        for angle in [phi_k, psi_k, chi1_k, chi2_k]:
+
+                            # Check for &#34;None&#34; angles.
+                            if angle is None:
+                                # Since there is no angle in [0, 2pi]
+                                # that satisfies both sine and cosine
+                                # to be zero this will imply that the
+                                # the angle is missing (i.e. is None).
+                                vec_i_extend([0.0, 0.0])
+                            else:
+                                # Add in the vector: [sin(x), cos(x)].
+                                vec_i_extend(get_sin_cos(angle))
+                            # _end_if_
+
+                        # _end_for_
+
+                        # Append the torsion angles (here in degrees).
+                        t_angles.append((INDEX, RES_3_TO_1[RES_NAME],
+                                         phi_k, psi_k, chi1_k, chi2_k))
+
+                        # Compute only if requested.
+                        if self.hydrogen_bonds and hd_bonds:
+
+                            # Make sure we are on the same residue.
+                            if hd_bonds[i + k].res_name == RES_NAME:
+
+                                # First residue in the list.
+                                if k == 0:
+                                    # Add the &#39;O-&#39; bond.
+                                    vec_i_extend(hd_bonds[i + k].O_)
+
+                                # Last residue in the list.
+                                elif k == n_peptides - 1:
+                                    # Add the &#39;H-&#39; bond.
+                                    vec_i_extend(hd_bonds[i + k].H_)
+
+                                # Middle residues in the list.
+                                else:
+                                    # Add the &#39;H-&#39; bond.
+                                    vec_i_extend(hd_bonds[i + k].H_)
+
+                                    # Add the &#39;O-&#39; bond.
+                                    vec_i_extend(hd_bonds[i + k].O_)
+                                # _end_if_
+                            else:
+                                # Print if verbose is true.
+                                if verbose:
+                                    # Display a warning message.
+                                    print(f&#34; {self.__class__.__name__}:&#34;
+                                          f&#34; WARNING! {hd_bonds[i + k].res_name} {RES_NAME}.&#34;)
+                                # _end_if_
+
+                            # _end_if_
+
+                        # _end_if_
+
+                    # _end_for_
+
+                    # The total number of entries will vary according
+                    # to what we will include in the data list vec_i.
+                    if all_good:
+                        # Holds the target atoms that can
+                        # be used with that input vector.
+                        unaffected_atoms = []
+
+                        # If the flag is enabled we need to check if
+                        # there are atoms affected by aromatic rings.
+                        if self.aromatic_rings:
+
+                            # Get the center residue info.
+                            _, r_name, r_id = t_peptide[mid_index]
+
+                            # Use the one-letter code.
+                            r_name = RES_3_TO_1[r_name]
+
+                            # Check all the target atoms.
+                            for target in TARGET_ATOMS:
+
+                                # We don&#39;t have yet the delta ring effect
+                                # values. NOTE: we use only the FIRST TWO
+                                # values from the center poly-peptide.
+                                if (r_name, r_id, target, _) in ring_atoms:
+                                    # Skip to the next.
+                                    continue
+                                # _end_if_
+
+                                # Add the target atom in the &#34;unaffected&#34; list.
+                                unaffected_atoms.append(target)
+                            # _end_for_
+
+                        # _end_if_
+
+                        # Append all information to a final (return) list.
+                        # The entries here are combined into a dictionary.
+                        # This way we have easier access using the &#34;keys&#34;,
+                        # to access the right data for each record.
+                        x_out[chain_id].append({&#34;poly-peptides&#34;: t_peptide,
+                                                &#34;targets&#34;: unaffected_atoms,
+                                                &#34;vector&#34;: np.array(vec_i, dtype=self.data_type)})
+
+                        # Update the list with the poly-peptides.
+                        poly_peptides_append(t_peptide)
+
+                        # Update the list with the torsion angles.
+                        torsion_angles_append(t_angles)
+                    # _end_if_
+
+                # _end_for_
+
+                # Check if the list is empty.
+                if len(x_out[chain_id]) &gt; 1:
+                    # Copy the first entry.
+                    x_front = x_out[chain_id][0].copy()
+
+                    # Get the front end points.
+                    front_end = self._zero_padding(x_front, n_peptides, terminal=&#34;front&#34;)
+
+                    # Copy the last entry.
+                    x_back = x_out[chain_id][-1].copy()
+
+                    # Get the back end points.
+                    back_end = self._zero_padding(x_back, n_peptides, terminal=&#34;back&#34;)
+
+                    # Insert the front terminal points.
+                    for f, vec_f in enumerate(front_end):
+                        x_out[chain_id].insert(f, vec_f)
+                    # _end_for_
+
+                    # Append the back terminal points.
+                    for vec_b in back_end:
+                        x_out[chain_id].append(vec_b)
+                    # _end_for_
+
+                # _end_if_
+
+                # Check if we want to save the data.
+                if save_output_path:
+
+                    # Make sure the save path exists.
+                    if not Path(save_output_path).is_dir():
+                        # This should run only the first time.
+                        Path(save_output_path).mkdir(parents=True)
+                    # _end_if_
+
+                    # File ID includes:
+                    # - 0) the filename &#34;f_name&#34;
+                    # - 1) the model number &#34;it&#34;
+                    # - 2) and chain number &#34;ic&#34;
+                    file_id = f&#34;{f_name}_{it}_{ic}&#34;
+
+                    # Poly-peptides.
+                    if poly_peptides:
+                        self.save_auxiliary(file_id, poly_peptides,
+                                            &#34;t_peptides&#34;, save_output_path)
+                    # _end_if_
+
+                    # Torsion angles.
+                    if torsion_angles:
+                        self.save_auxiliary(file_id, torsion_angles,
+                                            &#34;t_angles&#34;, save_output_path)
+                    # _end_if_
+
+                    # Aromatic rings.
+                    if ring_atoms:
+                        self.save_auxiliary(file_id, ring_atoms,
+                                            &#34;a_rings&#34;, save_output_path)
+                    # _end_if_
+
+                    # Hydrogen bonds.
+                    if hd_bonds:
+                        self.save_auxiliary(file_id, hd_bonds,
+                                            &#34;h_bonds&#34;, save_output_path)
+                    # _end_if_
+
+                # _end_if_
+
+            # _end_for_model_
+
+            # Add the {&#34;data&#34; + &#34;sequence&#34;} to the output dictionary.
+            # NOTE: Both &#34;data&#34; and &#34;sequence&#34;, are dictionaries too.
+            output_data[f&#34;model-{it}&#34;] = {&#34;data&#34;: x_out,
+                                          &#34;sequence&#34;: amino_acid_seq}
+        # _end_for_structures_
+
+        # Output data.
+        return output_data
+    # _end_def_
+
+    # Auxiliary.
+    def __call__(self, *args, **kwargs):
+        &#34;&#34;&#34;
+        This is only a &#34;wrapper&#34; method
+        of the &#34;get_data&#34; method.
+        &#34;&#34;&#34;
+        return self.get_data(*args, **kwargs)
+    # _end_def_
+
+    # Auxiliary.
+    def __str__(self):
+        &#34;&#34;&#34;
+        Override to print a readable string presentation of the object.
+        This will include its id(), along with its values of its flags.
+
+        :return: a string representation of a InputVector object.
+        &#34;&#34;&#34;
+
+        # New line in character.
+        new_line = &#39;\n&#39;
+
+        # Return the f-string.
+        return f&#34; InputVector Id({id(self)}): {new_line}&#34;\
+               f&#34; Include-HBonds={self.hydrogen_bonds} {new_line}&#34;\
+               f&#34; Check-ARings={self.aromatic_rings} {new_line}&#34;\
+               f&#34; Datatype={self.data_type} {new_line}&#34;\
+               f&#34; BLOSUM={self.blosum_id}&#34;</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="Napshift.src.chemical_shifts.input_vector.InputVector.aromatic_ring_calc"><code class="name">var <span class="ident">aromatic_ring_calc</span></code></dt>
+<dd>
+<div class="desc"><p>The default distance threshold is set equal to 3 Angstrom.
+It is also enabled to include five atom rings (default).</p></div>
+</dd>
+<dt id="Napshift.src.chemical_shifts.input_vector.InputVector.hydrogen_bond_calc"><code class="name">var <span class="ident">hydrogen_bond_calc</span></code></dt>
+<dd>
+<div class="desc"><p>The default setting for the hydrogen bond calculator are:</p>
+<pre><code>&gt; "D-A": 3.90, "H-A": 2.50
+&gt; "PHI": 90.0, "PSI": 90.0
+</code></pre>
+<p>Note: The distance units are in "Angstrom" and the angle
+units are in "degrees".</p></div>
+</dd>
+</dl>
+<h3>Static methods</h3>
+<dl>
+<dt id="Napshift.src.chemical_shifts.input_vector.InputVector.save_auxiliary"><code class="name flex">
+<span>def <span class="ident">save_auxiliary</span></span>(<span>f_id, rec_data, kind=None, output=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This auxiliary (static)
+function will save the auxiliary
+bi-products of the input vector construction, such as the
+hydrogen bonds, torsion angles and aromatic rings.</p>
+<p>:param f_id: File id. Usually the PDB-ID is ok to be used
+as a filename to identify the contents.</p>
+<p>:param rec_data: The data we want to save. Usually it is
+a list of things (tuples, dicts, etc.)</p>
+<p>:param kind: This is the type / kind of data that we are
+saving. It can only be of four types: 1) "t_peptides",
+2) "h_bonds", 3) "a_rings" and 4) "t_angles". Anything
+else will force the method to raise an exception.</p>
+<p>:param output: This is the main (parent) output directory
+where the data will be saved.</p>
+<p>:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def save_auxiliary(f_id, rec_data, kind=None, output=None):
+    &#34;&#34;&#34;
+    This auxiliary (static)  function will save the auxiliary
+    bi-products of the input vector construction, such as the
+    hydrogen bonds, torsion angles and aromatic rings.
+
+    :param f_id: File id. Usually the PDB-ID is ok to be used
+    as a filename to identify the contents.
+
+    :param rec_data: The data we want to save. Usually it is
+    a list of things (tuples, dicts, etc.)
+
+    :param kind: This is the type / kind of data that we are
+    saving. It can only be of four types: 1) &#34;t_peptides&#34;,
+    2) &#34;h_bonds&#34;, 3) &#34;a_rings&#34; and 4) &#34;t_angles&#34;. Anything
+    else will force the method to raise an exception.
+
+    :param output: This is the main (parent) output directory
+    where the data will be saved.
+
+    :return: None.
+    &#34;&#34;&#34;
+
+    # Set the local variables according to the
+    # kind of data that we have to save.
+    if kind == &#34;t_peptides&#34;:
+        f_ext, folder_name = &#34;tripep&#34;, &#34;Tri_Peptides&#34;
+
+    elif kind == &#34;h_bonds&#34;:
+        f_ext, folder_name = &#34;bonds&#34;, &#34;Hydrogen_Bonds&#34;
+
+    elif kind == &#34;a_rings&#34;:
+        f_ext, folder_name = &#34;rings&#34;, &#34;Aromatic_Rings&#34;
+
+    elif kind == &#34;t_angles&#34;:
+        f_ext, folder_name = &#34;angles&#34;, &#34;Torsion_Angles&#34;
+
+    else:
+        raise ValueError(f&#34; Unknown type of data: {kind}.&#34;)
+    # _end_if_
+
+    # Check for the output.
+    if output is None:
+        output = Path.cwd()
+    # _end_if_
+
+    # Create an output filename.
+    output_path = Path(output / folder_name)
+
+    # This will be true only once (for each kind).
+    if not output_path.is_dir():
+        output_path.mkdir(parents=True)
+    # _end_if_
+
+    # Convert to DataFrame.
+    df = DataFrame(data=rec_data)
+
+    # Save to csv file.
+    df.to_csv(Path(output_path / f&#34;{f_id}.{f_ext}&#34;), header=False)</code></pre>
+</details>
+</dd>
+<dt id="Napshift.src.chemical_shifts.input_vector.InputVector.sine_cosine"><code class="name flex">
+<span>def <span class="ident">sine_cosine</span></span>(<span>angle)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Auxiliary function that returns the sin(x) / cos(x) for
+a given input angle 'x'. This method is using Numba for
+speed up. Upon testing the performance we found that we
+average an ~23x speed up comparing to using only numpy.</p>
+<p>NOTE:
+We don't make any checks on the input angle as we
+assume that it has already been checked before this call.
+The whole point is to speed up the repeated calls to the
+trigonometric functions.</p>
+<p>:param angle: the angle (in degrees) that we want to get
+the sine / cosine.</p>
+<p>:return: sin(angle), cos(angle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+@njit(fastmath=True)
+def sine_cosine(angle):
+    &#34;&#34;&#34;
+    Auxiliary function that returns the sin(x) / cos(x) for
+    a given input angle &#39;x&#39;. This method is using Numba for
+    speed up. Upon testing the performance we found that we
+    average an ~23x speed up comparing to using only numpy.
+
+    NOTE:  We don&#39;t make any checks on the input angle as we
+    assume that it has already been checked before this call.
+    The whole point is to speed up the repeated calls to the
+    trigonometric functions.
+
+    :param angle: the angle (in degrees) that we want to get
+    the sine / cosine.
+
+    :return: sin(angle), cos(angle)
+    &#34;&#34;&#34;
+    # First convert to radians.
+    angle = np.deg2rad(angle)
+
+    # Return the results.
+    return np.sin(angle), np.cos(angle)</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="Napshift.src.chemical_shifts.input_vector.InputVector.aromatic_rings"><code class="name">var <span class="ident">aromatic_rings</span></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="Napshift.src.chemical_shifts.input_vector.InputVector.blosum"><code class="name">var <span class="ident">blosum</span></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="Napshift.src.chemical_shifts.input_vector.InputVector.blosum_id"><code class="name">var <span class="ident">blosum_id</span></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="Napshift.src.chemical_shifts.input_vector.InputVector.blosum_version"><code class="name">var <span class="ident">blosum_version</span></code></dt>
+<dd>
+<div class="desc"><p>Accessor (getter) of the version of the BLOSUM.</p>
+<p>:return: integer value.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def blosum_version(self):
+    &#34;&#34;&#34;
+    Accessor (getter) of the version of the BLOSUM.
+
+    :return: integer value.
+    &#34;&#34;&#34;
+    return self.blosum_id</code></pre>
+</details>
+</dd>
+<dt id="Napshift.src.chemical_shifts.input_vector.InputVector.check_aromatic_rings"><code class="name">var <span class="ident">check_aromatic_rings</span></code></dt>
+<dd>
+<div class="desc"><p>Accessor (getter) of the boolean flag that
+indicates if we detect the aromatic rings.</p>
+<p>:return: boolean flag.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def check_aromatic_rings(self):
+    &#34;&#34;&#34;
+    Accessor (getter) of the boolean flag that
+    indicates if we detect the aromatic rings.
+
+    :return: boolean flag.
+    &#34;&#34;&#34;
+    return self.aromatic_rings</code></pre>
+</details>
+</dd>
+<dt id="Napshift.src.chemical_shifts.input_vector.InputVector.data_type"><code class="name">var <span class="ident">data_type</span></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="Napshift.src.chemical_shifts.input_vector.InputVector.hydrogen_bonds"><code class="name">var <span class="ident">hydrogen_bonds</span></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="Napshift.src.chemical_shifts.input_vector.InputVector.include_hydrogen_bonds"><code class="name">var <span class="ident">include_hydrogen_bonds</span></code></dt>
+<dd>
+<div class="desc"><p>Accessor (getter) of the boolean flag that
+indicates if we include the hydrogen bonds
+in the formulation of the input vector.</p>
+<p>:return: boolean flag.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def include_hydrogen_bonds(self):
+    &#34;&#34;&#34;
+    Accessor (getter) of the boolean flag that
+    indicates if we include the hydrogen bonds
+    in the formulation of the input vector.
+
+    :return: boolean flag.
+    &#34;&#34;&#34;
+    return self.hydrogen_bonds</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="Napshift.src.chemical_shifts.input_vector.InputVector.get_data"><code class="name flex">
+<span>def <span class="ident">get_data</span></span>(<span>self, f_path, n_peptides=3, all_models=False, save_output_path=None, verbose=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This is the main function of the 'InputVector' class. It accepts
+as input a "Path(/path/to/the/PDB)" and returns a
+list with all
+the information that is extracted.
+This can be used as input to
+the ANN for predicting the chemical shift values of specific pre
+determined, atoms (e.g. "N", "C", "CA", "CB", "H", "HA").</p>
+<p>:param f_path: Path of the (protein) PDB file.</p>
+<p>:param n_peptides: Number of peptides to consider for the input
+vectors. By default it considers tri-peptides.</p>
+<p>:param all_models: (bool) flag. If True the method will process
+all the models in the PDB file, otherwise only the first model.</p>
+<p>:param save_output_path: (Path/String) If given it will be the
+output path where all the auxiliary data will be saved.</p>
+<p>:param verbose: (bool) flag. If True it will print more info on
+the screen. The default is set to False.</p>
+<p>:return: A dictionary with (data + sequence) for each processed
+model from the PDB file. The data + sequence are given as:</p>
+<pre><code>1) a list with the following information:
+    1.1) poly-peptides that have been generated
+         (index + three letter code)
+    1.2) vector with the input values
+    1.3) a list with the target atoms that are
+         available for each vector.
+
+2) the (modified) amino-acid sequence in string.
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_data(self, f_path, n_peptides=3, all_models=False,
+             save_output_path=None, verbose=False):
+    &#34;&#34;&#34;
+    This is the main function of the &#39;InputVector&#39; class. It accepts
+    as input a &#34;Path(/path/to/the/PDB)&#34; and returns a  list with all
+    the information that is extracted.  This can be used as input to
+    the ANN for predicting the chemical shift values of specific pre
+    determined, atoms (e.g. &#34;N&#34;, &#34;C&#34;, &#34;CA&#34;, &#34;CB&#34;, &#34;H&#34;, &#34;HA&#34;).
+
+    :param f_path: Path of the (protein) PDB file.
+
+    :param n_peptides: Number of peptides to consider for the input
+    vectors. By default it considers tri-peptides.
+
+    :param all_models: (bool) flag. If True the method will process
+    all the models in the PDB file, otherwise only the first model.
+
+    :param save_output_path: (Path/String) If given it will be the
+    output path where all the auxiliary data will be saved.
+
+    :param verbose: (bool) flag. If True it will print more info on
+    the screen. The default is set to False.
+
+    :return: A dictionary with (data + sequence) for each processed
+    model from the PDB file. The data + sequence are given as:
+
+        1) a list with the following information:
+            1.1) poly-peptides that have been generated
+                 (index + three letter code)
+            1.2) vector with the input values
+            1.3) a list with the target atoms that are
+                 available for each vector.
+
+        2) the (modified) amino-acid sequence in string.
+    &#34;&#34;&#34;
+
+    # Make sure peptides is int.
+    n_peptides = int(n_peptides)
+
+    # Make sure the input peptide is a positive number.
+    if n_peptides &lt;= 0:
+        raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                         f&#34;Input peptide should be greater than zero: {n_peptides}.&#34;)
+    # _end_if_
+
+    # Make sure the input peptide is an odd number.
+    if np.mod(n_peptides, 2) == 0:
+        raise ValueError(f&#34;{self.__class__.__name__}: &#34;
+                         f&#34;Input peptide should be odd number: {n_peptides}.&#34;)
+    # _end_if_
+
+    # Index of the middle element.
+    # E.g.: tri-peptide: (0, 1, 2) -&gt; &#39;1&#39;.
+    mid_index = n_peptides // 2
+
+    # Ensure the f_path is Path.
+    f_path = Path(f_path)
+
+    # Get the filename.
+    f_name = f_path.stem
+
+    # Get the structure(s) from the PDB file.
+    structure = PDBParser(PERMISSIVE=True, QUIET=True).get_structure(f_name, f_path)
+
+    # Sanity check.
+    if not structure:
+        raise ValueError(f&#34;{self.__class__.__name__}:&#34;
+                         f&#34; PDB file {f_path} is empty.&#34;)
+    # _end_if_
+
+    # Modify all models in the input structure.
+    # N.B. : CYS -&gt; CYO/CYR and PRO -&gt; PRC/PRT.
+    # N.B. : The modification is done in place.
+    modify_models_OX(structure, all_models=all_models, all_chains=True, in_place=True)
+
+    # Localize the static method.
+    get_sin_cos = self.sine_cosine
+
+    # Output dictionary.
+    output_data = {}
+
+    # Start processing all the structures in the list.
+    for it, model in enumerate(structure, start=1):
+
+        # Check if we want to process
+        # all models, or only the 1st.
+        if not all_models and (it &gt; 1):
+            break
+        # _end_if_
+
+        # Get the modified sequence(s).
+        # Modified means that it contains the distinction
+        # between: CYO / CYR and PRC / PRT.
+        amino_acid_seq = get_sequence(model, modified=True)
+
+        # Will hold the extracted data.
+        x_out = {}
+
+        # Compute the internal coordinates.
+        model.atom_to_internal_coordinates()
+
+        # We process every chain in the model.
+        for ic, chain in enumerate(model, start=0):
+
+            # Get the chain ID.
+            chain_id = str(chain.get_id()).upper()
+
+            # Create a new data entry
+            # (for the current chain).
+            x_out[chain_id] = []
+
+            # Initially set these to &#34;None&#34;.
+            hd_bonds, ring_atoms = None, None
+
+            # Stores all the poly-peptides / torsion angles.
+            poly_peptides, torsion_angles = [], []
+
+            # Localize the append method.
+            poly_peptides_append = poly_peptides.append
+
+            # Localize the append method.
+            torsion_angles_append = torsion_angles.append
+
+            # Get the h-bonds.
+            if self.hydrogen_bonds:
+                hd_bonds = self.hydrogen_bond_calc(chain)
+            # _end_if_
+
+            # Atoms affected by aromatic rings.
+            if self.aromatic_rings:
+                ring_atoms = self.aromatic_ring_calc.check_effect(chain,
+                                                                  find_rings=True)
+            # _end_if_
+
+            # Extract all the residues in a list.
+            residue_list = [*chain.get_residues()]
+
+            # Get the length of the chain.
+            chain_length = len(residue_list)
+
+            # This should not happen.
+            if verbose and self.hydrogen_bonds and len(hd_bonds) != chain_length:
+                # Display a warning rather than raising an exception.
+                print(f&#34; {self.__class__.__name__}:&#34;
+                      f&#34; WARNING! {f_name} : {len(hd_bonds)} : {chain_length}&#34;)
+            # _end_if_
+
+            # Amino-acid counter.
+            aa_counter = 0
+
+            # Go through all the residues in the chain.
+            for i, res_i in enumerate(chain.get_residues(), start=0):
+
+                # Skip hetero-atoms.
+                if res_i.id[0] != &#34; &#34;:
+                    continue
+                # _end_if_
+
+                # Check the index two residues ahead to
+                # ensure that we don&#39;t go out of bounds.
+                if (i + n_peptides - 1) &gt;= chain_length:
+                    break
+                # _end_if_
+
+                # Increase by one.
+                aa_counter += 1
+
+                # Auxiliary poly-peptide level lists.
+                vec_i, t_peptide, t_angles = [], [], []
+
+                # Localize the extend method.
+                vec_i_extend = vec_i.extend
+
+                # Boolean flag: Reset to &#34;True&#34;
+                # for every single poly-peptide.
+                all_good = True
+
+                # Get the poly-peptide information.
+                for k, res_k in enumerate(residue_list[i:i + n_peptides], start=0):
+
+                    # Index (one-based).
+                    INDEX = aa_counter + k
+
+                    # Residue name (three-letter-code).
+                    RES_NAME = str(res_k.get_resname()).strip()
+
+                    # Accepted list of residue names.
+                    if (RES_NAME not in ACCEPTED_RES) or \
+                            (res_k.internal_coord is None):
+                        # Change the flag value.
+                        all_good = False
+
+                        # Move on to the next poly-peptide.
+                        break
+                    # _end_if_
+
+                    # Use this name to extract
+                    # the info from the BLOSUM.
+                    BLM_RES_NAME = RES_NAME
+
+                    # Distinguish for CYS and PRO.
+                    if RES_NAME in {&#34;CYS&#34;, &#34;PRO&#34;}:
+
+                        try:
+                            # Get the value of the b-factor.
+                            b_factor = res_k[&#34;C&#34;].get_bfactor()
+
+                            # Check for Cysteine.
+                            if RES_NAME == &#34;CYS&#34;:
+                                # Distinguish CYS in CYR/CYO.
+                                BLM_RES_NAME = &#34;CYR&#34; if b_factor == -1.0 else &#34;CYO&#34;
+                            else:
+                                # In this case its a Proline.
+                                # Distinguish PRO in PRC/PRT.
+                                BLM_RES_NAME = &#34;PRC&#34; if b_factor == -1.0 else &#34;PRT&#34;
+                            # _end_if_
+
+                        except KeyError as e0:
+                            # Occasionally, some PDB files might have errors and
+                            # missing atoms in their residues. In this case just
+                            # ignore the error and keep the default residue name.
+                            print(f&#34;Residue {RES_NAME} has a missing {e0} atom.&#34;)
+                        # _end_try_
+
+                    # _end_if_
+
+                    # N.B: The res_k.get_id() returns the ID directly from
+                    # the PDB file, so it might not be linearly increasing.
+                    RES_ID = res_k.get_id()[1]
+
+                    # Append the residue info to a separate list. This will
+                    # built the poly-peptides information for later storage.
+                    t_peptide.append((INDEX, BLM_RES_NAME, RES_ID))
+
+                    # Add the BLOSUM score vector.
+                    vec_i_extend(self.blosum[BLM_RES_NAME])
+
+                    # Get the &#39;phi&#39;/&#39;psi&#39; angles (in degrees).
+                    phi_k = res_k.internal_coord.get_angle(&#34;phi&#34;)
+                    psi_k = res_k.internal_coord.get_angle(&#34;psi&#34;)
+
+                    # Get the &#39;chi1&#39;/&#39;chi2&#39; angles (in degrees).
+                    chi1_k = res_k.internal_coord.get_angle(&#34;chi1&#34;)
+                    chi2_k = res_k.internal_coord.get_angle(&#34;chi2&#34;)
+
+                    # Add all the angles (if they exist).
+                    for angle in [phi_k, psi_k, chi1_k, chi2_k]:
+
+                        # Check for &#34;None&#34; angles.
+                        if angle is None:
+                            # Since there is no angle in [0, 2pi]
+                            # that satisfies both sine and cosine
+                            # to be zero this will imply that the
+                            # the angle is missing (i.e. is None).
+                            vec_i_extend([0.0, 0.0])
+                        else:
+                            # Add in the vector: [sin(x), cos(x)].
+                            vec_i_extend(get_sin_cos(angle))
+                        # _end_if_
+
+                    # _end_for_
+
+                    # Append the torsion angles (here in degrees).
+                    t_angles.append((INDEX, RES_3_TO_1[RES_NAME],
+                                     phi_k, psi_k, chi1_k, chi2_k))
+
+                    # Compute only if requested.
+                    if self.hydrogen_bonds and hd_bonds:
+
+                        # Make sure we are on the same residue.
+                        if hd_bonds[i + k].res_name == RES_NAME:
+
+                            # First residue in the list.
+                            if k == 0:
+                                # Add the &#39;O-&#39; bond.
+                                vec_i_extend(hd_bonds[i + k].O_)
+
+                            # Last residue in the list.
+                            elif k == n_peptides - 1:
+                                # Add the &#39;H-&#39; bond.
+                                vec_i_extend(hd_bonds[i + k].H_)
+
+                            # Middle residues in the list.
+                            else:
+                                # Add the &#39;H-&#39; bond.
+                                vec_i_extend(hd_bonds[i + k].H_)
+
+                                # Add the &#39;O-&#39; bond.
+                                vec_i_extend(hd_bonds[i + k].O_)
+                            # _end_if_
+                        else:
+                            # Print if verbose is true.
+                            if verbose:
+                                # Display a warning message.
+                                print(f&#34; {self.__class__.__name__}:&#34;
+                                      f&#34; WARNING! {hd_bonds[i + k].res_name} {RES_NAME}.&#34;)
+                            # _end_if_
+
+                        # _end_if_
+
+                    # _end_if_
+
+                # _end_for_
+
+                # The total number of entries will vary according
+                # to what we will include in the data list vec_i.
+                if all_good:
+                    # Holds the target atoms that can
+                    # be used with that input vector.
+                    unaffected_atoms = []
+
+                    # If the flag is enabled we need to check if
+                    # there are atoms affected by aromatic rings.
+                    if self.aromatic_rings:
+
+                        # Get the center residue info.
+                        _, r_name, r_id = t_peptide[mid_index]
+
+                        # Use the one-letter code.
+                        r_name = RES_3_TO_1[r_name]
+
+                        # Check all the target atoms.
+                        for target in TARGET_ATOMS:
+
+                            # We don&#39;t have yet the delta ring effect
+                            # values. NOTE: we use only the FIRST TWO
+                            # values from the center poly-peptide.
+                            if (r_name, r_id, target, _) in ring_atoms:
+                                # Skip to the next.
+                                continue
+                            # _end_if_
+
+                            # Add the target atom in the &#34;unaffected&#34; list.
+                            unaffected_atoms.append(target)
+                        # _end_for_
+
+                    # _end_if_
+
+                    # Append all information to a final (return) list.
+                    # The entries here are combined into a dictionary.
+                    # This way we have easier access using the &#34;keys&#34;,
+                    # to access the right data for each record.
+                    x_out[chain_id].append({&#34;poly-peptides&#34;: t_peptide,
+                                            &#34;targets&#34;: unaffected_atoms,
+                                            &#34;vector&#34;: np.array(vec_i, dtype=self.data_type)})
+
+                    # Update the list with the poly-peptides.
+                    poly_peptides_append(t_peptide)
+
+                    # Update the list with the torsion angles.
+                    torsion_angles_append(t_angles)
+                # _end_if_
+
+            # _end_for_
+
+            # Check if the list is empty.
+            if len(x_out[chain_id]) &gt; 1:
+                # Copy the first entry.
+                x_front = x_out[chain_id][0].copy()
+
+                # Get the front end points.
+                front_end = self._zero_padding(x_front, n_peptides, terminal=&#34;front&#34;)
+
+                # Copy the last entry.
+                x_back = x_out[chain_id][-1].copy()
+
+                # Get the back end points.
+                back_end = self._zero_padding(x_back, n_peptides, terminal=&#34;back&#34;)
+
+                # Insert the front terminal points.
+                for f, vec_f in enumerate(front_end):
+                    x_out[chain_id].insert(f, vec_f)
+                # _end_for_
+
+                # Append the back terminal points.
+                for vec_b in back_end:
+                    x_out[chain_id].append(vec_b)
+                # _end_for_
+
+            # _end_if_
+
+            # Check if we want to save the data.
+            if save_output_path:
+
+                # Make sure the save path exists.
+                if not Path(save_output_path).is_dir():
+                    # This should run only the first time.
+                    Path(save_output_path).mkdir(parents=True)
+                # _end_if_
+
+                # File ID includes:
+                # - 0) the filename &#34;f_name&#34;
+                # - 1) the model number &#34;it&#34;
+                # - 2) and chain number &#34;ic&#34;
+                file_id = f&#34;{f_name}_{it}_{ic}&#34;
+
+                # Poly-peptides.
+                if poly_peptides:
+                    self.save_auxiliary(file_id, poly_peptides,
+                                        &#34;t_peptides&#34;, save_output_path)
+                # _end_if_
+
+                # Torsion angles.
+                if torsion_angles:
+                    self.save_auxiliary(file_id, torsion_angles,
+                                        &#34;t_angles&#34;, save_output_path)
+                # _end_if_
+
+                # Aromatic rings.
+                if ring_atoms:
+                    self.save_auxiliary(file_id, ring_atoms,
+                                        &#34;a_rings&#34;, save_output_path)
+                # _end_if_
+
+                # Hydrogen bonds.
+                if hd_bonds:
+                    self.save_auxiliary(file_id, hd_bonds,
+                                        &#34;h_bonds&#34;, save_output_path)
+                # _end_if_
+
+            # _end_if_
+
+        # _end_for_model_
+
+        # Add the {&#34;data&#34; + &#34;sequence&#34;} to the output dictionary.
+        # NOTE: Both &#34;data&#34; and &#34;sequence&#34;, are dictionaries too.
+        output_data[f&#34;model-{it}&#34;] = {&#34;data&#34;: x_out,
+                                      &#34;sequence&#34;: amino_acid_seq}
+    # _end_for_structures_
+
+    # Output data.
+    return output_data</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="Napshift.src.chemical_shifts" href="index.html">Napshift.src.chemical_shifts</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="Napshift.src.chemical_shifts.input_vector.InputVector" href="#Napshift.src.chemical_shifts.input_vector.InputVector">InputVector</a></code></h4>
+<ul class="">
+<li><code><a title="Napshift.src.chemical_shifts.input_vector.InputVector.aromatic_ring_calc" href="#Napshift.src.chemical_shifts.input_vector.InputVector.aromatic_ring_calc">aromatic_ring_calc</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.input_vector.InputVector.aromatic_rings" href="#Napshift.src.chemical_shifts.input_vector.InputVector.aromatic_rings">aromatic_rings</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.input_vector.InputVector.blosum" href="#Napshift.src.chemical_shifts.input_vector.InputVector.blosum">blosum</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.input_vector.InputVector.blosum_id" href="#Napshift.src.chemical_shifts.input_vector.InputVector.blosum_id">blosum_id</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.input_vector.InputVector.blosum_version" href="#Napshift.src.chemical_shifts.input_vector.InputVector.blosum_version">blosum_version</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.input_vector.InputVector.check_aromatic_rings" href="#Napshift.src.chemical_shifts.input_vector.InputVector.check_aromatic_rings">check_aromatic_rings</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.input_vector.InputVector.data_type" href="#Napshift.src.chemical_shifts.input_vector.InputVector.data_type">data_type</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.input_vector.InputVector.get_data" href="#Napshift.src.chemical_shifts.input_vector.InputVector.get_data">get_data</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.input_vector.InputVector.hydrogen_bond_calc" href="#Napshift.src.chemical_shifts.input_vector.InputVector.hydrogen_bond_calc">hydrogen_bond_calc</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.input_vector.InputVector.hydrogen_bonds" href="#Napshift.src.chemical_shifts.input_vector.InputVector.hydrogen_bonds">hydrogen_bonds</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.input_vector.InputVector.include_hydrogen_bonds" href="#Napshift.src.chemical_shifts.input_vector.InputVector.include_hydrogen_bonds">include_hydrogen_bonds</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.input_vector.InputVector.save_auxiliary" href="#Napshift.src.chemical_shifts.input_vector.InputVector.save_auxiliary">save_auxiliary</a></code></li>
+<li><code><a title="Napshift.src.chemical_shifts.input_vector.InputVector.sine_cosine" href="#Napshift.src.chemical_shifts.input_vector.InputVector.sine_cosine">sine_cosine</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>
