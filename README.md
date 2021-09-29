@@ -25,7 +25,7 @@ computer.
 
 ## Required packages
 
-The recommended version is **Python 3.6** and above. Some required packages
+The required version is **Python 3.6** and above. Some required packages
 are:
 
 >
@@ -36,7 +36,7 @@ To simplify the required packages just use:
 
     $ pip install -r requirements.txt
 
-## Virtual environment
+## Virtual environment (recommended)
 
 It is highly advised to create a single virtual environment to avoid
 messing with the main Python installation. On Linux and macOS systems
