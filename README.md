@@ -1,7 +1,7 @@
 # NapShift (version 0.1)
 ---
 
-![Logo](./Logo_main.png)
+![Logo](./logos/Logo_main.png)
 
 This repository provides a "Python implementation" of the NapShift program
 to estimate the backbone atoms' chemical shift values from NMR protein PBD
@@ -79,7 +79,7 @@ To explore all the options of NapShift, use:
 
 You will see the following menu:
 
-![Help](./Help_menu.png)
+![Help](./logos/Help_menu.png)
 
 ## References
 ---
