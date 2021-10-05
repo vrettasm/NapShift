@@ -83,23 +83,28 @@ def main(pdb_file=None, pH=None, output_path=None, random_coil_path=None,
             nn_predict.random_coil.pH = pH
         # _end_if_
 
-        # Make sure is a Path.
-        f_path = Path(pdb_file)
+        # Process all input files.
+        for f_in in pdb_file:
 
-        # If the file exists.
-        if f_path.is_file():
-            # Make the predictions.
-            nn_predict(f_path, n_peptides=3, all_models=all_models,
-                       random_coil_path=random_coil_path,
-                       talos_fmt=talos_fmt, verbose=verbose)
-        else:
-            raise FileNotFoundError(f"File {f_path} not found.")
-        # _end_if_
+            # Make sure is a Path.
+            f_path = Path(f_in)
 
-        # Final message.
-        if verbose:
-            print(f" Successfully saved results to: {nn_predict.dir_output}")
-        # _end_if_
+            # If the file exists.
+            if f_path.is_file():
+                # Make the predictions.
+                nn_predict(f_path, n_peptides=3, all_models=all_models,
+                           random_coil_path=random_coil_path,
+                           talos_fmt=talos_fmt, verbose=verbose)
+            else:
+                raise FileNotFoundError(f"File {f_path} not found.")
+            # _end_if_
+
+            # Final message.
+            if verbose:
+                print(f" Successfully saved results to: {nn_predict.dir_output}")
+            # _end_if_
+
+        # _end_for_
 
     except Exception as e1:
 
@@ -123,8 +128,8 @@ if __name__ == "__main__":
                                                      "with the usage of Artificial Neural Networks (ANN). ")
 
         # Input (PDB) file with the residue coordinates.
-        parser.add_argument("-f", "--file", type=str, required=True,
-                            help="Input PDB file (Path/String).")
+        parser.add_argument("-f", "--file", type=str, nargs='+', required=True,
+                            help="Input PDB file(s) (Path/String).")
 
         # Input pH value for the random coil shift values.
         parser.add_argument("--pH", type=float, default=7.0,
