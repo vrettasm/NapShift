@@ -25,12 +25,10 @@ computer.
 
 ## Required packages
 
-The required version is **Python 3.6** and above. Some required packages
+The recommended version is **Python 3.6** (and above). Some required packages
 are:
 
->
 > tensorflow, numpy, pathlib, pandas, etc.
->
 
 To simplify the required packages just use:
 
@@ -38,13 +36,13 @@ To simplify the required packages just use:
 
 ## Virtual environment (recommended)
 
-It is highly advised to create a single virtual environment to avoid
+It is highly advised to create a separate virtual environment to avoid
 messing with the main Python installation. On Linux and macOS systems
 type:
 
     $ python3 -m venv napshift_venv
 
-Note: "napshift_venv" is an optional name.
+Note: "napshift_venv" is an _optional_ name.
 
 Once the virtual environment is created activate it with:
 
@@ -58,7 +56,7 @@ or
 
     $ python3 -m pip install -r requirements.txt
 
-N.B. For Windows systems follow the relevant instructions.
+N.B. For Windows systems follow the **equivalent** instructions.
 
 ## How to run
 ---
@@ -70,7 +68,7 @@ or locate it through the command line and then run the following command:
     $ ./napshift.py -f path/to/PDB/file
 
 This is the simplest way to run NapShift. It will create a file named:
-"prediction_filename_model_0_chain_A.tab" in the current working directory,
+"prediction_filename_model_0_chain_A.tab" in the _current working directory_,
 with the predicted chemical shift values for all backbone atoms (N, C, Ca, Cb, H, Ha).
 
 To explore all the options of NapShift, use:
@@ -81,15 +79,19 @@ You will see the following menu:
 
 ![Help](./logos/Help_menu.png)
 
-## References
+## References (and documentation)
 ---
 
-The work is described in detail at:
+The original work is described in detail at:
 
-1.  [Alfonso De Simone, etc. (2021)](https://doi.org/...).
+1. [Alfonso De Simone, etc. (2021)](https://doi.org/...)
+
+Also, the documentation of the code can be found in:
+
+2. [NapShift_v01-doc](./docs/NapShift_v01.pdf)
 
 ### Contact
 ---
 
-For any questions/comments (*regarding this code*) please contact me at:
+For any questions/comments (**_regarding this code_**) please contact me at:
 vrettasm@gmail.com
