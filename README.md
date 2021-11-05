@@ -1,4 +1,4 @@
-# NapShift (version 0.1)
+# NapShift (version 1.0.0)
 
 ![Logo](./logos/Logo_main.png)
 
