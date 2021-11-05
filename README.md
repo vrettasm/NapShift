@@ -62,11 +62,20 @@ To execute the program (within the activated virtual environment), you can eithe
 navigate  to the main directory of the project (i.e. where the napshift.py is located),
 or locate it through the command line and then run the following command:
 
-    $ ./napshift.py -f path/to/PDB/file
+    $ ./napshift.py -f path/to/filename.pdb
 
 This is the simplest way to run NapShift. It will create a file named:
 "prediction_filename_model_0_chain_A.tab" in the _current working directory_,
 with the predicted chemical shift values for all backbone atoms (N, C, Ca, Cb, H, Ha).
+
+   > **Hint**: If you want to run the program on multiple files (in the same directory) you
+   > can use the '*' wildcard as follows:
+   >  
+   > $ ./napshift.py -f path/to/*.pdb
+
+This will run NapShift on all the files (in the directory) with the '.pdb' extension.
+
+---
 
 To explore all the options of NapShift, use:
 
