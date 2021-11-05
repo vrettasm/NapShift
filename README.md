@@ -1,5 +1,4 @@
 # NapShift (version 0.1)
----
 
 ![Logo](./logos/Logo_main.png)
 
@@ -10,7 +9,6 @@ files.
 M. Vrettas, PhD.
 
 ## Installation
----
 
 There are two options to install the software.
 
@@ -59,7 +57,6 @@ or
 N.B. For Windows systems follow the **equivalent** instructions.
 
 ## How to run
----
 
 To execute the program (within the activated virtual environment), you can either
 navigate  to the main directory of the project (i.e. where the napshift.py is located),
@@ -80,7 +77,6 @@ You will see the following menu:
 ![Help](./logos/Help_menu.png)
 
 ## References (and documentation)
----
 
 The original work is described in detail at:
 
@@ -91,7 +87,6 @@ Also, the documentation of the code can be found in:
 2. [NapShift_v01-doc](./docs/NapShift_v01.pdf)
 
 ### Contact
----
 
 For any questions/comments (**_regarding this code_**) please contact me at:
 vrettasm@gmail.com
