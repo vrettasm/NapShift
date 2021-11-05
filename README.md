@@ -23,7 +23,7 @@ computer.
 
 ## Required packages
 
-The recommended version is **Python 3.6** (and above). Some required packages
+The recommended version is **Python 3.7** (and above). Some required packages
 are:
 
 > tensorflow, numpy, pathlib, pandas, etc.

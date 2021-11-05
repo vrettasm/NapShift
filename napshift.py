@@ -3,13 +3,14 @@
 import sys
 
 # Check the current python version before running.
-if sys.version_info < (3, 6, 0):
-    sys.exit("Error: NapShift program requires Python 3.6 or greater.")
+if sys.version_info < (3, 7, 0):
+    sys.exit("Error: NapShift program requires Python 3.7 or greater.")
 # _end_if_
 
 import os
 
 # Disable some tensor-flow warning messages.
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
 os.environ["TF_XLA_FLAGS"] = "--tf_xla_enable_xla_devices"
 
 from pathlib import Path
