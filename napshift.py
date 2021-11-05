@@ -16,8 +16,9 @@ from pathlib import Path
 from src.chemical_shifts.model_machine import ChemShiftPredictor
 
 # INFO:
-__author__ = "Michail Vrettas, PhD"
-__email__ = "vrettasm@duck.com"
+__version__ = '1.0.0'
+__author__ = 'Michail Vrettas, PhD'
+__email__ = 'vrettasm@duck.com'
 
 
 # Main function.
@@ -160,6 +161,11 @@ if __name__ == "__main__":
         parser.add_argument("--verbose", dest="verbose", action="store_true",
                             help="Display information while running.")
 
+        # Shows the version of the program.
+        parser.add_argument("--version", action="version",
+                            version=f" NapShift (c), version: {__version__}",
+                            help="Print version information and exit.")
+
         # Enables prediction for all the models in the PDB file.
         parser.add_argument("--all-models", dest="all_models", action="store_true",
                             help="Allows prediction for all the models in the PDB file.")
@@ -174,6 +180,7 @@ if __name__ == "__main__":
         main(pdb_file=args.file, pH=args.pH, output_path=args.out,
              random_coil_path=args.rc_path, talos_fmt=args.talos,
              all_models=args.all_models, verbose=args.verbose)
+
     else:
         # Display error message.
         sys.exit(f"Error: Not enough input parameters. {os.linesep}"
