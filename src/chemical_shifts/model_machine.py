@@ -667,7 +667,7 @@ class ChemShiftPredictor(ChemShiftBase):
 
     # InputVector.
     vec_in = InputVector(blosum_id=62, include_hydrogen_bonds=False,
-                         check_aromatic_rings=True, data_type=np.float16)
+                         check_aromatic_rings=True, data_type=np.float32)
     """
     This will be used to load the PDB file(s) before we make the prediction
     with the ANN model. Here we set (for brevity) all the input parameters.
