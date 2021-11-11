@@ -55,7 +55,7 @@ class InputVector(object):
 
     # Constructor.
     def __init__(self, blosum_id=62, include_hydrogen_bonds=False,
-                 check_aromatic_rings=True, data_type=np.float16):
+                 check_aromatic_rings=True, data_type=np.float32):
         """
         Constructs an object that will create the input vectors from
         a given PDB (protein) file.
@@ -74,7 +74,7 @@ class InputVector(object):
 
         :param data_type: This is the datatype of the input vector.
         This will affect the size (unit is MB) of the return vectors.
-        Default here is set to float16.
+        Default here is set to float32.
         """
 
         # Check the version of the matrix.
