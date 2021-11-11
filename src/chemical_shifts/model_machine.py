@@ -472,16 +472,21 @@ class ChemShiftTraining(ChemShiftBase):
         # _end_if_
 
         # Switch on/off the verbosity.
-        nn_verbose_flag = 1 if verbose else 0
-
-        # Localize the convert to tensor method.
-        convert_to_tensor = tf.convert_to_tensor
+        nn_verbose_flag = tf.constant(1) if verbose else tf.constant(0)
 
         # Make batch size tf.constant.
         nn_batch_size = tf.constant(512, dtype=tf.int64, name="batch_size")
 
         # Make epochs tf.constant.
         nn_epochs = tf.constant(1000, dtype=tf.int64, name="epochs")
+
+        # Make validation_split tf.constant.
+        nn_validation_split = tf.constant(validation_split,
+                                          dtype=tf.float32,
+                                          name="val_split")
+
+        # Localize the convert to tensor method.
+        convert_to_tensor = tf.convert_to_tensor
 
         # Train for each target a separate ANN.
         for atom in TARGET_ATOMS:
@@ -557,7 +562,7 @@ class ChemShiftTraining(ChemShiftBase):
             nn_output[atom] = nn_model[atom].fit(x=convert_to_tensor(x_train),
                                                  y=convert_to_tensor(y_train),
                                                  batch_size=nn_batch_size, epochs=nn_epochs,
-                                                 validation_split=validation_split, shuffle=True,
+                                                 validation_split=nn_validation_split, shuffle=True,
                                                  verbose=nn_verbose_flag, callbacks=[early_stop])
             # Final time instant.
             time_f = time()
@@ -1025,13 +1030,13 @@ class ChemShiftPredictor(ChemShiftBase):
         # _end_if_
 
         # Switch on/off the verbosity.
-        nn_verbose_flag = 1 if verbose else 0
-
-        # Localize the convert to tensor method.
-        convert_to_tensor = tf.convert_to_tensor
+        nn_verbose_flag = tf.constant(1) if verbose else tf.constant(0)
 
         # Make batch size tf.constant.
         nn_batch_size = tf.constant(512, dtype=tf.int64, name="batch_size")
+
+        # Localize the convert to tensor method.
+        convert_to_tensor = tf.convert_to_tensor
 
         # Predict chemical shifts of all models.
         for model_id, model_value in enumerate(model_vectors.values(), start=0):
