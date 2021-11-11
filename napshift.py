@@ -85,6 +85,9 @@ def main(pdb_file=None, pH=None, output_path=None, random_coil_path=None,
             nn_predict.random_coil.pH = pH
         # _end_if_
 
+        # Count the successful predictions.
+        count_success = 0
+
         # Process all input files.
         for f_in in pdb_file:
 
@@ -93,20 +96,24 @@ def main(pdb_file=None, pH=None, output_path=None, random_coil_path=None,
 
             # If the file exists.
             if f_path.is_file():
+
                 # Make the predictions.
                 nn_predict(f_path, n_peptides=3, all_models=all_models,
                            random_coil_path=random_coil_path,
                            talos_fmt=talos_fmt, verbose=verbose)
+
+                # Increase counter by one.
+                count_success += 1
             else:
                 raise FileNotFoundError(f"File {f_path} not found.")
             # _end_if_
 
-            # Final message.
-            if verbose:
-                print(f" Successfully saved results to: {nn_predict.dir_output}")
-            # _end_if_
-
         # _end_for_
+
+        # Final message.
+        if verbose:
+            print(f" Successfully saved {count_success} result(s) to: {nn_predict.dir_output}")
+        # _end_if_
 
     except Exception as e1:
 
