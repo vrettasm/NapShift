@@ -951,7 +951,7 @@ class ChemShiftPredictor(ChemShiftBase):
         except FileExistsError as e0:
 
             # Log the error message.
-            self.logger.error(e0, end="\n")
+            self.logger.error(e0)
         # _end_try_
 
     # _end_def_
