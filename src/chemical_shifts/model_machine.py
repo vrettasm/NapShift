@@ -966,7 +966,7 @@ class ChemShiftPredictor(ChemShiftBase):
         :param f_path: (string) PDB file with the residue / atom coordinates.
 
         :param n_peptides: (int) Number of peptides to consider for the input vectors.
-        By default it considers tri-peptides.
+        By default, it considers tri-peptides.
 
         :param all_models: (bool) flag. If "True" the method will process all the models
         in the PDB file, otherwise only the first model.
