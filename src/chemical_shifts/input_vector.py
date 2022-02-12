@@ -231,7 +231,7 @@ class InputVector(object):
         Auxiliary function that returns the sin(x) / cos(x) for
         a given input angle 'x'. This method is using Numba for
         speed up. Upon testing the performance we found that we
-        average an ~23x speed up comparing to using only numpy.
+        average a ~23x speed up comparing to using only numpy.
 
         NOTE:  We don't make any checks on the input angle as we
         assume that it has already been checked before this call.
@@ -317,7 +317,7 @@ class InputVector(object):
         """
         This auxiliary method is used to add the front and back
         terminal vectors, using zero padding. The method can be
-        used for any (odd) number of peptides (3-, 5-, 7-, etc).
+        used for any (odd) number of peptides (3-, 5-, 7-, etc.)
 
         :param x_in: This is the input that will be used to make
         the front or back terminal poly-peptide entries.
@@ -417,23 +417,23 @@ class InputVector(object):
         :param f_path: Path of the (protein) PDB file.
 
         :param n_peptides: Number of peptides to consider for the input
-        vectors. By default it considers tri-peptides.
+        vectors. By default, it considers tri-peptides.
 
-        :param all_models: (bool) flag. If True the method will process
+        :param all_models: (bool) flag. If True the method processes
         all the models in the PDB file, otherwise only the first model.
 
         :param save_output_path: (Path/String) If given it will be the
         output path where all the auxiliary data will be saved.
 
-        :param verbose: (bool) flag. If True it will print more info on
-        the screen. The default is set to False.
+        :param verbose: (bool) flag. If True it prints more info on the
+        screen. The default is set to False.
 
         :return: A dictionary with (data + sequence) for each processed
         model from the PDB file. The data + sequence are given as:
 
             1) a list with the following information:
                 1.1) poly-peptides that have been generated
-                     (index + three letter code)
+                     (index + three-letter code)
                 1.2) vector with the input values
                 1.3) a list with the target atoms that are
                      available for each vector.
@@ -575,7 +575,7 @@ class InputVector(object):
                     # Auxiliary poly-peptide level lists.
                     vec_i, t_peptide, t_angles = [], [], []
 
-                    # Localize the extend method.
+                    # Localize the "extend" method.
                     vec_i_extend = vec_i.extend
 
                     # Boolean flag: Reset to "True"
@@ -617,7 +617,7 @@ class InputVector(object):
                                     # Distinguish CYS in CYR/CYO.
                                     BLM_RES_NAME = "CYR" if b_factor == -1.0 else "CYO"
                                 else:
-                                    # In this case its a Proline.
+                                    # In this case it's a Proline.
                                     # Distinguish PRO in PRC/PRT.
                                     BLM_RES_NAME = "PRC" if b_factor == -1.0 else "PRT"
                                 # _end_if_
@@ -635,7 +635,7 @@ class InputVector(object):
                         # the PDB file, so it might not be linearly increasing.
                         RES_ID = res_k.get_id()[1]
 
-                        # Append the residue info to a separate list. This will
+                        # Append the residue info to a separate list. This
                         # built the poly-peptides information for later storage.
                         t_peptide.append((INDEX, BLM_RES_NAME, RES_ID))
 
@@ -658,7 +658,7 @@ class InputVector(object):
                                 # Since there is no angle in [0, 2pi]
                                 # that satisfies both sine and cosine
                                 # to be zero this will imply that the
-                                # the angle is missing (i.e. is None).
+                                # angle is missing (i.e. is None).
                                 vec_i_extend([0.0, 0.0])
                             else:
                                 # Add in the vector: [sin(x), cos(x)].

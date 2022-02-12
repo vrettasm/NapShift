@@ -46,14 +46,14 @@ def main(pdb_file=None, pH=None, output_path=None, random_coil_path=None,
     automatically new values using the camcoil engine module.
 
     :param talos_fmt: This is the TALOS format for the output file. If not set
-    to True, than we will use a tabular format, where each row corresponds to
+    to True, then we will use a tabular format, where each row corresponds to
     a single residue and each atom has each own column.
 
     :param all_models: If "True" the method will process all the models in the
     PDB file, otherwise only the first model.
 
-    :param verbose: This is a boolean flag that determines whether or not we
-    want to display additional information on the screen.
+    :param verbose: This is a boolean flag that determines whether we want to
+    display additional information on the screen.
 
     :return: None.
     """
@@ -140,7 +140,7 @@ if __name__ == "__main__":
         parser.add_argument("-f", "--file", type=str, nargs='+', required=True,
                             help="Input PDB file(s) (Path/String).")
 
-        # Input pH value for the random coil shift values.
+        # Input pH values for the random coil shift values.
         parser.add_argument("--pH", type=float, default=7.0,
                             help="The pH value of reference chemical shifts. "
                                  "Default value is set to 7.0.")

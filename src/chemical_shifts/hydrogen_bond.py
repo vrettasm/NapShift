@@ -162,7 +162,7 @@ class HBond(object):
         # Process each residue in the chain.
         for res_i in chain.get_residues():
 
-            # Get the residue name in three letter code.
+            # Get the residue name in three-letter code.
             # Ensure there are no spaces before / after.
             res_name = str(res_i.get_resname()).strip()
 

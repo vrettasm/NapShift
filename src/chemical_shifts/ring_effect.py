@@ -220,7 +220,7 @@ class RingEffects(object):
         # Process each residue in the chain.
         for res_i in chain.get_residues():
 
-            # Get the residue name in three letter code.
+            # Get the residue name in three-letter code.
             res_name = str(res_i.get_resname()).strip()
 
             # Accepted list of residue names.
@@ -321,7 +321,7 @@ class RingEffects(object):
         center of the ring.
 
         :return: a list with atoms that are affected (given the threshold
-        distance that we have already define).
+        distance that we have already defined).
         """
 
         # Check for empty input.
@@ -358,7 +358,7 @@ class RingEffects(object):
         # Process each residue in the chain.
         for res_i in chain.get_residues():
 
-            # Get the residue name (three letter code).
+            # Get the residue name (three-letter code).
             res_name = str(res_i.get_resname()).strip()
 
             # Accepted list of residue names.

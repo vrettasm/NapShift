@@ -101,7 +101,7 @@ class ChemShiftBase(object):
         # Boolean flag. If "True" the class will allow
         # the new results to overwrite old ones (if exist).
         if isinstance(overwrite, bool):
-            # Copy the overwrite flag value.
+            # Copy to overwrite flag value.
             self.overwrite_flag = overwrite
         else:
             raise TypeError(f"{self.__class__.__name__}: "
@@ -172,7 +172,7 @@ class ChemShiftBase(object):
                 # First close the stream.
                 handler.close()
 
-                # Finally remove it from the list.
+                # Finally, remove it from the list.
                 self.logger.removeHandler(handler)
             # _end_for_
 
@@ -193,7 +193,7 @@ class ChemShiftBase(object):
     @overwrite.setter
     def overwrite(self, new_value):
         """
-        Accessor (setter) of the overwrite flag.
+        Accessor (setter) of to overwrite flag.
 
         :param new_value: (bool).
         """
@@ -287,7 +287,7 @@ class ChemShiftBase(object):
         Override to print a readable string presentation of the object.
         This will include its id(), along with its field values.
 
-        NOTE: The overwrite protection is the "opposite" of the overwrite
+        NOTE: Overwrite protection is the "opposite" of to overwrite
         flag, so in the print version we show the "not overwrite_flag"!
 
         :return: a string representation of a ChemShiftBase object.
@@ -647,9 +647,8 @@ class ChemShiftTraining(ChemShiftBase):
         Override method to print a readable string presentation of the
         object. This will include its id, along with its field values.
 
-            NOTE: The overwrite protection is the opposite of the
-            overwrite flag, so in the printed version we show the
-            "not overwrite_flag"!
+            NOTE: Overwrite protection is the opposite of to overwrite
+            flag, so in the printed version we show the "not overwrite_flag"!
 
         :return: a string representation of a ChemShiftTraining object.
         """
@@ -698,7 +697,7 @@ class ChemShiftPredictor(ChemShiftBase):
     # Constructor.
     def __init__(self, dir_model=None, dir_output=None, overwrite=True):
         """
-        Constructs an object that will perform the chemical shifts prediction.
+        Constructs an object that will perform the chemical shifts' prediction.
         This is done by first constructing the necessary input values from the
         PDB file and subsequently calling the trained nn-models to perform the
         predictions on all atoms.
@@ -778,8 +777,7 @@ class ChemShiftPredictor(ChemShiftBase):
         could be poly-peptides that were not predicted for all the targets.
 
         :param ref_peptides: These are ALL the poly-peptides, as constructed by the
-        InputVector class. They are used as reference with regards to the list of
-        "poly_peptides".
+        InputVector class. They are used as reference regarding the list of "poly_peptides".
 
         :param random_coil: This is a DataFrame with the random coil values. If it
         isn't given (default=None) we will use average values from a default table.
@@ -808,7 +806,7 @@ class ChemShiftPredictor(ChemShiftBase):
             f_name_out = Path(self.output_path/f"prediction_{pdb_id}_"
                                                f"model_{model_id}_chain_{chain_id}.tab")
 
-            # Check if we have enabled the overwrite protection.
+            # Check if we have enabled overwrite protection.
             if (not self.overwrite) and f_name_out.is_file():
                 raise FileExistsError(f" Output: {f_name_out} already exists.")
             # _end_if_
@@ -822,7 +820,7 @@ class ChemShiftPredictor(ChemShiftBase):
             # Size of chunks.
             n = 20
 
-            # Split the amino-acid sequence to chucks of size 'n'.
+            # Split the amino-acid sequence to chunk of size 'n'.
             chunks = [aa_sequence[i:i + n] for i in range(0, len(aa_sequence), n)]
 
             # Write the prediction data to a text file.
@@ -831,7 +829,7 @@ class ChemShiftPredictor(ChemShiftBase):
                 # Localize the write function.
                 file_write = f_out.write
 
-                # In case we need to add comments. This is not mandatory but
+                # In case we need to add comments. This isn't mandatory, but
                 # it will let us know what the original file was coming from.
                 file_write(f"REMARK Chemical Shift predictions for {pdb_id}. \n")
 
@@ -1160,9 +1158,9 @@ class ChemShiftPredictor(ChemShiftBase):
         Override to print a readable string presentation of the object.
         This will include its id(), along with its field values.
 
-            NOTE: The overwrite protection is the opposite of the
-            overwrite flag, so in the printed version we show the
-            "not overwrite_flag"!
+            NOTE: Overwrite protection is the opposite of to
+            overwrite flag, so in the printed version we show
+            the "not overwrite_flag"!
 
         :return: a string representation of a ChemShiftPredictor object.
         """

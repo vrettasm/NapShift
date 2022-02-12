@@ -124,7 +124,7 @@ class NHOrderParameters(object):
             # Get the residue id from the PDB.
             res_id = res_i.get_id()[1]
 
-            # Get the residue name in three letter code.
+            # Get the residue name in three-letter code.
             res_name = str(res_i.get_resname()).strip()
 
             # Skip the first residue.

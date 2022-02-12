@@ -137,9 +137,9 @@ RANDOM_COIL_STD = {"ALA": ChemShifts(6.900, 2.100, 1.900, 2.000, 0.630, 0.430),
                    "TYR": ChemShifts(4.500, 1.800, 2.400, 3.200, 0.750, 0.520)}
 
 # ONEHOT10:
-# "One hot encoding" is a process  of converting  categorical data variables so
+# One hot encoding, is a process  of converting  categorical data variables, so
 # they can be provided to machine learning algorithms for improving predictions.
-# One Letter Code:  A  R  N  D  X  C  Q  E  G  H  I  L  K  M  F  O  P  S  T  W  Y  V
+# One-Letter Code:  A  R  N  D  X  C  Q  E  G  H  I  L  K  M  F  O  P  S  T  W  Y  V
 # -----------------------------------------------------------------------------------
 ONEHOT10 = {"ALA": (1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
             "ARG": (0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
@@ -300,7 +300,7 @@ BLOSUM90 = {"ALA": (+5, -2, -2, -3, -1, -1, -1, -1, +0, -2, -2, -2, -1, -2, -3, 
             "VAL": (-1, -3, -4, -5, -2, -2, -3, -3, -5, -4, +3, +0, -3, +0, -2, -3, -3, -2, -1, -3, -3, +5)}
 
 # BLOSUM: Block substitution  matrices are used for  sequence alignment
-# of proteins. They are used to score alignments between evolutionarily
+# of proteins. They are used to scoring alignments between evolutionarily
 # divergent protein sequences and are based on local alignments.
 # NOTE: As special case we also include here the "one-hot-encoding".
 BLOSUM = {"10": ONEHOT10, "45": BLOSUM45, "50": BLOSUM50,
@@ -372,7 +372,7 @@ def read_random_coil_to_df(f_path):
 # Utility function.
 def get_sequence(model, modified=False):
     """
-    Returns the amino-acid sequence (one letter code) for
+    Returns the amino-acid sequence (one-letter code) for
     the given input model. Optionally, we can request the
     "modified" sequence version where the CYS and PRO res
     are distinguished in:
@@ -384,7 +384,7 @@ def get_sequence(model, modified=False):
     WARNING:   The modified version assumes that the input
     model has already been processed with modify_models_OX.
     This will ensure that the b-factors are updated to (-1
-    / +1). Otherwise all CYS will be renamed to CYR and all
+    /+1). Otherwise, all CYS will be renamed to CYR and all
     PRO to PRT (which are the default values).
 
     :param model: amino-acid chain (model) from biopython.
@@ -394,7 +394,7 @@ def get_sequence(model, modified=False):
     with the CYS: CYR / CYO and PRO: PRT / PRC distinction.
 
     :return: A dictionary with {"A": "seq_A", "B": "seq_B",
-    "C": "seq_C",...} pairs in one letter code.
+    "C": "seq_C",...} pairs in one-letter code.
     """
 
     # Store the extracted sequences.
@@ -433,7 +433,7 @@ def get_sequence(model, modified=False):
                         # Distinguish CYS in CYR/CYO.
                         RES_NAME = "CYR" if b_factor == -1.0 else "CYO"
                     else:
-                        # In this case its a Proline.
+                        # In this case it's a Proline.
                         # Distinguish PRO in PRC/PRT.
                         RES_NAME = "PRC" if b_factor == -1.0 else "PRT"
                     # _end_if_
@@ -539,10 +539,10 @@ def modify_models_OX(structure, all_models=False, all_chains=True, in_place=True
                         cys_list.append(res)
 
                     else:
-                        # Otherwise is a Proline!
+                        # Otherwise, is a Proline!
 
                         # If this is the first residue we cannot
-                        # used it because in this case the omega
+                        # use it because in this case the omega
                         # angle cannot be computed.
                         if idx == 0:
                             continue
