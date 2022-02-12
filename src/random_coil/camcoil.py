@@ -178,7 +178,7 @@ class CamCoil(object):
             return None
         # _end_if_
 
-        # Make sure there are not empty spaces.
+        # Make sure there aren't empty spaces.
         seq = str(seq).strip().upper()
 
         # Get the length of the sequence.
@@ -300,7 +300,7 @@ class CamCoil(object):
             # Size of the chunks.
             n = 20
 
-            # Split the amino-acid sequence to chucks of size 'n'.
+            # Split the amino-acid sequence to chunk of size 'n'.
             chunks = [seq[i:i + n] for i in range(0, seq_length, n)]
 
             # Print message:
