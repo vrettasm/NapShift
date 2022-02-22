@@ -517,13 +517,13 @@ class ChemShiftTraining(ChemShiftBase):
                       name="Hidden_1",
                       activation="elu",
                       activity_regularizer=None,
-                      kernel_initializer="glorot_normal",
+                      kernel_initializer="he_normal",
                       input_shape=(x_train.shape[1],)),
                 Dense(units=1,
                       name="Output_1",
                       activation='linear',
                       activity_regularizer=None,
-                      kernel_initializer="glorot_uniform")
+                      kernel_initializer="random_uniform")
             ], name=f"model_{atom}")
 
             # Print info.
@@ -538,7 +538,7 @@ class ChemShiftTraining(ChemShiftBase):
             early_stop = keras.callbacks.EarlyStopping(monitor="val_loss", mode="min",
                                                        patience=20, restore_best_weights=True)
             # Set the optimizer object.
-            optimization_alg = SGD(learning_rate=0.01, momentum=0.8, nesterov=True)
+            optimization_alg = SGD(learning_rate=0.01, momentum=0.9, nesterov=True)
 
             # Compile the model.
             nn_model[atom].compile(optimizer=optimization_alg, loss=tf.keras.losses.MSE)
