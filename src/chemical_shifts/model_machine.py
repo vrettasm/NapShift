@@ -471,9 +471,6 @@ class ChemShiftTraining(ChemShiftBase):
             # _end_if_
         # _end_if_
 
-        # Switch on/off the verbosity.
-        nn_verbose_flag = tf.constant(1) if verbose else tf.constant(0)
-
         # Make batch size tf.constant.
         nn_batch_size = tf.constant(512, dtype=tf.int64, name="batch_size")
 
@@ -514,15 +511,6 @@ class ChemShiftTraining(ChemShiftBase):
             # Transform the input data.
             x_train = input_scaler.transform(x_train)
 
-            # Weights initializer:
-            #
-            # 1) For the "hidden" units can also use:
-            #    - RandomNormal(mean=0.0, stddev=0.1)
-            #
-            # 2) For the "output" units can also use:
-            #    - RandomUniform(minval=-0.1, maxval=0.1)
-            #
-
             # Setup the ANN (model).
             nn_model[atom] = Sequential([
                 Dense(units=26,
@@ -553,7 +541,7 @@ class ChemShiftTraining(ChemShiftBase):
             optimization_alg = SGD(learning_rate=0.01, momentum=0.8, nesterov=True)
 
             # Compile the model.
-            nn_model[atom].compile(optimizer=optimization_alg, loss="mse")
+            nn_model[atom].compile(optimizer=optimization_alg, loss=tf.keras.losses.MSE)
 
             # First time instant.
             time_0 = time()
@@ -563,7 +551,7 @@ class ChemShiftTraining(ChemShiftBase):
                                                  y=convert_to_tensor(y_train),
                                                  batch_size=nn_batch_size, epochs=nn_epochs,
                                                  validation_split=nn_validation_split, shuffle=True,
-                                                 verbose=nn_verbose_flag, callbacks=[early_stop])
+                                                 verbose=verbose, callbacks=[early_stop])
             # Final time instant.
             time_f = time()
 
