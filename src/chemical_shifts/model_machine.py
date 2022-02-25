@@ -1015,9 +1015,6 @@ class ChemShiftPredictor(ChemShiftBase):
 
         # _end_if_
 
-        # Switch on/off the verbosity.
-        nn_verbose_flag = tf.constant(1) if verbose else tf.constant(0)
-
         # Make batch size tf.constant.
         nn_batch_size = tf.constant(512, dtype=tf.int64, name="batch_size")
 
@@ -1117,7 +1114,7 @@ class ChemShiftPredictor(ChemShiftBase):
                     # Get the model predictions (secondary structure values).
                     y_predict[atom] = self.nn_model[atom].predict(x=convert_to_tensor(df_data),
                                                                   batch_size=nn_batch_size,
-                                                                  verbose=nn_verbose_flag)
+                                                                  verbose=verbose)
                 # _end_for_
 
                 # Send the predictions to the "save method".
