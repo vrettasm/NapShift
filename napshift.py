@@ -13,6 +13,7 @@ import os
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
 os.environ["TF_XLA_FLAGS"] = "--tf_xla_enable_xla_devices"
 
+from tqdm import tqdm
 from pathlib import Path
 from src.chemical_shifts.model_machine import ChemShiftPredictor
 
@@ -89,7 +90,8 @@ def main(pdb_file=None, pH=None, output_path=None, random_coil_path=None,
         count_success = 0
 
         # Process all input files.
-        for f_in in pdb_file:
+        for f_in in tqdm(pdb_file,
+                         " Predicting chemical shifts ... "):
 
             # Make sure is a Path.
             f_path = Path(f_in)
