@@ -93,7 +93,7 @@ Guowei Qi, Michail D. Vrettas, Carmen Biancaniello, Maximo Sanz-Hernandez,
 Conor T. Cafolla, John W. R. Morgan, Yifei Wang, Alfonso De Simone, and
 David J. Wales (2022).
 _"Enhancing Biomolecular Simulations With Hybrid Potentials Incorporating NMR Data."_
-Submitted for publication at the **Journal of the American Chemical Society**.
+Submitted for publication.
 
 Also, the documentation of the code can be found in:
 
