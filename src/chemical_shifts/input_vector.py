@@ -33,10 +33,10 @@ class InputVector(object):
     hydrogen_bond_calc = HBond()
     """
     The default setting for the hydrogen bond calculator are:
-    
+
         > "D-A": 3.90, "H-A": 2.50
         > "PHI": 90.0, "PSI": 90.0
-    
+
     Note: The distance units are in "Angstrom" and the angle
     units are in "degrees".
     """
