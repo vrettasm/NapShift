@@ -6,6 +6,7 @@
 import unittest
 import joblib
 from pathlib import Path
+from src.random_coil.camcoil import CamCoil
 from tensorflow.keras.models import load_model
 
 class TestTrainedModels(unittest.TestCase):
@@ -70,6 +71,19 @@ class TestTrainedModels(unittest.TestCase):
         # _end_for_
 
     # _end_def_
+
+    def test_camcoil(self):
+        """
+        Test that the MD5 hash-codes of the camcoil object.
+
+        :return: None.
+        """
+
+        # Create an object to test the MD5 checksums.
+        _ = CamCoil(pH=7.0)
+
+    # _end_def_
+
 
 # _end_class_
 
