@@ -95,7 +95,7 @@ David J. Wales (2022).
 _"Enhancing Biomolecular Simulations With Hybrid Potentials Incorporating NMR Data."_
 Accepted for publication at Journal of Chemical Theory and Computation.
 
-2. Also, the documentation of the code can be found in: [NapShift_v01-doc](./docs/NapShift_v01.pdf)
+2. The documentation of the code can be found in: [NapShift_v01-doc](./docs/NapShift_v01.pdf)
 
 ### Contact
 
