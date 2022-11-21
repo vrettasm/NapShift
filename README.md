@@ -89,11 +89,10 @@ You will see the following menu:
 
 The original work is described in detail at:
 
-1. Guowei Qi, Michail D. Vrettas, Carmen Biancaniello, Maximo Sanz-Hernandez,
+1. [Guowei Qi, Michail D. Vrettas, Carmen Biancaniello, Maximo Sanz-Hernandez,
 Conor T. Cafolla, John W. R. Morgan, Yifei Wang, Alfonso De Simone, and
-David J. Wales (2022).
-_"Enhancing Biomolecular Simulations With Hybrid Potentials Incorporating NMR Data."_
-Accepted for publication at Journal of Chemical Theory and Computation.
+David J. Wales (2022)] (https://pubs.acs.org/doi/10.1021/acs.jctc.2c00657).
+"Enhancing Biomolecular Simulations With Hybrid Potentials Incorporating NMR Data."
 
 2. The documentation of the code can be found in: [NapShift_v01-doc](./docs/NapShift_v01.pdf)
 
