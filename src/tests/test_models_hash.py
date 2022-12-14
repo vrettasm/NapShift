@@ -30,23 +30,23 @@ class TestTrainedModels(unittest.TestCase):
         """
 
         # Dictionary with all the md5 hash codes.
-        md5_models = {"ann_model_C": {"L0": "2962dc76e0c8b0f447132d448ec65f19",
-                                      "L1": "1ba97cdfea220bb0a32d3bb17683423f"},
+        md5_models = {"ann_model_C": {"L0": "1cef868127c4dbad6a02064bae9c35b7",
+                                      "L1": "a1cfde3be501ea09c4e41bac24186635"},
 
-                      "ann_model_CA": {"L0": "b1351a2fa2bd74779a98e42c3155be26",
-                                       "L1": "9c6626ca94de3d482e8c1a298d213ddc"},
+                      "ann_model_CA": {"L0": "abe776bf09434eac53c5c112b9218d9a",
+                                       "L1": "057c1234508d495aed0fd98f09cbcaae"},
 
-                      "ann_model_CB": {"L0": "c4e83a8297cd5005d5a1f961e56457b9",
-                                       "L1": "3e14922c4adf229d333c71c206816d15"},
+                      "ann_model_CB": {"L0": "d579f38c905e614e179bafd954d94847",
+                                       "L1": "5b28039b23b5f99a64419eb21a20a4b0"},
 
-                      "ann_model_H": {"L0": "a1f2b766ffa810657d50a0fd805840ca",
-                                      "L1": "86aeeb96b481835502c1c089d6eb16a7"},
+                      "ann_model_H": {"L0": "6b1dc3a020393ccecdd407e9b67d68db",
+                                      "L1": "fede3f623bfd705bb1c1a35611a1a788"},
 
-                      "ann_model_HA": {"L0": "72bb03231e4518ceb088e0efab07de64",
-                                       "L1": "e878deac7748b3a30ee34782b7826724"},
+                      "ann_model_HA": {"L0": "cbd432da3ad3bfcf4f5fc75b8fb4c731",
+                                       "L1": "0e12c7814945aa2144dd2ec65c5a062f"},
 
-                      "ann_model_N": {"L0": "3fc22cc9484889d26107b91b67e5a096",
-                                      "L1": "5a09907f833c9aa305b69a43ae842360"}
+                      "ann_model_N": {"L0": "0d63cf1e3734851b601cfeca1d5a78f9",
+                                      "L1": "b0d920474291d2cfe693ce94478759aa"}
                       }
 
         # Go through all the trained models.
