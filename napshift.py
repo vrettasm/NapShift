@@ -13,6 +13,13 @@ import os
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
 os.environ["TF_XLA_FLAGS"] = "--tf_xla_enable_xla_devices"
 
+# Import the IC_Chain to update a threshold globally.
+from Bio.PDB.internal_coords import IC_Chain
+
+# This avoids the chain break errors when
+# the bond is slightly above 1.4 Angstrom.
+IC_Chain.MaxPeptideBond = 1.5
+
 from tqdm import tqdm
 from pathlib import Path
 from src.chemical_shifts.model_machine import ChemShiftPredictor
