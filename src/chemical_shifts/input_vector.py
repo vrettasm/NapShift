@@ -322,7 +322,7 @@ class InputVector(object):
         :param x_in: This is the input that will be used to make
         the front or back terminal poly-peptide entries.
 
-        :param n_peptides: This is the number (int) of the poly-
+        :param n_peptides: This is the number (int) of the poly -
         peptides that we are constructing. It should be strictly
         an odd number.
 
