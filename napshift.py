@@ -25,7 +25,7 @@ from pathlib import Path
 from src.chemical_shifts.model_machine import ChemShiftPredictor
 
 # INFO:
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 __author__ = 'Michail Vrettas, PhD'
 __email__ = 'vrettasm@duck.com'
 
