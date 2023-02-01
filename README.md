@@ -1,4 +1,4 @@
-# NapShift (version 1.0.0)
+# NapShift (version 1.0.1)
 
 ![Logo](./logos/Logo_main.png)
 
@@ -23,12 +23,8 @@ computer.
 
 ## Required packages
 
-The recommended version is **Python 3.7** (and above). Some required packages
-are:
-
-> tensorflow, numpy, pathlib, pandas, etc.
-
-To simplify the required packages just use:
+The minimum version is **Python 3.7** (recommended 3.8 and above). The required packages
+are given in the "requirements.txt": To simplify the installation of the packages just use:
 
     $ pip install -r requirements.txt
 
