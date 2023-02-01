@@ -2,6 +2,12 @@
     Verify that we use the correct trained models. This test should
     FAIL if we use re-trained models, and it will have to be updated.
 """
+import warnings
+
+from Bio import BiopythonDeprecationWarning
+
+# Disable all the Deprecation warning from Bio.
+warnings.simplefilter('ignore', category=BiopythonDeprecationWarning)
 
 import unittest
 import joblib
@@ -30,23 +36,23 @@ class TestTrainedModels(unittest.TestCase):
         """
 
         # Dictionary with all the md5 hash codes.
-        md5_models = {"ann_model_C": {"L0": "1cef868127c4dbad6a02064bae9c35b7",
-                                      "L1": "a1cfde3be501ea09c4e41bac24186635"},
+        md5_models = {"ann_model_C": {"L0": "fe754138e3b645195e3c91ffc1d2fa43",
+                                      "L1": "a850923a04d53e9a3953f1d283ad63cd"},
 
-                      "ann_model_CA": {"L0": "abe776bf09434eac53c5c112b9218d9a",
-                                       "L1": "057c1234508d495aed0fd98f09cbcaae"},
+                      "ann_model_CA": {"L0": "d21dfa02f6c2d4891784e3e97e3a5389",
+                                       "L1": "d31c515716ed3be8fd118db4908600f0"},
 
-                      "ann_model_CB": {"L0": "d579f38c905e614e179bafd954d94847",
-                                       "L1": "5b28039b23b5f99a64419eb21a20a4b0"},
+                      "ann_model_CB": {"L0": "224cff671db87a28ca2b88daa8f97cc3",
+                                       "L1": "f3b7438f298c81808b872a96d9791889"},
 
-                      "ann_model_H": {"L0": "6b1dc3a020393ccecdd407e9b67d68db",
-                                      "L1": "fede3f623bfd705bb1c1a35611a1a788"},
+                      "ann_model_H": {"L0": "d36a2780cff3bad897dbb34d294210d7",
+                                      "L1": "0abdc96089a9a3e3396d451299740ef9"},
 
-                      "ann_model_HA": {"L0": "cbd432da3ad3bfcf4f5fc75b8fb4c731",
-                                       "L1": "0e12c7814945aa2144dd2ec65c5a062f"},
+                      "ann_model_HA": {"L0": "8d8655d3b6553e4745d51d3c0695364a",
+                                       "L1": "725cd7a4a09199bc9525554181bd6a86"},
 
-                      "ann_model_N": {"L0": "0d63cf1e3734851b601cfeca1d5a78f9",
-                                      "L1": "b0d920474291d2cfe693ce94478759aa"}
+                      "ann_model_N": {"L0": "96ede85338b9fd1c498e5804d1533540",
+                                      "L1": "6ebd81dd66fc25b219e3707d478872c9"}
                       }
 
         # Go through all the trained models.
