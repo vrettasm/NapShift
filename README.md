@@ -46,9 +46,13 @@ Once the virtual environment is created activate it with:
 
     $ source napshift_venv/bin/activate
 
+Make sure **pip** is updated:
+
+    $ python3 -m pip install --upgrade pip
+
 Then we can install all the requirements as above:
 
-    $ pip3 install -r requirements.txt
+    $ pip install -r requirements.txt
 
 or
 
