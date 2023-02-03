@@ -23,7 +23,7 @@ computer.
 
 ## Required packages
 
-The minimum version is **Python 3.7** (recommended 3.8 and above). The required packages
+The minimum version is **Python 3.8** (recommended >3.8). The required packages
 are given in the "requirements.txt": To simplify the installation of the packages just use:
 
     $ pip install -r requirements.txt
