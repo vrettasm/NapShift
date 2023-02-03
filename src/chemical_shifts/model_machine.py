@@ -4,6 +4,7 @@ as well as the predictions of the new chemical shifts.
 """
 
 # Python import(s).
+import warnings
 import logging
 import sys
 from datetime import date
@@ -733,8 +734,17 @@ class ChemShiftPredictor(ChemShiftBase):
 
             # Check if the scaler exists.
             if scaler_path.is_file():
-                # Load the Scaler from the file.
-                self.input_scaler[atom] = joblib.load(scaler_path)
+
+                # It might throw a warning if the joblib version
+                # is newer than the one we used to save the scaler.
+                with warnings.catch_warnings():
+                    # Ignore warnings here.
+                    warnings.filterwarnings("ignore")
+
+                    # Load the Scaler from the file.
+                    self.input_scaler[atom] = joblib.load(scaler_path)
+                # _end_with_
+
             else:
                 # Display what went wrong.
                 self.logger.warning(f" {self.__class__.__name__}."
