@@ -4,7 +4,6 @@ as well as the predictions of the new chemical shifts.
 """
 
 # Python import(s).
-import warnings
 import logging
 import sys
 from datetime import date
@@ -34,6 +33,12 @@ from src.random_coil.camcoil import CamCoil
 
 # Disables annoying TF warnings.
 tf.get_logger().setLevel("ERROR")
+
+# Log(2 x Pi).
+_LOG_2PI = np.log(2.0 * np.pi)
+
+# Machine precision (epsilon).
+tf_eps = tf.keras.backend.epsilon()
 
 
 # Base (abstract) class.
@@ -102,7 +107,7 @@ class ChemShiftBase(object):
         # Boolean flag. If "True" the class will allow
         # the new results to overwrite old ones (if exist).
         if isinstance(overwrite, bool):
-            # Copy to overwrite flag value.
+            # Copy overwrite flag value.
             self.overwrite_flag = overwrite
         else:
             raise TypeError(f"{self.__class__.__name__}: "
@@ -194,7 +199,7 @@ class ChemShiftBase(object):
     @overwrite.setter
     def overwrite(self, new_value):
         """
-        Accessor (setter) of to overwrite flag.
+        Accessor (setter) of overwrite flag.
 
         :param new_value: (bool).
         """
@@ -288,8 +293,8 @@ class ChemShiftBase(object):
         Override to print a readable string presentation of the object.
         This will include its id(), along with its field values.
 
-        NOTE: Overwrite protection is the "opposite" of to overwrite
-        flag, so in the print version we show the "not overwrite_flag"!
+        NOTE: Overwrite protection is the "opposite" of overwrite flag,
+        so in the print version we show the "not overwrite_flag"!
 
         :return: a string representation of a ChemShiftBase object.
         """
@@ -397,6 +402,33 @@ class ChemShiftTraining(ChemShiftBase):
         return x_train, y_train
     # _end_def_
 
+    @staticmethod
+    def loss_func(y_true, y_pred):
+        """
+        Loss function to use when training the ANN with two outputs.
+
+        :param y_true: True labels of the targets.
+
+        :param y_pred: Predicted labels of the targets.
+
+        :return: the NLL loss function.
+        """
+
+        # First output neuron.
+        mu = y_pred[:, :1]
+
+        # Second output neuron.
+        log_sigma = y_pred[:, 1:]
+
+        # NB: To avoid numerical errors we take the maximum
+        # between the estimated standard deviation and eps.
+        sigma = tf.math.maximum(tf.math.exp(log_sigma), tf_eps)
+
+        # Get the 'NLL' loss value.
+        return 0.5 * (tf.reduce_mean((_LOG_2PI + 2.0 * log_sigma +
+                                      tf.math.square((y_true - mu) / sigma)), axis=-1))
+    # _end_def_
+
     def train_models(self, validation_split=0.10, save_plots=True, verbose=False):
         """
         The main purpose of this method is to use a pre-defined Artificial Neural
@@ -476,7 +508,7 @@ class ChemShiftTraining(ChemShiftBase):
         nn_batch_size = tf.constant(512, dtype=tf.int64, name="batch_size")
 
         # Make epochs tf.constant.
-        nn_epochs = tf.constant(1000, dtype=tf.int64, name="epochs")
+        nn_epochs = tf.constant(250, dtype=tf.int64, name="epochs")
 
         # Make validation_split tf.constant.
         nn_validation_split = tf.constant(validation_split,
@@ -520,7 +552,7 @@ class ChemShiftTraining(ChemShiftBase):
                       activity_regularizer=None,
                       kernel_initializer="he_normal",
                       input_shape=(x_train.shape[1],)),
-                Dense(units=1,
+                Dense(units=2,
                       name="Output_1",
                       activation='linear',
                       activity_regularizer=None,
@@ -537,12 +569,13 @@ class ChemShiftTraining(ChemShiftBase):
             # 'patience' epochs, then stop the training and restore the best
             # weights that have been found so far.
             early_stop = keras.callbacks.EarlyStopping(monitor="val_loss", mode="min",
-                                                       patience=20, restore_best_weights=True)
+                                                       patience=20, verbose=1,
+                                                       restore_best_weights=True)
             # Set the optimizer object.
             optimization_alg = SGD(learning_rate=0.01, momentum=0.9, nesterov=True)
 
-            # Compile the model.
-            nn_model[atom].compile(optimizer=optimization_alg, loss=tf.keras.losses.MSE)
+            # Compile the model.custom_loss
+            nn_model[atom].compile(optimizer=optimization_alg, loss=self.loss_func)
 
             # First time instant.
             time_0 = time()
@@ -568,12 +601,12 @@ class ChemShiftTraining(ChemShiftBase):
                              f" in {time_f - time_0:.2f} seconds.")
 
             # Get the final (training and validation) error values.
-            train_RMSE = np.sqrt(nn_output[atom].history["loss"][-1])
-            valid_RMSE = np.sqrt(nn_output[atom].history["val_loss"][-1])
+            train_LOSS = nn_output[atom].history["loss"][-1]
+            valid_LOSS = nn_output[atom].history["val_loss"][-1]
 
             # Error message.
-            self.logger.info(f" RMSE = {train_RMSE:.3f},"
-                             f" val-RMSE = {valid_RMSE:.3f}\n\n")
+            self.logger.info(f" LOSS = {train_LOSS:.3f},"
+                             f" val-LOSS = {valid_LOSS:.3f}\n\n")
 
             # Convert the output history to a DataFrame.
             df_output = DataFrame(nn_output[atom].history)
@@ -589,16 +622,16 @@ class ChemShiftTraining(ChemShiftBase):
                 fig = plt.figure()
 
                 # Plot training loss.
-                plt.plot(np.sqrt(df_output['loss']), label="Training")
+                plt.plot(df_output['loss'], label="Training")
 
                 # Plot validation loss.
-                plt.plot(np.sqrt(df_output['val_loss']), label="Validation")
+                plt.plot(df_output['val_loss'], label="Validation")
 
                 # Add the x label.
                 plt.xlabel("Epoch")
 
                 # Add the y label.
-                plt.ylabel("RMSE")
+                plt.ylabel("LOSS")
 
                 # Finalize the plot.
                 plt.title(f"Target: {atom}")
@@ -636,8 +669,8 @@ class ChemShiftTraining(ChemShiftBase):
         Override method to print a readable string presentation of the
         object. This will include its id, along with its field values.
 
-            NOTE: Overwrite protection is the opposite of to overwrite
-            flag, so in the printed version we show the "not overwrite_flag"!
+            NOTE: Overwrite protection is the opposite of overwrite flag,
+            so in the printed version we show the "not overwrite_flag"!
 
         :return: a string representation of a ChemShiftTraining object.
         """
@@ -734,17 +767,8 @@ class ChemShiftPredictor(ChemShiftBase):
 
             # Check if the scaler exists.
             if scaler_path.is_file():
-
-                # It might throw a warning if the joblib version
-                # is newer than the one we used to save the scaler.
-                with warnings.catch_warnings():
-                    # Ignore warnings here.
-                    warnings.filterwarnings("ignore")
-
-                    # Load the Scaler from the file.
-                    self.input_scaler[atom] = joblib.load(scaler_path)
-                # _end_with_
-
+                # Load the Scaler from the file.
+                self.input_scaler[atom] = joblib.load(scaler_path)
             else:
                 # Display what went wrong.
                 self.logger.warning(f" {self.__class__.__name__}."
@@ -774,8 +798,9 @@ class ChemShiftPredictor(ChemShiftBase):
         the artificial neural network. Because of the "aromatic-rings effect" there
         could be poly-peptides that were not predicted for all the targets.
 
-        :param ref_peptides: These are ALL the poly-peptides, as constructed by the
-        InputVector class. They are used as reference regarding the list of "poly_peptides".
+        :param ref_peptides: These are ALL the poly-peptides, as constructed by
+        the InputVector class. They are used as reference regarding the list of
+        "poly_peptides".
 
         :param random_coil: This is a DataFrame with the random coil values. If it
         isn't given (default=None) we will use average values from a default table.
@@ -854,10 +879,10 @@ class ChemShiftPredictor(ChemShiftBase):
                 # Check the file format.
                 if talos_format:
                     # Write the (TALOS) variable names.
-                    file_write("VARS RESID RESNAME ATOMNAME SHIFT \n")
+                    file_write("VARS RESID RESNAME ATOMNAME SHIFT STDV\n")
 
                     # Write the (TALOS) file format.
-                    file_write("FORMAT %4d %1s %4s %8.3f \n")
+                    file_write("FORMAT %4d %1s %4s %8.3f %6.3f \n")
                 else:
                     # Declare a dictionary to group the data
                     # values according to their atom values.
@@ -865,8 +890,8 @@ class ChemShiftPredictor(ChemShiftBase):
 
                     # Tabular text format. This will preserve the same order
                     # (of atoms) as in the TARGET_ATOMS (tuple) declaration.
-                    file_write("{:>4} {:>4} {:>8} {:>8} {:>8} {:>8} {:>8} "
-                               "{:>8} \n".format("ID", "RES", *record.keys()))
+                    file_write("{:>4} {:>4} {:>8} {:>21} {:>21} {:>21} {:>21} "
+                               "{:>21} \n".format("ID", "RES", *record.keys()))
                 # _end_if_
 
                 # Empty line.
@@ -889,7 +914,7 @@ class ChemShiftPredictor(ChemShiftBase):
 
                         # Setting to NaN will indicate that we don't
                         # have a predicted "ss" value for this atom.
-                        ss_value, rc_value = np.nan, np.nan
+                        ss_mean, rc_value = np.nan, np.nan
 
                         # Create a search-peptide tuple.
                         search_peptide = tuple(peptide)
@@ -901,8 +926,11 @@ class ChemShiftPredictor(ChemShiftBase):
                             idx = target_peptides[atom].index(search_peptide)
 
                             # Get the predicted (secondary structure)
-                            # value that comes directly from the ANN.
-                            ss_value = predictions[atom][idx].item()
+                            # vector that comes directly from the ANN.
+                            nn_values = predictions[atom][idx]
+
+                            # Mean prediction.
+                            ss_mean = nn_values[0]
 
                             # Get the random coil chemical shift.
                             if random_coil is not None:
@@ -917,7 +945,10 @@ class ChemShiftPredictor(ChemShiftBase):
 
                         # Add the random coil value to
                         # the secondary structure value.
-                        value = ss_value + rc_value
+                        value = ss_mean + rc_value
+
+                        # Standard deviation of the prediction.
+                        ss_std = np.nan if np.isnan(value) else np.exp(nn_values[1])
 
                         # Check the file format.
                         if talos_format:
@@ -925,20 +956,27 @@ class ChemShiftPredictor(ChemShiftBase):
                             atom = "HN" if atom == "H" else atom
 
                             # Put all the information together in one record.
-                            file_write(f"{res_id:>4} {res_name_1:>3} {atom:>6} {value:>8.3f} \n")
+                            file_write(f"{res_id:>4} {res_name_1:>3} {atom:>6} {value:>8.3f} {ss_std:>6.3f} \n")
                         else:
                             # Store it to the dictionary.
-                            record[atom] = value
+                            record[atom] = (value, ss_std)
                         # _end_if_
 
                     # _end_for_
 
                     # Check the file format.
                     if not talos_format:
-                        # NOTE: From Python "3.6" onwards, the standard dict type maintains
-                        # insertion order by default!
-                        file_write("{:>4} {:>4} {:>8.3f} {:>8.3f} {:>8.3f} {:>8.3f} {:>8.3f} "
-                                   "{:>8.3f} \n".format(res_id, res_name_1, *record.values()))
+                        # Write the header of the file.
+                        file_write("{0:>4} {1:>4} ".format(res_id, res_name_1))
+
+                        # Iterate through all the records.
+                        for p_rec in record.values():
+                            file_write("{0:>8.3f} (+/- {1:>6.3f}) ".format(p_rec[0], p_rec[1]))
+                        # _end_for_
+
+                        # ---
+                        file_write("\n")
+
                     # _end_if_
 
                 # _end_for_
@@ -1132,9 +1170,10 @@ class ChemShiftPredictor(ChemShiftBase):
                                   df_random_coil, model_id, chain_id, talos_format=talos_fmt)
             # _end_for_
 
-            # Clean up the memory.
-            collect_mem_garbage()
         # _end_for_
+
+        # Clean up the memory.
+        collect_mem_garbage()
 
     # _end_def_
 
@@ -1153,9 +1192,8 @@ class ChemShiftPredictor(ChemShiftBase):
         Override to print a readable string presentation of the object.
         This will include its id(), along with its field values.
 
-            NOTE: Overwrite protection is the opposite of to
-            overwrite flag, so in the printed version we show
-            the "not overwrite_flag"!
+            NOTE: Overwrite protection is the opposite of to overwrite flag,
+            so in the printed version we show the "not overwrite_flag"!
 
         :return: a string representation of a ChemShiftPredictor object.
         """
