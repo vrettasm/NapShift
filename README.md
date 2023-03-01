@@ -56,6 +56,13 @@ or
 
 N.B. For Windows systems follow the **equivalent** instructions.
 
+## For Conda users
+
+A conda environment_napshift.yml file is provided with all the required dependencies.
+
+    $ conda env create -f environment_napshift.yml
+    $ conda activate venv_napshift
+
 ## How to run
 
 To execute the program (within the activated virtual environment), you can either
