@@ -188,7 +188,7 @@ if __name__ == "__main__":
                             help="Allows prediction for all the models in the PDB file.")
 
         # Make sure the defaults are set.
-        parser.set_defaults(talos=True, verose=False, all_models=False)
+        parser.set_defaults(talos=True, verbose=False, all_models=False)
 
         # Parse the arguments.
         args = parser.parse_args()
