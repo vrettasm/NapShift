@@ -2,9 +2,10 @@
 
 ![Logo](./logos/Logo_main.png)
 
-This repository provides a "Python implementation" of the NapShift program
-to estimate the backbone atoms' chemical shift values from NMR protein PBD
-files.
+This repository provides a standalone Python3 implementation of the (full atomistic)
+NapShift program to estimate the backbone atoms' chemical shift values from NMR protein
+PBD files. For the new version of the coarse grain (Martini PBD files) model please check
+the [**NapShift-CG**](https://github.com/vrettasm/NapShift_CG) version.
 
 M. Vrettas, PhD.
 
