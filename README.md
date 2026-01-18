@@ -2,7 +2,9 @@
 
 ![Logo](./logos/Logo_main.png)
 
-[![DOI](https://zenodo.org/badge/311952715.svg)](https://doi.org/10.5281/zenodo.18289998)
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18289998.svg)](https://doi.org/10.5281/zenodo.18289998)
+
 
 This repository provides a standalone Python3 implementation of the (full atomistic)
 NapShift program to estimate the backbone atoms' chemical shift values from NMR protein
