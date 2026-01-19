@@ -2,16 +2,14 @@
 
 ![Logo](./logos/Logo_main.png)
 
-
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18289998.svg)](https://doi.org/10.5281/zenodo.18289998)
-
-
 This repository provides a standalone Python3 implementation of the (full atomistic)
 NapShift program to estimate the backbone atoms' chemical shift values from NMR protein
 PBD files. For the new version of the coarse grain (Martini PBD files) model please check
 the [NapShift-CG](https://github.com/vrettasm/NapShift_CG) version.
 
 M. Vrettas, PhD.
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18289998.svg)](https://doi.org/10.5281/zenodo.18289998)
 
 ## Installation
 
